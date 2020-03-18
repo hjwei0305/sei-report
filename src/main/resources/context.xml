@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <import resource="classpath:ureport-console-context.xml"/>
+    <!--<context:annotation-config/>
+    &lt;!&ndash; 引入配置文件 &ndash;&gt;
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
+        <property name="resources" value="classpath:application.yaml"/>
+    </bean>
+    <context:property-placeholder properties-ref="propertyConfigurer"/>-->
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer" parent="ureport.props">
+        <property name="location">
+            <!-- 读取配置文件 -->
+            <value>classpath:ureport.properties</value>
+        </property>
+    </bean>
+    <bean id="ureport.htmlPageServletAction" class="com.changhong.sei.report.servlet.HtmlPageServletAction"/>
+    <bean id="ureport.sei.designerServletAction" class="com.changhong.sei.report.servlet.SeiDesignerServletAction"/>
+    <bean id="ureport.pageExportManager" class="com.changhong.sei.report.service.impl.PageExportManagerImpl"/>
+</beans>

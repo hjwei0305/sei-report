@@ -1,0 +1,57 @@
+# 应用全局配置
+application:
+  name: 报表服务
+  version: 6.0.1
+
+# ureport配置
+# 前缀，开启mysql
+ureport:
+  file:
+    provider:
+      prefix: file-
+      disabled: false
+      name: 文件服务器
+      dir: E:/ureportfiles
+  jpa:
+    provider:
+      prefix: report-
+      disabled: false
+      name: 内置数据库
+
+# spring 环境配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://${DB_HOST}/sei-report?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    #username: ${DB_USERNAME}
+    #password: ${DB_PASSWORD}
+    #url: jdbc:mysql://10.4.69.38:13306/srm
+    #username: root
+    #password: qUsM6wPF9Y6TS
+    url: jdbc:mysql://10.4.208.134:3306/sei_report?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: sei
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+      namingStrategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+    show-sql: true
+  thymeleaf:
+    prefix: classpath:/static/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+    enabled: true
+
+#sei:
+  #serial:
+    #service:
+      #url: http://${GATEWAY_HOST}/sei-report
+      #enable: true
