@@ -3,7 +3,6 @@ package com.changhong.sei.report.servlet;
 import com.bstek.ureport.cache.CacheUtils;
 import com.bstek.ureport.console.RenderPageServletAction;
 import com.bstek.ureport.console.cache.TempObjectCache;
-import com.bstek.ureport.console.designer.ReportDefinitionWrapper;
 import com.bstek.ureport.console.designer.ReportUtils;
 import com.bstek.ureport.console.exception.ReportDesignException;
 import com.bstek.ureport.definition.ReportDefinition;
@@ -14,6 +13,7 @@ import com.bstek.ureport.expression.ErrorInfo;
 import com.bstek.ureport.expression.ScriptErrorListener;
 import com.bstek.ureport.parser.ReportParser;
 import com.bstek.ureport.provider.report.ReportProvider;
+import com.changhong.sei.report.model.ReportDefinitionDto;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.io.IOUtils;
@@ -115,10 +115,10 @@ public class SeiDesignerServletAction extends RenderPageServletAction {
         if(obj!=null && obj instanceof ReportDefinition){
             ReportDefinition reportDef=(ReportDefinition)obj;
             TempObjectCache.removeObject(file);
-            writeObjectToJson(resp, new ReportDefinitionWrapper(reportDef));
+            writeObjectToJson(resp, new ReportDefinitionDto(reportDef));
         }else{
             ReportDefinition reportDef=reportRender.parseReport(file);
-            writeObjectToJson(resp, new ReportDefinitionWrapper(reportDef));
+            writeObjectToJson(resp, new ReportDefinitionDto(reportDef));
         }
     }
 
