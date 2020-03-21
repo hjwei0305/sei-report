@@ -195,9 +195,7 @@ public class PageProducer {
 			if(params!=null && params.containsKey(name)){
 				value=params.get(name);
 			}
-			if(!"startRow".equals(name) && !"rows".equals(name)) {
-				map.put(name, datatype.parse(value));
-			}
+			map.put(name, datatype.parse(value));
 		}
 		return map;
 	}

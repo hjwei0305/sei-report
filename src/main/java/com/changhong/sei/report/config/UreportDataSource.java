@@ -1,4 +1,4 @@
-package com.changhong.sei.report.datasource;
+package com.changhong.sei.report.config;
 
 import com.bstek.ureport.definition.datasource.BuildinDatasource;
 import org.slf4j.Logger;
