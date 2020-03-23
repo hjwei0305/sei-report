@@ -29,9 +29,7 @@ repositories {
     maven { url 'http://rddgit.changhong.com/nexus/repository/SEI_Group/' }
 }
 group 'sei-report'
-version '6.0.0'
-
-
+//version '6.0.0'
 
 dependencies {
     //implementation "org.springframework.boot:spring-boot-starter:$springBootVersion"
