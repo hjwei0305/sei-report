@@ -19,10 +19,6 @@ spring:
   application:
     name: ${sei.application.code}
   cloud:
-    bus: # 启用平台的配置中心
-      trace:
-        enabled: true
-      enabled: true
     config: # 配置中心地址
       uri: http://10.4.208.86:8100/config-center/
       profile: ${sei.application.env} #当前环境

@@ -6,7 +6,6 @@ import com.changhong.sei.report.model.PageReportDto;
 import com.changhong.sei.report.service.PageExportManager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Api(value = "平台报表接口")
-@FeignClient(name = "sei-report", path = "report")
 @RestController
 @RequestMapping("/report")
 public class ReportController {
@@ -34,7 +32,7 @@ public class ReportController {
     @ApiOperation(value = "获取报表", notes = "参数说明：\n_u:报表全名，注意带上前后缀；\n_type:报表预览类型，1-预览，2-分页预览，3-物理分页预览；\n" +
             "_t:工具栏，默认值1,2,3,4,5,6,7,8,9，可根据具体业务状况筛选需要的打印或导出按钮；\npage:物理分页参数，页码;\n" +
             "rows:物理分页参数，每页展示条数；\n其他参数与数据集中的参数名保持一致")
-    public PageReportDto genReport(HttpServletRequest request) throws ServletException, SQLException {
+    public String genReport(HttpServletRequest request) throws ServletException, SQLException {
         Map<String, Object> parameters = buildParameters(request);
         PageReport pageReport = null;
         String file=request.getParameter("_u");
@@ -86,7 +84,7 @@ public class ReportController {
             }
         }
         if(pageReport==null) pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters);
-        return new PageReportDto(pageReport);
+        return new PageReportDto(pageReport).toString();
     }
 
     private Map<String, Object> buildParameters(HttpServletRequest req) {

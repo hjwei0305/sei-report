@@ -1,5 +1,6 @@
 package com.changhong.sei.report.model;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bstek.ureport.chart.ChartData;
 import com.bstek.ureport.export.html.SearchFormData;
 import org.springframework.util.ObjectUtils;
@@ -99,5 +100,23 @@ public class PageReportDto implements Serializable {
         this.htmlIntervalRefreshValue = report.getHtmlIntervalRefreshValue();
         this.searchFormData = report.getSearchFormData();
         this.type = report.getType();
+    }
+
+    @Override
+    public String toString() {
+        JSONObject json = new JSONObject();
+        json.put("page", this.getPage());
+        json.put("rows", this.getRows());
+        json.put("total", this.getTotal());
+        json.put("records", this.getRecords());
+        json.put("content", this.getContent());
+        json.put("style", this.getStyle());
+        json.put("column", this.getColumn());
+        json.put("reportAlign", this.getReportAlign());
+        json.put("chartDatas", this.getChartDatas());
+        json.put("htmlIntervalRefreshValue", this.getHtmlIntervalRefreshValue());
+        json.put("searchFormData", this.getSearchFormData());
+        json.put("type", this.getType());
+        return json.toJSONString();
     }
 }

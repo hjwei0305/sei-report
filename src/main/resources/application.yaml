@@ -1,8 +1,3 @@
-# 应用全局配置
-application:
-  name: 报表服务
-  version: 6.0.1
-
 # ureport配置
 # 前缀，开启mysql
 ureport:
@@ -11,7 +6,9 @@ ureport:
       prefix: file-
       disabled: false
       name: 文件服务器
-      dir: ${REPORT_FILE_DIR}
+      #dir: ${REPORT_FILE_DIR}
+      dir: E:/ureportfiles
+
   jpa:
     provider:
       prefix: report-
@@ -22,12 +19,12 @@ ureport:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_HOST}/sei_report?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    #url: jdbc:mysql://10.4.208.134:3306/sei_report?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-    #username: sei
-    #password: 123456
+#    url: jdbc:mysql://${DB_HOST}/sei_report?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+    url: jdbc:mysql://10.4.208.134:3306/sei_report?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: sei
+    password: 123456
   jpa:
     hibernate:
       ddl-auto: update

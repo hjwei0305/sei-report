@@ -23,9 +23,8 @@ import java.util.List;
 /**
  * @description 自定义报表存储器
  */
-@Component
 @RefreshScope
-public class JpaProvider{
+public class JpaProvider implements ReportProvider {
     private final Logger log= LoggerFactory.getLogger(getClass());
 
     @Value("${ureport.jpa.provider.name}")
@@ -38,9 +37,9 @@ public class JpaProvider{
     @Autowired
     private ReportService reportService;
 
-    @Bean
-    public ReportProvider jpaReportProvider(){
-        return new ReportProvider() {
+//    @Bean
+//    public ReportProvider jpaReportProvider(){
+//        return new ReportProvider() {
             /**
              * 根据报表名加载报表文件
              *
@@ -141,6 +140,6 @@ public class JpaProvider{
                 }
                 return name;
             }
-        };
-    }
+//        };
+//    }
 }

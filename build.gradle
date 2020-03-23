@@ -13,7 +13,6 @@ group GROUP
 version VERSION
 apply plugin: 'idea'
 
-
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
@@ -36,7 +35,7 @@ version '6.0.0'
 
 dependencies {
     //implementation "org.springframework.boot:spring-boot-starter:$springBootVersion"
-    compile("com.changhong.sei:sei-service-starter:$sei_version")
+    compile("com.changhong.sei:sei-core-service:$sei_version")
     compile group: 'com.bstek.ureport', name: 'ureport2-console', version: '2.2.9'
     compile files('lib/ojdbc14.jar')
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
@@ -48,8 +47,7 @@ dependencies {
     //compile "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     //implementation("org.springframework.cloud:spring-cloud-starter-bus-kafka:2.2.0.RELEASE")
     //implementation("org.springframework.cloud:spring-cloud-context:2.2.0.RELEASE")
+    implementation("com.alibaba:fastjson:1.2.62")
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     testCompile group: 'junit', name: 'junit', version: '4.12'
-
-    //implementation("com.changhong.sei:sei-service-starter:6.0.1.12")
 }

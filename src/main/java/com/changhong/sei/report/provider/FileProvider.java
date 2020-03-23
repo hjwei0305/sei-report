@@ -25,16 +25,16 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.util.*;
 
-@Component
+//@Component
 @RefreshScope
-public class FileProvider implements ApplicationContextAware{
+public class FileProvider implements ReportProvider,ApplicationContextAware{
 	@Value("${ureport.file.provider.name}")
 	private String name;
 	@Value("${ureport.file.provider.prefix}")
@@ -43,10 +43,10 @@ public class FileProvider implements ApplicationContextAware{
 	private String fileStoreDir;
 	@Value("${ureport.file.provider.disabled}")
 	private boolean disabled;
-	@Bean
+	/*@Bean
 	public ReportProvider fileReportProvider() {
 
-		return new ReportProvider() {
+		return new ReportProvider() {*/
 			@Override
 			public InputStream loadReport(String file) {
 				if (file.startsWith(prefix)) {
@@ -127,8 +127,8 @@ public class FileProvider implements ApplicationContextAware{
 			public String getPrefix() {
 				return prefix;
 			}
-		};
-	}
+		/*};
+	}*/
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
