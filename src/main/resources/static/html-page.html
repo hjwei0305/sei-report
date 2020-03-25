@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -11,12 +11,12 @@
 	<style type="text/css" id="_ureport_table_style">
 		${style}
 	</style>
-	<script type="text/javascript" src="/js/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/Chart.bundle.min.js"></script>
-	<script type="text/javascript" src="/js/chartjs-plugin-datalabels.min.js"></script>
-	<script type="text/javascript" src="/js/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" src="/js/preview.bundle.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/chartjs-plugin-datalabels.min.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="${contextPath}/js/preview.bundle.js"></script>
 </head>
 <body style="margin:5px">
 ${upSearchFormHtml}
@@ -25,42 +25,42 @@ ${upSearchFormHtml}
 	<div style="text-align:${reportAlign}">
 		#if($tools.print)
 		<button type="button" class="btn btn-default ureport-print" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="在线打印">
-			<img src='/images/print.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/print.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pdfPrint)
 		<button type="button" class="btn btn-default ureport-pdf-direct-print" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="PDF在线打印">
-			<img src='/images/pdf-direct-print.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/pdf-direct-print.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pdfPreviewPrint)
 		<button type="button" class="btn btn-default ureport-pdf-print" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="PDF在线预览打印">
-			<img src='/images/pdf-print.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/pdf-print.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pdf)
 		<button type="button" class="btn btn-default ureport-export-pdf" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出PDF">
-			<img src='/images/pdf.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/pdf.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.word)
 		<button type="button" class="btn btn-default ureport-export-word" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出WORD">
-			<img src='/images/word.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/word.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.excel)
 		<button type="button" class="btn btn-default ureport-export-excel" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出EXCEL">
-			<img src='/images/excel.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/excel.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pagingExcel)
 		<button type="button" class="btn btn-default ureport-export-excel-paging" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="分页导出EXCEL">
-			<img src='/images/excel-paging.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/excel-paging.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.sheetPagingExcel)
 		<button type="button" class="btn btn-default ureport-export-excel-paging-sheet" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="分页分Sheet导出EXCEL">
-			<img src='/images/excel-with-paging-sheet.svg' width="20px" height="20px">
+			<img src='${contextPath}/images/excel-with-paging-sheet.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.paging)
