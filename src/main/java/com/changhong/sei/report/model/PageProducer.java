@@ -388,6 +388,26 @@ public class PageProducer {
 		return table;
 	}
 
+	public TableDto buildTableWithColumnMargin(Context context, List<com.bstek.ureport.build.paging.Page> pages, int columnMargin){
+		TableDto jsonContent = new TableDto();
+		int pageSize = pages.size();
+		List<TableDto> tableList = new ArrayList<>();
+		TableDto table = null;
+		int singleTableWidth = buildTableWidth(((com.bstek.ureport.build.paging.Page)pages.get(0)).getColumns());
+		int tableWidth = singleTableWidth * pageSize + columnMargin * (pageSize - 1);
+		String bgImage = context.getReport().getPaper().getBgImage();
+		jsonContent.setBgStyle("page-break");
+		jsonContent.setWidth(tableWidth);
+		jsonContent.setBgImage(bgImage);
+		for(int i=0;i<pageSize;i++){
+			com.bstek.ureport.build.paging.Page pag = pages.get(i);
+			table = buildTable(context, pag.getRows(), pag.getColumns(), context.getReport().getRowColCellMap(), false, true);
+			tableList.add(table);
+		}
+		jsonContent.setTableList(tableList);
+		return jsonContent;
+	}
+
 	private int buildTableWidth(List<Column> columns){
 		int width=0;
 		for(Column col:columns){
@@ -588,4 +608,6 @@ public class PageProducer {
 		}
 		return height;
 	}
+
+
 }

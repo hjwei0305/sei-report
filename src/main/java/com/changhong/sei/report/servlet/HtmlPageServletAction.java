@@ -206,8 +206,9 @@ public class HtmlPageServletAction extends RenderPageServletAction {
                         html = htmlProducer.produce(context, pag, false);
                         jsonContent = pageProducer.buildTable(context, pag.getRows(), pag.getColumns(), context.getReport().getRowColCellMap(), false, true);
                     } else {
-                        html = htmlProducer.produce(context, pages, pageData.getColumnMargin(), false);
-
+                        int columnMargin = pageData.getColumnMargin();
+                        html = htmlProducer.produce(context, pages, columnMargin, false);
+                        jsonContent = pageProducer.buildTableWithColumnMargin(context, pages ,columnMargin);
                     }
                     pageReport.setPage(new com.changhong.sei.report.model.Page(index));
                     pageReport.getPage().setTotal(pageData.getTotalPages());

@@ -73,7 +73,10 @@ public class PageExportManagerImpl implements PageExportManager {
             content=htmlProducer.produce(context,pag,false);
             jsonContent = pageProducer.buildTable(context, pag.getRows(), pag.getColumns(), context.getReport().getRowColCellMap(), false, true);
         }else{
-            content=htmlProducer.produce(report.getContext(),pages,pageData.getColumnMargin(),false);
+            Context context = report.getContext();
+            int columnMargin = pageData.getColumnMargin();
+            content = htmlProducer.produce(context, pages, columnMargin, false);
+            jsonContent = pageProducer.buildTableWithColumnMargin(context, pages ,columnMargin);
         }
         PageReport pageReport=new PageReport();
         pageReport.setContent(content);

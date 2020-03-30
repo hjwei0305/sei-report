@@ -17,6 +17,11 @@ public class TableDto implements Serializable{
     private String bgImage;
 
     /**
+     * 分栏样式，如果不为空，则把表格class设置为这个值
+     */
+    private String bgStyle;
+
+    /**
      * 子表格
      */
     private List<TableDto> tableList;
@@ -25,6 +30,14 @@ public class TableDto implements Serializable{
      * 行
      */
     private List<RowDto> rowList;
+
+    public String getBgStyle() {
+        return bgStyle;
+    }
+
+    public void setBgStyle(String bgStyle) {
+        this.bgStyle = bgStyle;
+    }
 
     public Integer getWidth() {
         return width;
