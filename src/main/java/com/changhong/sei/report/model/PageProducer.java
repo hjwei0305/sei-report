@@ -396,7 +396,7 @@ public class PageProducer {
 		int singleTableWidth = buildTableWidth(((com.bstek.ureport.build.paging.Page)pages.get(0)).getColumns());
 		int tableWidth = singleTableWidth * pageSize + columnMargin * (pageSize - 1);
 		String bgImage = context.getReport().getPaper().getBgImage();
-		jsonContent.setBgStyle("page-break");
+		jsonContent.setPageBreak("page-break");
 		jsonContent.setWidth(tableWidth);
 		jsonContent.setBgImage(bgImage);
 		for(int i=0;i<pageSize;i++){

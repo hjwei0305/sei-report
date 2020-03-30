@@ -7,28 +7,35 @@ public class CellDto implements Serializable{
      * rowSpan
      */
     private Integer rowSpan;
+
     /**
      * colSpan
      */
     private Integer colSpan;
+
     /**
-     * 元素名称
+     * 单元格名称
+     * td的class设置为class='_'+name
      */
     private String name;
+
     /**
      * 样式
      */
     private String style;
+
     /**
      * 链接地址
      */
     private String linkUrl;
+
     /**
      * 链接target
      */
     private String linkTarget;
+
     /**
-     * 元素内容
+     * 单元格内容
      */
     private String content;
 

@@ -13,16 +13,19 @@ public class TableDto implements Serializable{
 
     /**
      * 背景图片
+     * 如果有值，bgStyle=";background:url("+bgImage+") no-repeat";
+     * table写为"<table border='0' style='margin:auto;border-collapse:collapse;width:"+width+"pt"+bgStyle+"'>"
      */
     private String bgImage;
 
     /**
      * 分栏样式，如果不为空，则把表格class设置为这个值
+     * table写为"<table class='page-break' border='0' style='margin:auto;border-collapse:collapse;width:"+width+"pt"+bgStyle+"'>"
      */
-    private String bgStyle;
+    private String pageBreak;
 
     /**
-     * 子表格
+     * 分栏的子表格
      */
     private List<TableDto> tableList;
 
@@ -31,12 +34,12 @@ public class TableDto implements Serializable{
      */
     private List<RowDto> rowList;
 
-    public String getBgStyle() {
-        return bgStyle;
+    public String getPageBreak() {
+        return pageBreak;
     }
 
-    public void setBgStyle(String bgStyle) {
-        this.bgStyle = bgStyle;
+    public void setPageBreak(String pageBreak) {
+        this.pageBreak = pageBreak;
     }
 
     public Integer getWidth() {
