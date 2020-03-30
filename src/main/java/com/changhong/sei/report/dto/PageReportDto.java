@@ -1,8 +1,9 @@
-package com.changhong.sei.report.model;
+package com.changhong.sei.report.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bstek.ureport.chart.ChartData;
 import com.bstek.ureport.export.html.SearchFormData;
+import com.changhong.sei.report.model.PageReport;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
@@ -29,6 +30,7 @@ public class PageReportDto implements Serializable {
      */
     private Integer total;
     private String content;
+    private TableDto jsonContent;
     private String style;
     private int column;
     private String reportAlign;
@@ -36,6 +38,10 @@ public class PageReportDto implements Serializable {
     private int htmlIntervalRefreshValue;
     private SearchFormData searchFormData;
     private String type;//1-预览,2-分页预览,3-物理分页预览
+
+    public TableDto getJsonContent() {
+        return jsonContent;
+    }
 
     public Integer getPage() {
         return page;
@@ -93,6 +99,7 @@ public class PageReportDto implements Serializable {
         this.total = ObjectUtils.isEmpty(report.getPage())?0:report.getPage().getTotal();
         this.records = ObjectUtils.isEmpty(report.getPage())?0:report.getPage().getRecords();
         this.content = report.getContent();
+        this.jsonContent = report.getJsonContent();
         this.style = report.getStyle();
         this.column = report.getColumn();
         this.reportAlign = report.getReportAlign();
@@ -105,18 +112,19 @@ public class PageReportDto implements Serializable {
     @Override
     public String toString() {
         JSONObject json = new JSONObject();
-        json.put("page", this.getPage());
-        json.put("rows", this.getRows());
-        json.put("total", this.getTotal());
-        json.put("records", this.getRecords());
-        json.put("content", this.getContent());
-        json.put("style", this.getStyle());
-        json.put("column", this.getColumn());
-        json.put("reportAlign", this.getReportAlign());
-        json.put("chartDatas", this.getChartDatas());
-        json.put("htmlIntervalRefreshValue", this.getHtmlIntervalRefreshValue());
-        json.put("searchFormData", this.getSearchFormData());
-        json.put("type", this.getType());
+        json.put("page", this.page);
+        json.put("rows", this.rows);
+        json.put("total", this.total);
+        json.put("records", this.records);
+        json.put("content", this.content);
+        json.put("jsonContent", this.jsonContent);
+        json.put("style", this.style);
+        json.put("column", this.column);
+        json.put("reportAlign", this.reportAlign);
+        json.put("chartDatas", this.chartDatas);
+        json.put("htmlIntervalRefreshValue", this.htmlIntervalRefreshValue);
+        json.put("searchFormData", this.searchFormData);
+        json.put("type", this.type);
         return json.toJSONString();
     }
 }

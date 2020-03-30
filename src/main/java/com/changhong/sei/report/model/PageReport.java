@@ -2,6 +2,7 @@ package com.changhong.sei.report.model;
 
 import com.bstek.ureport.chart.ChartData;
 import com.bstek.ureport.export.html.SearchFormData;
+import com.changhong.sei.report.dto.TableDto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.Collection;
 public class PageReport implements Serializable {
     private Page page;
     private String content;
+    private TableDto jsonContent;
     private String style;
     private int column;
     /*private int totalPage;
@@ -27,6 +29,13 @@ public class PageReport implements Serializable {
         this.type = type;
     }
 
+    public TableDto getJsonContent() {
+        return jsonContent;
+    }
+
+    public void setJsonContent(TableDto jsonContent) {
+        this.jsonContent = jsonContent;
+    }
     /*public int getTotalPage() {
         return totalPage;
     }

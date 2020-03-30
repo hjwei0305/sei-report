@@ -1,5 +1,6 @@
 package com.changhong.sei.report.service.impl;
 
+import com.bstek.ureport.build.Context;
 import com.bstek.ureport.cache.CacheUtils;
 import com.bstek.ureport.chart.ChartData;
 import com.bstek.ureport.definition.ReportDefinition;
@@ -10,6 +11,7 @@ import com.bstek.ureport.export.SinglePageData;
 import com.bstek.ureport.export.html.HtmlProducer;
 import com.bstek.ureport.export.pdf.PdfProducer;
 import com.bstek.ureport.model.Report;
+import com.changhong.sei.report.dto.TableDto;
 import com.changhong.sei.report.model.Page;
 import com.changhong.sei.report.model.PageProducer;
 import com.changhong.sei.report.model.PageReport;
@@ -38,7 +40,9 @@ public class PageExportManagerImpl implements PageExportManager {
         }
         PageReport pageReport=new PageReport();
         String content=htmlProducer.produce(report);
+        TableDto jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
         pageReport.setContent(content);
+        pageReport.setJsonContent(jsonContent);
         if(reportDefinition.getPaper().isColumnEnabled()){
             pageReport.setColumn(reportDefinition.getPaper().getColumnCount());
         }
@@ -62,13 +66,18 @@ public class PageExportManagerImpl implements PageExportManager {
         SinglePageData pageData= PageBuilder.buildSinglePageData(pageIndex, report);
         List<com.bstek.ureport.build.paging.Page> pages = pageData.getPages();
         String content=null;
+        TableDto jsonContent = null;
         if(pages.size()==1){
-            content=htmlProducer.produce(report.getContext(),pages.get(0),false);
+            com.bstek.ureport.build.paging.Page pag = pages.get(0);
+            Context context = report.getContext();
+            content=htmlProducer.produce(context,pag,false);
+            jsonContent = pageProducer.buildTable(context, pag.getRows(), pag.getColumns(), context.getReport().getRowColCellMap(), false, true);
         }else{
             content=htmlProducer.produce(report.getContext(),pages,pageData.getColumnMargin(),false);
         }
         PageReport pageReport=new PageReport();
         pageReport.setContent(content);
+        pageReport.setJsonContent(jsonContent);
         if(reportDefinition.getPaper().isColumnEnabled()){
             pageReport.setColumn(reportDefinition.getPaper().getColumnCount());
         }
@@ -93,7 +102,9 @@ public class PageExportManagerImpl implements PageExportManager {
         }
         PageReport pageReport=new PageReport();
         String content=htmlProducer.produce(report);
+        TableDto jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
         pageReport.setContent(content);
+        pageReport.setJsonContent(jsonContent);
         if(reportDefinition.getPaper().isColumnEnabled()){
             pageReport.setColumn(reportDefinition.getPaper().getColumnCount());
         }

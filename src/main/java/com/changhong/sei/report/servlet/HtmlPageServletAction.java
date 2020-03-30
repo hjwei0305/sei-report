@@ -21,9 +21,10 @@ import com.bstek.ureport.export.SinglePageData;
 import com.bstek.ureport.export.html.HtmlProducer;
 import com.bstek.ureport.export.html.SearchFormData;
 import com.bstek.ureport.model.Report;
+import com.changhong.sei.report.dto.TableDto;
 import com.changhong.sei.report.model.PageProducer;
 import com.changhong.sei.report.model.PageReport;
-import com.changhong.sei.report.model.PageReportDto;
+import com.changhong.sei.report.dto.PageReportDto;
 import com.changhong.sei.report.service.PageExportManager;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -193,6 +194,7 @@ public class HtmlPageServletAction extends RenderPageServletAction {
             }
             pageReport=new PageReport();
             String html=null;
+            TableDto jsonContent = null;
             if("2".equals(type)) {
                 if (!StringUtils.isEmpty(pageIndex) && !pageIndex.equals("0")) {
                     Context context = report.getContext();
@@ -202,19 +204,23 @@ public class HtmlPageServletAction extends RenderPageServletAction {
                     if (pages.size() == 1) {
                         Page pag = pages.get(0);
                         html = htmlProducer.produce(context, pag, false);
+                        jsonContent = pageProducer.buildTable(context, pag.getRows(), pag.getColumns(), context.getReport().getRowColCellMap(), false, true);
                     } else {
                         html = htmlProducer.produce(context, pages, pageData.getColumnMargin(), false);
+
                     }
                     pageReport.setPage(new com.changhong.sei.report.model.Page(index));
                     pageReport.getPage().setTotal(pageData.getTotalPages());
                 } else {
                     html = htmlProducer.produce(report);
+                    jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
                 }
             }else{
                 if(page!=0&&rows!=0){
                     pageReport.setPage(pageProducer.produce(reportDefinition, parameters, page, rows));
                 }
                 html = htmlProducer.produce(report);
+                jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
             }
             if(report.getPaper().isColumnEnabled()){
                 pageReport.setColumn(report.getPaper().getColumnCount());
@@ -222,6 +228,7 @@ public class HtmlPageServletAction extends RenderPageServletAction {
             pageReport.setType(type==null?"1":type);
             pageReport.setChartDatas(report.getContext().getChartDataMap().values());
             pageReport.setContent(html);
+            pageReport.setJsonContent(jsonContent);
             pageReport.setStyle(reportDefinition.getStyle());
             pageReport.setSearchFormData(reportDefinition.buildSearchFormData(report.getContext().getDatasetMap(),parameters));
             pageReport.setReportAlign(report.getPaper().getHtmlReportAlign().name());

@@ -2,7 +2,7 @@ package com.changhong.sei.report.controller;
 
 import com.bstek.ureport.exception.ReportComputeException;
 import com.changhong.sei.report.model.PageReport;
-import com.changhong.sei.report.model.PageReportDto;
+import com.changhong.sei.report.dto.PageReportDto;
 import com.changhong.sei.report.service.PageExportManager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

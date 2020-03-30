@@ -58,6 +58,7 @@ jar {
 }
 
 dependencies {
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.8'
     compile("com.changhong.sei:sei-core-service:$sei_version")
     compile group: 'com.bstek.ureport', name: 'ureport2-console', version: '2.2.9'
     compile files('lib/ojdbc14.jar')

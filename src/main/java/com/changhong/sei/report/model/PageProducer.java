@@ -15,10 +15,12 @@
  ******************************************************************************/
 package com.changhong.sei.report.model;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bstek.ureport.Utils;
+import com.bstek.ureport.build.BindData;
 import com.bstek.ureport.build.Context;
-import com.bstek.ureport.definition.CellDefinition;
-import com.bstek.ureport.definition.ReportDefinition;
+import com.bstek.ureport.chart.ChartData;
+import com.bstek.ureport.definition.*;
 import com.bstek.ureport.definition.dataset.DatasetDefinition;
 import com.bstek.ureport.definition.dataset.Parameter;
 import com.bstek.ureport.definition.dataset.SqlDatasetDefinition;
@@ -30,19 +32,30 @@ import com.bstek.ureport.definition.value.DatasetValue;
 import com.bstek.ureport.exception.ReportComputeException;
 import com.bstek.ureport.expression.ExpressionUtils;
 import com.bstek.ureport.expression.model.Expression;
+import com.bstek.ureport.expression.model.data.BindDataListExpressionData;
 import com.bstek.ureport.expression.model.data.ExpressionData;
 import com.bstek.ureport.expression.model.data.ObjectExpressionData;
+import com.bstek.ureport.expression.model.data.ObjectListExpressionData;
 import com.bstek.ureport.model.Cell;
+import com.bstek.ureport.model.Column;
+import com.bstek.ureport.model.Image;
+import com.bstek.ureport.model.Row;
 import com.bstek.ureport.utils.ProcedureUtils;
+import com.changhong.sei.report.dto.CellDto;
+import com.changhong.sei.report.dto.RowDto;
+import com.changhong.sei.report.dto.TableDto;
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -230,5 +243,349 @@ public class PageProducer {
 		cell.setMultiple(cellDef.getMultiple());
 		cell.setLinkUrlExpression(cellDef.getLinkUrlExpression());
 		return cell;
+	}
+
+	public TableDto buildTable(Context context, List<Row> rows, List<Column> columns, Map<Row, Map<Column, Cell>> cellMap, boolean breakPage,boolean forPage) {
+		TableDto table = new TableDto();
+		int tableWidth=buildTableWidth(columns);
+		table.setWidth(tableWidth);
+		String bgImage=context.getReport().getPaper().getBgImage();
+		if(!StringUtils.isEmpty(bgImage)){
+			table.setBgImage(bgImage);
+		}
+		Row row;
+		Cell cell;
+		RowDto ro;
+		CellDto cel;
+		List<RowDto> rowList = new ArrayList<>();
+		List<CellDto> cellList;
+		int colSize=columns.size();
+		int rowSize=rows.size();
+		for(int i=0;i<rowSize;i++){
+			row=rows.get(i);
+			ro = null;
+			if(!forPage && row.isForPaging()){
+				continue;
+			}
+			int height=row.getRealHeight();
+			if(height<1){
+				continue;
+			}
+			ro = new RowDto();
+			ro.setHeight(height);
+			cellList = new ArrayList<>();
+			for(int j=0;j<colSize;j++){
+				Column col=columns.get(j);
+				cell = null;
+				if(cellMap.containsKey(row)){
+					Map<Column,Cell> colMap=cellMap.get(row);
+					if(colMap.containsKey(col)){
+						cell=colMap.get(col);
+					}
+				}
+				if(cell==null || (!forPage && cell.isForPaging())){
+					continue;
+				}
+				cel = new CellDto();
+				int colSpan = cell.getColSpan();
+				int rowSpan = cell.getRowSpan();
+				cel.setColSpan(colSpan);
+				cel.setRowSpan(rowSpan);
+				if(forPage){
+					cel.setRowSpan(cell.getPageRowSpan());
+				}
+				cel.setName(cell.getName());
+				String style=buildCustomStyle(cell);
+				cel.setStyle(style);
+				String linkURL=cell.getLinkUrl();
+				if(!StringUtils.isEmpty(linkURL)){
+					Expression urlExpression=cell.getLinkUrlExpression();
+					if(urlExpression!=null){
+						ExpressionData<?> exprData=urlExpression.execute(cell, cell, context);
+						if(exprData instanceof BindDataListExpressionData){
+							BindDataListExpressionData listExprData=(BindDataListExpressionData)exprData;
+							List<BindData> bindDataList=listExprData.getData();
+							if(bindDataList!=null && bindDataList.size()>0){
+								Object data=bindDataList.get(0).getValue();
+								if(data!=null){
+									linkURL=data.toString();
+								}
+							}
+						}else if(exprData instanceof ObjectExpressionData){
+							ObjectExpressionData objExprData=(ObjectExpressionData)exprData;
+							Object data=objExprData.getData();
+							if(data!=null){
+								linkURL=data.toString();
+							}
+						}else if(exprData instanceof ObjectListExpressionData){
+							ObjectListExpressionData objListExprData=(ObjectListExpressionData)exprData;
+							List<?> list=objListExprData.getData();
+							if(list!=null && list.size()>0){
+								Object data=list.get(0);
+								if(data!=null){
+									linkURL=data.toString();
+								}
+							}
+						}
+					}
+					String urlParameter=cell.buildLinkParameters(context);
+					if(!StringUtils.isEmpty(urlParameter)) {
+						if(linkURL.indexOf("?")==-1){
+							linkURL+="?"+urlParameter;
+						}else{
+							linkURL+="&"+urlParameter;
+						}
+					}
+					String target=cell.getLinkTargetWindow();
+					if(StringUtils.isEmpty(target))target="_self";
+					cel.setLinkUrl(linkURL);
+					cel.setLinkTarget(target);
+				}
+				Object obj=(cell.getFormatData()== null) ? "" : cell.getFormatData();
+				if(obj instanceof Image){
+					Image img=(Image)obj;
+					String path=img.getPath();
+					String imageType="image/png";
+					if(!StringUtils.isEmpty(path)){
+						path=path.toLowerCase();
+						if(path.endsWith(".jpg") || path.endsWith(".jpeg")){
+							imageType="image/jpeg";
+						}else if(path.endsWith(".gif")){
+							imageType="image/gif";
+						}
+					}
+					cel.setContent("<img src=\"data:"+imageType+";base64,"+img.getBase64Data()+"\">");
+				}else if(obj instanceof ChartData){
+					ChartData chartData=(ChartData)obj;
+					String canvasId=chartData.getId();
+					int width=col.getWidth()-2;
+					if(colSpan>0){
+						width=buildWidth(columns,j,colSpan)-2;
+					}
+					if(rowSpan>0){
+						height=buildHeight(rows,i,rowSpan)-2;
+					}else{
+						height-=2;
+					}
+					StringBuffer chart = new StringBuffer("<div style=\"position: relative;width:"+width+"pt;height:"+height+"pt\">");
+					chart.append("<canvas id=\""+canvasId+"\" style=\"width:"+width+"px !important;height:"+height+"px !important\"></canvas>");
+					chart.append("</div>");
+					cel.setContent(chart.toString());
+				}else{
+					String text=obj.toString();
+					text= StringEscapeUtils.escapeHtml4(text);
+					text=text.replaceAll("\r\n", "<br>");
+					text=text.replaceAll("\n", "<br>");
+					text=text.replaceAll(" ", "&nbsp;");
+					cel.setContent(text);
+				}
+				cellList.add(cel);
+			}
+			ro.setCellList(cellList);
+			rowList.add(ro);
+			table.setRowList(rowList);
+		}
+		return table;
+	}
+
+	private int buildTableWidth(List<Column> columns){
+		int width=0;
+		for(Column col:columns){
+			width+=col.getWidth();
+		}
+		return width;
+	}
+
+	private String buildCustomStyle(Cell cell){
+		CellStyle style=cell.getCustomCellStyle();
+		CellStyle rowStyle=cell.getRow().getCustomCellStyle();
+		CellStyle colStyle=cell.getColumn().getCustomCellStyle();
+		if(style==null && rowStyle==null && colStyle==null)return "";
+		StringBuilder sb=new StringBuilder();
+		String forecolor=null;
+		if(style!=null){
+			forecolor=style.getForecolor();
+		}
+		if(rowStyle!=null){
+			forecolor=rowStyle.getForecolor();
+		}
+		if(colStyle!=null){
+			forecolor=colStyle.getForecolor();
+		}
+		if(!StringUtils.isEmpty(forecolor)){
+			sb.append("color:rgb("+forecolor+");");
+		}
+		String bgcolor=null;
+		if(style!=null){
+			bgcolor=style.getBgcolor();
+		}
+		if(rowStyle!=null){
+			bgcolor=rowStyle.getBgcolor();
+		}
+		if(colStyle!=null){
+			bgcolor=colStyle.getBgcolor();
+		}
+		if(!StringUtils.isEmpty(bgcolor)){
+			sb.append("background-color:rgb("+bgcolor+");");
+		}
+		String fontFamily=null;
+		if(style!=null){
+			fontFamily=style.getFontFamily();
+		}
+		if(rowStyle!=null){
+			fontFamily=rowStyle.getFontFamily();
+		}
+		if(colStyle!=null){
+			fontFamily=colStyle.getFontFamily();
+		}
+		if(!StringUtils.isEmpty(fontFamily)){
+			sb.append("font-family:"+fontFamily+";");
+		}
+		int fontSize=0;
+		if(style!=null){
+			fontSize=style.getFontSize();
+		}
+		if(rowStyle!=null){
+			fontSize=rowStyle.getFontSize();
+		}
+		if(colStyle!=null){
+			fontSize=colStyle.getFontSize();
+		}
+		if(fontSize>0){
+			sb.append("font-size:"+fontSize+"pt;");
+		}
+		Boolean bold=null;
+		if(style!=null){
+			bold=style.getBold();
+		}
+		if(rowStyle!=null){
+			bold=rowStyle.getBold();
+		}
+		if(colStyle!=null){
+			bold=colStyle.getBold();
+		}
+		if(bold!=null){
+			if(bold){
+				sb.append("font-weight:bold;");
+			}else{
+				sb.append("font-weight:normal;");
+			}
+		}
+		Boolean italic=null;
+		if(style!=null){
+			italic=style.getItalic();
+		}
+		if(rowStyle!=null){
+			italic=rowStyle.getItalic();
+		}
+		if(colStyle!=null){
+			italic=colStyle.getItalic();
+		}
+		if(italic!=null){
+			if(italic){
+				sb.append("font-style:italic;");
+			}else{
+				sb.append("font-style:normal;");
+
+			}
+		}
+		Boolean underline=null;
+		if(style!=null){
+			underline=style.getUnderline();
+		}
+		if(rowStyle!=null){
+			underline=rowStyle.getUnderline();
+		}
+		if(colStyle!=null){
+			underline=colStyle.getUnderline();
+		}
+		if(underline!=null){
+			if(underline){
+				sb.append("text-decoration:underline;");
+			}else{
+				sb.append("text-decoration:none;");
+			}
+		}
+		Alignment align=null;
+		if(style!=null){
+			align=style.getAlign();
+		}
+		if(rowStyle!=null){
+			align=rowStyle.getAlign();
+		}
+		if(colStyle!=null){
+			align=colStyle.getAlign();
+		}
+		if(align!=null){
+			sb.append("text-align:"+align.name()+";");
+		}
+		Alignment valign=null;
+		if(style!=null){
+			valign=style.getValign();
+		}
+		if(rowStyle!=null){
+			valign=rowStyle.getValign();
+		}
+		if(colStyle!=null){
+			valign=colStyle.getValign();
+		}
+		if(valign!=null){
+			sb.append("vertical-align:"+valign.name()+";");
+		}
+		Border border=null;
+		if(style!=null){
+			border=style.getLeftBorder();
+		}
+		if(border!=null){
+			sb.append("border-left:"+border.getStyle().name()+" "+border.getWidth()+"px rgb("+border.getColor()+");");
+		}
+		Border rightBorder=null;
+		if(style!=null){
+			rightBorder=style.getRightBorder();
+		}
+		if(rightBorder!=null){
+			sb.append("border-right:"+rightBorder.getStyle().name()+" "+rightBorder.getWidth()+"px rgb("+rightBorder.getColor()+");");
+		}
+		Border topBorder=null;
+		if(style!=null){
+			topBorder=style.getTopBorder();
+		}
+		if(topBorder!=null){
+			sb.append("border-top:"+topBorder.getStyle().name()+" "+topBorder.getWidth()+"px rgb("+topBorder.getColor()+");");
+		}
+		Border bottomBorder=null;
+		if(style!=null){
+			bottomBorder=style.getBottomBorder();
+		}
+		if(bottomBorder!=null){
+			sb.append("border-bottom:"+bottomBorder.getStyle().name()+" "+bottomBorder.getWidth()+"px rgb("+bottomBorder.getColor()+");");
+		}
+		if(sb.length()>0){
+			int colWidth=cell.getColumn().getWidth();
+			sb.append("width:"+colWidth+"pt");
+			sb.insert(0, "style=\"");
+			sb.append("\"");
+		}
+		return sb.toString();
+	}
+
+	private int buildWidth(List<Column> columns,int colIndex,int colSpan){
+		int width=0;
+		int start=colIndex,end=colIndex+colSpan;
+		for(int i=start;i<end;i++){
+			Column col=columns.get(i);
+			width+=col.getWidth();
+		}
+		return width;
+	}
+
+	private int buildHeight(List<Row> rows,int rowIndex,int rowSpan){
+		int height=0;
+		int start=rowIndex,end=rowIndex+rowSpan;
+		for(int i=start;i<end;i++){
+			Row row=rows.get(i);
+			height+=row.getRealHeight();
+		}
+		return height;
 	}
 }
