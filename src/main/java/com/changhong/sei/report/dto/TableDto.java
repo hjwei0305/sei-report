@@ -20,12 +20,22 @@ public class TableDto implements Serializable{
 
     /**
      * 分栏样式，如果不为空，则把表格class设置为这个值
-     * table写为"<table class='page-break' border='0' style='margin:auto;border-collapse:collapse;width:"+width+"pt"+bgStyle+"'>"
+     * bgStyle=";background:url("+bgImage+") no-repeat";
+     * table写为"<table border='0' class='page-break' style='margin:auto;border-collapse:collapse;width:"+width+"pt"+bgStyle+"'>"
      */
     private String pageBreak;
 
     /**
+     * 分栏表格间的间隔
+     * "<td style='width:"+columnMargin+"pt'></td>"
+     */
+    private Integer columnMargin;
+
+    /**
      * 分栏的子表格
+     * "<td style='width:"+singleTableWidth+"pt;vertical-align:top'>"
+     * 内容为tableList中的元素
+     * "</td>"
      */
     private List<TableDto> tableList;
 
@@ -33,6 +43,14 @@ public class TableDto implements Serializable{
      * 行
      */
     private List<RowDto> rowList;
+
+    public Integer getColumnMargin() {
+        return columnMargin;
+    }
+
+    public void setColumnMargin(Integer columnMargin) {
+        this.columnMargin = columnMargin;
+    }
 
     public String getPageBreak() {
         return pageBreak;
@@ -79,6 +97,8 @@ public class TableDto implements Serializable{
         JSONObject json = new JSONObject();
         json.put("width", this.width);
         json.put("bgImage", this.bgImage);
+        json.put("pageBreak", this.pageBreak);
+        json.put("columnMargin", this.columnMargin);
         json.put("tableList", this.tableList);
         json.put("rowList", this.rowList);
         return json.toJSONString();
