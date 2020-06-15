@@ -19,4 +19,4 @@ ADD /build/libs/$APP_NAME.jar $APP_NAME.jar
 EXPOSE 8080
 
 # Launch the application
-ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar $APP_NAME.jar --spring.application.name=$APP_NAME --sei.application.code=$APP_NAME --server.servlet.context-path=/$APP_NAME --server.port=8080"]
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar $APP_NAME.jar --server.servlet.context-path=/$APP_NAME --server.port=8080"]
