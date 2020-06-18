@@ -44,9 +44,9 @@ bootJar  {
 }
 jar {
     enabled = true
-    exclude('bootstrap.yaml')
+//    exclude('bootstrap.yaml')
     exclude('application.yaml')
-    exclude('com/changhong/sei/report/ReportApplication.*')
+//    exclude('com/changhong/sei/report/ReportApplication.*')
     manifest {
         attributes("Manifest-Version": "6.0")
         attributes("Created-By": "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString())
@@ -59,7 +59,7 @@ jar {
 
 dependencies {
     compile group: 'org.apache.commons', name: 'commons-text', version: '1.8'
-    compile("com.changhong.sei:sei-core-service:$sei_version")
+    compile("com.changhong.sei:sei-service-starter:$sei_version")
     compile group: 'com.bstek.ureport', name: 'ureport2-console', version: '2.2.9'
     compile files('lib/ojdbc14.jar')
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
