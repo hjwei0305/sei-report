@@ -1,4 +1,4 @@
-package com.changhong.sei.report.model;
+package com.changhong.sei.report.dto;
 
 import com.bstek.ureport.definition.*;
 import com.bstek.ureport.definition.datasource.DatasourceDefinition;

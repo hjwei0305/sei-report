@@ -13,7 +13,7 @@ import com.bstek.ureport.expression.ErrorInfo;
 import com.bstek.ureport.expression.ScriptErrorListener;
 import com.bstek.ureport.parser.ReportParser;
 import com.bstek.ureport.provider.report.ReportProvider;
-import com.changhong.sei.report.model.ReportDefinitionDto;
+import com.changhong.sei.report.dto.ReportDefinitionDto;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.io.IOUtils;

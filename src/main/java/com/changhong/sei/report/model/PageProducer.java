@@ -15,7 +15,6 @@
  ******************************************************************************/
 package com.changhong.sei.report.model;
 
-import com.alibaba.fastjson.JSONObject;
 import com.bstek.ureport.Utils;
 import com.bstek.ureport.build.BindData;
 import com.bstek.ureport.build.Context;

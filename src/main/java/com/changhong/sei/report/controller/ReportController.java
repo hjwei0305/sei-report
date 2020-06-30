@@ -1,11 +1,14 @@
 package com.changhong.sei.report.controller;
 
 import com.bstek.ureport.exception.ReportComputeException;
+import com.changhong.sei.report.entity.ReportEntity;
 import com.changhong.sei.report.model.PageReport;
 import com.changhong.sei.report.dto.PageReportDto;
 import com.changhong.sei.report.service.PageExportManager;
+import com.changhong.sei.report.service.ReportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +30,8 @@ public class ReportController {
 
     @Resource(name = "ureport.pageExportManager")
     private PageExportManager pageExportManager;
+    @Autowired
+    private ReportService reportService;
 
     @PostMapping("/genReport")
     @ApiOperation(value = "获取报表", notes = "参数说明：\n_u:报表全名，注意带上前后缀；\n_type:报表预览类型，1-预览，2-分页预览，3-物理分页预览；\n" +
@@ -124,5 +129,11 @@ public class ReportController {
             parameters.remove("page");
             parameters.put("startRow", startRow);
         }
+    }
+
+    @PostMapping("/getContent")
+    public String genReport(String name){
+        ReportEntity entity = reportService.queryUreportEntityByName(name);
+        return new String(entity.getContent());
     }
 }
