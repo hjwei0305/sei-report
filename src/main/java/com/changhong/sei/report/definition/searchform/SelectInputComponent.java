@@ -1,6 +1,6 @@
 package com.changhong.sei.report.definition.searchform;
 
-import com.changhong.sei.report.build.Dataset;
+import com.changhong.sei.report.builds.Dataset;
 import com.changhong.sei.report.exception.DatasetUndefinitionException;
 import com.changhong.sei.report.utils.Utils;
 import org.apache.commons.lang3.StringUtils;

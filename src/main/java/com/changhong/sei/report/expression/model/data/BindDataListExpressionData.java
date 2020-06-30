@@ -1,6 +1,6 @@
 package com.changhong.sei.report.expression.model.data;
 
-import com.changhong.sei.report.build.BindData;
+import com.changhong.sei.report.builds.BindData;
 
 import java.util.List;
 

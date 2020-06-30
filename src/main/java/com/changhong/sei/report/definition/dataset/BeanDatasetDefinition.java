@@ -1,6 +1,6 @@
 package com.changhong.sei.report.definition.dataset;
 
-import com.changhong.sei.report.build.Dataset;
+import com.changhong.sei.report.builds.Dataset;
 import com.changhong.sei.report.exception.ReportComputeException;
 
 import java.lang.reflect.Method;

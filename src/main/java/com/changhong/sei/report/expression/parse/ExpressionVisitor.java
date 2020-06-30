@@ -9,7 +9,7 @@ import com.changhong.sei.report.expression.model.Expression;
 import com.changhong.sei.report.expression.model.condition.Join;
 import com.changhong.sei.report.expression.model.expr.*;
 import com.changhong.sei.report.expression.model.expr.ifelse.*;
-import com.changhong.sei.report.expression.parse.build.ExpressionBuilder;
+import com.changhong.sei.report.expression.parse.builds.ExpressionBuilder;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;

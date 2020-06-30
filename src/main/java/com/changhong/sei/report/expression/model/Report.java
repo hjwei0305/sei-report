@@ -1,9 +1,9 @@
 package com.changhong.sei.report.expression.model;
 
 
-import com.changhong.sei.report.build.Context;
-import com.changhong.sei.report.build.webpaging.Page;
-import com.changhong.sei.report.build.webpaging.PagingBuilder;
+import com.changhong.sei.report.builds.Context;
+import com.changhong.sei.report.builds.webpaging.Page;
+import com.changhong.sei.report.builds.webpaging.PagingBuilder;
 import com.changhong.sei.report.definition.ConditionPropertyItem;
 import com.changhong.sei.report.definition.HeaderFooterDefinition;
 import com.changhong.sei.report.definition.Paper;

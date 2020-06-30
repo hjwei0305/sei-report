@@ -1,6 +1,6 @@
 package com.changhong.sei.report.definition.searchform;
 
-import com.changhong.sei.report.build.Dataset;
+import com.changhong.sei.report.builds.Dataset;
 
 import java.util.HashMap;
 import java.util.Map;

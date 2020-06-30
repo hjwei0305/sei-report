@@ -1,7 +1,7 @@
 package com.changhong.sei.report.model;
 
-import com.changhong.sei.report.build.BindData;
-import com.changhong.sei.report.build.Context;
+import com.changhong.sei.report.builds.BindData;
+import com.changhong.sei.report.builds.Context;
 import com.changhong.sei.report.definition.*;
 import com.changhong.sei.report.definition.value.SimpleValue;
 import com.changhong.sei.report.definition.value.Value;

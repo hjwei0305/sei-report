@@ -1,6 +1,6 @@
 package com.changhong.sei.report.definition;
 
-import com.changhong.sei.report.build.Dataset;
+import com.changhong.sei.report.builds.Dataset;
 import com.changhong.sei.report.definition.datasource.DatasourceDefinition;
 import com.changhong.sei.report.definition.searchform.RenderContext;
 import com.changhong.sei.report.definition.searchform.SearchForm;

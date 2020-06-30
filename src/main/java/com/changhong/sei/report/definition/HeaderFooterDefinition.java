@@ -1,7 +1,7 @@
 package com.changhong.sei.report.definition;
 
-import com.changhong.sei.report.build.Context;
-import com.changhong.sei.report.build.webpaging.HeaderFooter;
+import com.changhong.sei.report.builds.Context;
+import com.changhong.sei.report.builds.webpaging.HeaderFooter;
 import com.changhong.sei.report.expression.model.Expression;
 import com.changhong.sei.report.expression.model.data.ExpressionData;
 import com.changhong.sei.report.expression.model.data.ObjectExpressionData;

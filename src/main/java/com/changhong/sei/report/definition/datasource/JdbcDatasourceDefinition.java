@@ -1,6 +1,6 @@
 package com.changhong.sei.report.definition.datasource;
 
-import com.changhong.sei.report.build.Dataset;
+import com.changhong.sei.report.builds.Dataset;
 import com.changhong.sei.report.definition.dataset.DatasetDefinition;
 
 import java.sql.Connection;
