@@ -29,6 +29,3 @@ spring:
       connect-string: 10.4.208.132:2181
       # 关闭zk可用不用依赖平台注册中心
       enabled: true
-  service-registry:
-    auto-registration:
-      enabled: true

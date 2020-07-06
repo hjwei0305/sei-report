@@ -9,7 +9,7 @@ import java.util.List;
  * @author：zhaohz
  * @date：2020/6/30 11:19
  */
-public class ColumnDefinition implements Comparable<com.bstek.ureport.definition.ColumnDefinition>{
+public class ColumnDefinition implements Comparable<ColumnDefinition>{
 	private int columnNumber;
 	private int width;
 	private boolean hide;
@@ -45,7 +45,7 @@ public class ColumnDefinition implements Comparable<com.bstek.ureport.definition
 	}
 
 	@Override
-	public int compareTo(com.bstek.ureport.definition.ColumnDefinition o) {
+	public int compareTo(ColumnDefinition o) {
 		return columnNumber-o.getColumnNumber();
 	}
 }

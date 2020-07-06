@@ -2,6 +2,9 @@ package com.changhong.sei.report.definition.datasource;
 
 import com.changhong.sei.report.builds.Dataset;
 import com.changhong.sei.report.definition.dataset.DatasetDefinition;
+import com.changhong.sei.report.definition.dataset.SqlDatasetDefinition;
+import com.changhong.sei.report.enums.DatasourceType;
+import com.changhong.sei.report.exception.ReportComputeException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

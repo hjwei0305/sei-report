@@ -11,7 +11,7 @@ import java.util.List;
  * @author：zhaohz
  * @date：2020/6/30 11:18
  */
-public class RowDefinition implements Comparable<com.bstek.ureport.definition.RowDefinition>,Serializable{
+public class RowDefinition implements Comparable<RowDefinition>,Serializable{
 	private static final long serialVersionUID = 8326047944994933822L;
 	private int rowNumber;
 	private int height;
@@ -49,7 +49,7 @@ public class RowDefinition implements Comparable<com.bstek.ureport.definition.Ro
 	}
 
 	@Override
-	public int compareTo(com.bstek.ureport.definition.RowDefinition o) {
+	public int compareTo(RowDefinition o) {
 		return rowNumber-o.getRowNumber();
 	}
 }

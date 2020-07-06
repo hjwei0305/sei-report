@@ -1,23 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    <import resource="classpath:ureport-console-context.xml"/>
-    <!--<context:annotation-config/>
-    &lt;!&ndash; 引入配置文件 &ndash;&gt;
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
-        <property name="resources" value="classpath:application.yaml"/>
-    </bean>
-    <context:property-placeholder properties-ref="propertyConfigurer"/>-->
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <!--<import resource="classpath:ureport-console-context.xml"/>-->
     <!-- 引入配置文件 -->
-    <bean id="propertyConfigurer" parent="ureport.props">
-        <property name="location">
+    <!-- <bean id="propertyConfigurer" parent="ureport.props">
+        <property name="location"> -->
             <!-- 读取配置文件 -->
-            <value>classpath:ureport.properties</value>
-        </property>
-    </bean>
+    <!-- <value>classpath:ureport.properties</value>
+</property>
+</bean> -->
     <bean id="ureport.htmlPageServletAction" class="com.changhong.sei.report.servlet.HtmlPageServletAction"/>
     <bean id="ureport.sei.designerServletAction" class="com.changhong.sei.report.servlet.SeiDesignerServletAction"/>
     <bean id="ureport.pageExportManager" class="com.changhong.sei.report.service.impl.PageExportManagerImpl"/>
+    <!--<bean id="ureport.props" class="com.bstek.ureport.UReportPropertyPlaceholderConfigurer" abstract="true">
+        <property name="ignoreUnresolvablePlaceholders" value="true"></property>
+    </bean>-->
+
+    <context:property-placeholder location="classpath:ureport.properties" ignore-unresolvable="true"/>
+
+    <bean id="ureport.exportManager" class="com.changhong.sei.report.export.ExportManagerImpl">
+        <property name="reportRender" ref="ureport.reportRender"></property>
+    </bean>
+
+    <bean id="ureport.reportRender" class="com.changhong.sei.report.export.ReportRender">
+        <property name="reportParser" ref="ureport.reportParser"></property>
+        <property name="reportBuilder" ref="ureport.reportBuilder"></property>
+    </bean>
+
+    <bean id="ureport.defaultImageProvider" class="com.changhong.sei.report.provider.image.DefaultImageProvider"></bean>
+
+    <!--<bean id="ureport.fileReportProvider" class="com.changhong.sei.report.provider.report.file.FileReportProvider">
+        <property name="fileStoreDir" value="${ureport.fileStoreDir}"></property>
+        <property name="disabled" value="${ureport.disableFileProvider}"></property>
+    </bean>-->
+
+    <bean id="ureport.httpImageProvider" class="com.changhong.sei.report.provider.image.HttpImageProvider"></bean>
+    <bean id="ureport.httpsImageProvider" class="com.changhong.sei.report.provider.image.HttpsImageProvider"></bean>
+
+    <bean id="ureport.reportBuilder" class="com.changhong.sei.report.builds.ReportBuilder">
+        <property name="hideRowColumnBuilder" ref="ureport.hideRowColumnBuilder"></property>
+    </bean>
+
+    <bean id="ureport.hideRowColumnBuilder" class="com.changhong.sei.report.builds.HideRowColumnBuilder"></bean>
+
+    <bean id="ureport.reportParser" class="com.changhong.sei.report.parser.ReportParser"></bean>
+
+    <bean id="ureport.formParserUtils" class="com.changhong.sei.report.parser.impl.searchform.FormParserUtils"></bean>
+    <bean id="ureport.checkboxParser" class="com.changhong.sei.report.parser.impl.searchform.CheckboxParser"></bean>
+    <bean id="ureport.gridParser" class="com.changhong.sei.report.parser.impl.searchform.GridParser"></bean>
+    <bean id="ureport.radioInputParser" class="com.changhong.sei.report.parser.impl.searchform.RadioInputParser"></bean>
+    <bean id="ureport.rextInputParser" class="com.changhong.sei.report.parser.impl.searchform.TextInputParser"></bean>
+    <bean id="ureport.resetButtonParser" class="com.changhong.sei.report.parser.impl.searchform.ResetButtonParser"></bean>
+    <bean id="ureport.submitButtonParser" class="com.changhong.sei.report.parser.impl.searchform.SubmitButtonParser"></bean>
+    <bean id="ureport.selectInputParser" class="com.changhong.sei.report.parser.impl.searchform.SelectInputParser"></bean>
+    <bean id="ureport.datetimeInputParser" class="com.changhong.sei.report.parser.impl.searchform.DatetimeInputParser"></bean>
+
+    <!--<bean id="ureport.classpathReportProvider" class="com.changhong.sei.report.provider.report.classpath.ClasspathReportProvider"></bean>-->
+
+    <bean id="ureport.fontBuilder" class="com.changhong.sei.report.export.pdf.font.FontBuilder"></bean>
+
+    <bean id="ureport.expressionUtils" class="com.changhong.sei.report.utils.ExpressionUtils"></bean>
+    <bean id="ureport.utils" class="com.changhong.sei.report.utils.Utils">
+        <property name="debug" value="${ureport.debug}"></property>
+    </bean>
+    <bean id="ureport.cacheUtils" class="com.changhong.sei.report.cache.CacheUtils"></bean>
+
+    <bean id="ureport.countFunction" class="com.changhong.sei.report.expression.function.CountFunction"></bean>
+    <bean id="ureport.sumFunction" class="com.changhong.sei.report.expression.function.SumFunction"></bean>
+    <bean id="ureport.maxFunction" class="com.changhong.sei.report.expression.function.MaxFunction"></bean>
+    <bean id="ureport.minFunction" class="com.changhong.sei.report.expression.function.MinFunction"></bean>
+    <bean id="ureport.listFunction" class="com.changhong.sei.report.expression.function.ListFunction"></bean>
+    <bean id="ureport.avgFunction" class="com.changhong.sei.report.expression.function.AvgFunction"></bean>
+    <bean id="ureport.orderFunction" class="com.changhong.sei.report.expression.function.OrderFunction"></bean>
+    <bean id="ureport.WeekFunction" class="com.changhong.sei.report.expression.function.date.WeekFunction"></bean>
+    <bean id="ureport.dayFunction" class="com.changhong.sei.report.expression.function.date.DayFunction"></bean>
+    <bean id="ureport.monthFunction" class="com.changhong.sei.report.expression.function.date.MonthFunction"></bean>
+    <bean id="ureport.yearFunction" class="com.changhong.sei.report.expression.function.date.YearFunction"></bean>
+    <bean id="ureport.dateFunction" class="com.changhong.sei.report.expression.function.date.DateFunction"></bean>
+    <bean id="ureport.formatNumberFunction" class="com.changhong.sei.report.expression.function.FormatNumberFunction"></bean>
+    <bean id="ureport.formatDateFunction" class="com.changhong.sei.report.expression.function.FormatDateFunction"></bean>
+    <bean id="ureport.getFunction" class="com.changhong.sei.report.expression.function.GetFunction"></bean>
+
+    <bean id="ureport.absFunction" class="com.changhong.sei.report.expression.function.math.AbsFunction"></bean>
+    <bean id="ureport.ceilFunction" class="com.changhong.sei.report.expression.function.math.CeilFunction"></bean>
+    <bean id="ureport.ChnFunction" class="com.changhong.sei.report.expression.function.math.ChnFunction"></bean>
+    <bean id="ureport.ChnMoneyFunction" class="com.changhong.sei.report.expression.function.math.ChnMoneyFunction"></bean>
+    <bean id="ureport.CosFunction" class="com.changhong.sei.report.expression.function.math.CosFunction"></bean>
+    <bean id="ureport.ExpFunction" class="com.changhong.sei.report.expression.function.math.ExpFunction"></bean>
+    <bean id="ureport.floorFunction" class="com.changhong.sei.report.expression.function.math.FloorFunction"></bean>
+    <bean id="ureport.log10Function" class="com.changhong.sei.report.expression.function.math.Log10Function"></bean>
+    <bean id="ureport.logFunction" class="com.changhong.sei.report.expression.function.math.LogFunction"></bean>
+    <bean id="ureport.powFunction" class="com.changhong.sei.report.expression.function.math.PowFunction"></bean>
+    <bean id="ureport.randomFunction" class="com.changhong.sei.report.expression.function.math.RandomFunction"></bean>
+    <bean id="ureport.roundFunction" class="com.changhong.sei.report.expression.function.math.RoundFunction"></bean>
+    <bean id="ureport.sinFunction" class="com.changhong.sei.report.expression.function.math.SinFunction"></bean>
+    <bean id="ureport.sqrtFunction" class="com.changhong.sei.report.expression.function.math.SqrtFunction"></bean>
+    <bean id="ureport.tanFunction" class="com.changhong.sei.report.expression.function.math.TanFunction"></bean>
+    <bean id="ureport.stdevpFunction" class="com.changhong.sei.report.expression.function.math.StdevpFunction"></bean>
+    <bean id="ureport.varaFunction" class="com.changhong.sei.report.expression.function.math.VaraFunction"></bean>
+    <bean id="ureport.modeFunction" class="com.changhong.sei.report.expression.function.math.ModeFunction"></bean>
+    <bean id="ureport.medianFunction" class="com.changhong.sei.report.expression.function.math.MedianFunction"></bean>
+
+
+    <bean id="ureport.lengthFunction" class="com.changhong.sei.report.expression.function.string.LengthFunction"></bean>
+    <bean id="ureport.lowerFunction" class="com.changhong.sei.report.expression.function.string.LowerFunction"></bean>
+    <bean id="ureport.IndexOfFunction" class="com.changhong.sei.report.expression.function.string.IndexOfFunction"></bean>
+    <bean id="ureport.replaceFunction" class="com.changhong.sei.report.expression.function.string.ReplaceFunction"></bean>
+    <bean id="ureport.substringFunction" class="com.changhong.sei.report.expression.function.string.SubstringFunction"></bean>
+    <bean id="ureport.trimFunction" class="com.changhong.sei.report.expression.function.string.TrimFunction"></bean>
+    <bean id="ureport.upperFunction" class="com.changhong.sei.report.expression.function.string.UpperFunction"></bean>
+
+    <bean id="ureport.pageTotalFunction" class="com.changhong.sei.report.expression.function.page.PageTotalFunction"></bean>
+    <bean id="ureport.pageNumberFunction" class="com.changhong.sei.report.expression.function.page.PageNumberFunction"></bean>
+    <bean id="ureport.pageAvgFunction" class="com.changhong.sei.report.expression.function.page.PageAvgFunction"></bean>
+    <bean id="ureport.pageCountFunction" class="com.changhong.sei.report.expression.function.page.PageCountFunction"></bean>
+    <bean id="ureport.pageMaxFunction" class="com.changhong.sei.report.expression.function.page.PageMaxFunction"></bean>
+    <bean id="ureport.pageMinFunction" class="com.changhong.sei.report.expression.function.page.PageMinFunction"></bean>
+    <bean id="ureport.pageRowsFunction" class="com.changhong.sei.report.expression.function.page.PageRowsFunction"></bean>
+    <bean id="ureport.pageSumFunction" class="com.changhong.sei.report.expression.function.page.PageSumFunction"></bean>
+
+    <bean id="ureport.parameterFunction" class="com.changhong.sei.report.expression.function.ParameterFunction"></bean>
+    <bean id="ureport.parameterIsEmptyFunction" class="com.changhong.sei.report.expression.function.ParameterIsEmptyFunction"></bean>
+    <bean id="ureport.jsonFunction" class="com.changhong.sei.report.expression.function.JsonFunction"></bean>
+
+    <bean id="ureport.rowFunction" class="com.changhong.sei.report.expression.function.RowFunction"></bean>
+    <bean id="ureport.columnFunction" class="com.changhong.sei.report.expression.function.ColumnFunction"></bean>
 </beans>
