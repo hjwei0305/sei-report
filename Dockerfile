@@ -1,7 +1,8 @@
 # Docker for java sei-report
 
 # Base image oracle jdk8
-FROM frolvlad/alpine-java:latest
+#FROM frolvlad/alpine-java:latest
+FROM openjdk:8-jre-alpine
 
 # Author
 LABEL maintainer="brianhsiung@outlook.com"
@@ -19,4 +20,4 @@ ADD /build/libs/$APP_NAME.jar $APP_NAME.jar
 EXPOSE 8080
 
 # Launch the application
-ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar $APP_NAME.jar --server.servlet.context-path=/$APP_NAME --server.port=8080"]
+ENTRYPOINT ["sh","-c","java -server  -XX:InitialRAMPercentage=75.0 -XX:MaxRAMPercentage=75.0 -XX:+UseG1GC $JAVA_OPTS -jar $APP_NAME.jar --server.servlet.context-path=/$APP_NAME --server.port=8080"]
