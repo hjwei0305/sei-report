@@ -1,6 +1,6 @@
 package com.changhong.sei.report;
 
-import com.bstek.ureport.console.UReportServlet;
+import com.changhong.sei.report.servlet.UReportServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;

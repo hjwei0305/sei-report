@@ -1,17 +1,14 @@
 package com.changhong.sei.report.provider;
 
-import com.bstek.ureport.provider.report.ReportFile;
-import com.bstek.ureport.provider.report.ReportProvider;
 import com.changhong.sei.report.entity.ReportEntity;
+import com.changhong.sei.report.provider.report.ReportFile;
+import com.changhong.sei.report.provider.report.ReportProvider;
 import com.changhong.sei.report.service.ReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import java.io.ByteArrayInputStream;

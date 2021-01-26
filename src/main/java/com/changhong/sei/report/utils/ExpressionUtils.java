@@ -10,7 +10,8 @@ import com.changhong.sei.report.expression.model.Expression;
 import com.changhong.sei.report.expression.parse.ExpressionErrorListener;
 import com.changhong.sei.report.expression.parse.ExpressionVisitor;
 import com.changhong.sei.report.expression.parse.builds.*;
-import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -89,7 +90,8 @@ public class ExpressionUtils implements ApplicationContextAware {
 	}
 	
 	public static Expression parseExpression(String text){
-		ANTLRInputStream antlrInputStream=new ANTLRInputStream(text);
+		CharStream antlrInputStream = CharStreams.fromString(text);
+		//ANTLRInputStream antlrInputStream=new ANTLRInputStream(text);
 		ReportParserLexer lexer=new ReportParserLexer(antlrInputStream);
 		CommonTokenStream tokenStream=new CommonTokenStream(lexer);
 		ReportParserParser parser=new ReportParserParser(tokenStream);

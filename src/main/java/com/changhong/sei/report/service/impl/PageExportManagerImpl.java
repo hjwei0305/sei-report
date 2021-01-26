@@ -1,17 +1,17 @@
 package com.changhong.sei.report.service.impl;
 
-import com.bstek.ureport.build.Context;
-import com.bstek.ureport.cache.CacheUtils;
-import com.bstek.ureport.chart.ChartData;
-import com.bstek.ureport.definition.ReportDefinition;
-import com.bstek.ureport.export.ExportConfigure;
-import com.bstek.ureport.export.PageBuilder;
-import com.bstek.ureport.export.ReportRender;
-import com.bstek.ureport.export.SinglePageData;
-import com.bstek.ureport.export.html.HtmlProducer;
-import com.bstek.ureport.export.pdf.PdfProducer;
-import com.bstek.ureport.model.Report;
+import com.changhong.sei.report.builds.Context;
+import com.changhong.sei.report.cache.CacheUtils;
+import com.changhong.sei.report.chart.ChartData;
+import com.changhong.sei.report.definition.ReportDefinition;
 import com.changhong.sei.report.dto.TableDto;
+import com.changhong.sei.report.export.ExportConfigure;
+import com.changhong.sei.report.export.PageBuilder;
+import com.changhong.sei.report.export.ReportRender;
+import com.changhong.sei.report.export.SinglePageData;
+import com.changhong.sei.report.export.html.HtmlProducer;
+import com.changhong.sei.report.export.pdf.PdfProducer;
+import com.changhong.sei.report.expression.model.Report;
 import com.changhong.sei.report.model.Page;
 import com.changhong.sei.report.model.PageProducer;
 import com.changhong.sei.report.model.PageReport;
@@ -64,11 +64,11 @@ public class PageExportManagerImpl implements PageExportManager {
             CacheUtils.storeChartDataMap(chartMap);
         }
         SinglePageData pageData= PageBuilder.buildSinglePageData(pageIndex, report);
-        List<com.bstek.ureport.build.paging.Page> pages = pageData.getPages();
+        List<com.changhong.sei.report.builds.webpaging.Page> pages = pageData.getPages();
         String content=null;
         TableDto jsonContent = null;
         if(pages.size()==1){
-            com.bstek.ureport.build.paging.Page pag = pages.get(0);
+            com.changhong.sei.report.builds.webpaging.Page pag = pages.get(0);
             Context context = report.getContext();
             content=htmlProducer.produce(context,pag,false);
             jsonContent = pageProducer.buildTable(context, pag.getRows(), pag.getColumns(), context.getReport().getRowColCellMap(), false, true);

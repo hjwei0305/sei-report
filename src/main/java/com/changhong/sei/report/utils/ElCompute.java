@@ -16,7 +16,7 @@ public class ElCompute {
 		long start=System.currentTimeMillis();
 		String expr="22/2*2-(5+(1*2))-2*2";
 		for(int i=0;i<1;i++) {
-			com.bstek.ureport.utils.ElCompute el=new com.bstek.ureport.utils.ElCompute();
+			ElCompute el=new ElCompute();
 			Object data=el.doCompute(expr);
 			System.out.println(data);
 		}

@@ -1,48 +1,33 @@
-/*******************************************************************************
- * Copyright 2017 Bstek
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License.  You may obtain a copy
- * of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
- * License for the specific language governing permissions and limitations under
- * the License.
- ******************************************************************************/
 package com.changhong.sei.report.model;
 
-import com.bstek.ureport.Utils;
-import com.bstek.ureport.build.BindData;
-import com.bstek.ureport.build.Context;
-import com.bstek.ureport.chart.ChartData;
-import com.bstek.ureport.definition.*;
-import com.bstek.ureport.definition.dataset.DatasetDefinition;
-import com.bstek.ureport.definition.dataset.Parameter;
-import com.bstek.ureport.definition.dataset.SqlDatasetDefinition;
-import com.bstek.ureport.definition.datasource.BuildinDatasourceDefinition;
-import com.bstek.ureport.definition.datasource.DataType;
-import com.bstek.ureport.definition.datasource.DatasourceDefinition;
-import com.bstek.ureport.definition.datasource.JdbcDatasourceDefinition;
-import com.bstek.ureport.definition.value.DatasetValue;
-import com.bstek.ureport.exception.ReportComputeException;
-import com.bstek.ureport.expression.ExpressionUtils;
-import com.bstek.ureport.expression.model.Expression;
-import com.bstek.ureport.expression.model.data.BindDataListExpressionData;
-import com.bstek.ureport.expression.model.data.ExpressionData;
-import com.bstek.ureport.expression.model.data.ObjectExpressionData;
-import com.bstek.ureport.expression.model.data.ObjectListExpressionData;
-import com.bstek.ureport.model.Cell;
-import com.bstek.ureport.model.Column;
-import com.bstek.ureport.model.Image;
-import com.bstek.ureport.model.Row;
-import com.bstek.ureport.utils.ProcedureUtils;
+import com.changhong.sei.report.builds.BindData;
+import com.changhong.sei.report.builds.Context;
+import com.changhong.sei.report.chart.ChartData;
+import com.changhong.sei.report.definition.Border;
+import com.changhong.sei.report.definition.CellDefinition;
+import com.changhong.sei.report.definition.CellStyle;
+import com.changhong.sei.report.definition.ReportDefinition;
+import com.changhong.sei.report.definition.dataset.DatasetDefinition;
+import com.changhong.sei.report.definition.dataset.Parameter;
+import com.changhong.sei.report.definition.dataset.SqlDatasetDefinition;
+import com.changhong.sei.report.definition.datasource.BuildinDatasourceDefinition;
+import com.changhong.sei.report.definition.datasource.DataType;
+import com.changhong.sei.report.definition.datasource.DatasourceDefinition;
+import com.changhong.sei.report.definition.datasource.JdbcDatasourceDefinition;
+import com.changhong.sei.report.definition.value.DatasetValue;
 import com.changhong.sei.report.dto.CellDto;
 import com.changhong.sei.report.dto.RowDto;
 import com.changhong.sei.report.dto.TableDto;
+import com.changhong.sei.report.enums.Alignment;
+import com.changhong.sei.report.exception.ReportComputeException;
+import com.changhong.sei.report.expression.model.Expression;
+import com.changhong.sei.report.expression.model.data.BindDataListExpressionData;
+import com.changhong.sei.report.expression.model.data.ExpressionData;
+import com.changhong.sei.report.expression.model.data.ObjectExpressionData;
+import com.changhong.sei.report.expression.model.data.ObjectListExpressionData;
+import com.changhong.sei.report.utils.ExpressionUtils;
+import com.changhong.sei.report.utils.ProcedureUtils;
+import com.changhong.sei.report.utils.Utils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
@@ -387,19 +372,19 @@ public class PageProducer {
 		return table;
 	}
 
-	public TableDto buildTableWithColumnMargin(Context context, List<com.bstek.ureport.build.paging.Page> pages, int columnMargin){
+	public TableDto buildTableWithColumnMargin(Context context, List<com.changhong.sei.report.builds.webpaging.Page> pages, int columnMargin){
 		TableDto jsonContent = new TableDto();
 		int pageSize = pages.size();
 		List<TableDto> tableList = new ArrayList<>();
 		TableDto table = null;
-		int singleTableWidth = buildTableWidth(((com.bstek.ureport.build.paging.Page)pages.get(0)).getColumns());
+		int singleTableWidth = buildTableWidth(((com.changhong.sei.report.builds.webpaging.Page)pages.get(0)).getColumns());
 		int tableWidth = singleTableWidth * pageSize + columnMargin * (pageSize - 1);
 		String bgImage = context.getReport().getPaper().getBgImage();
 		jsonContent.setPageBreak("page-break");
 		jsonContent.setWidth(tableWidth);
 		jsonContent.setBgImage(bgImage);
 		for(int i=0;i<pageSize;i++){
-			com.bstek.ureport.build.paging.Page pag = pages.get(i);
+			com.changhong.sei.report.builds.webpaging.Page pag = pages.get(i);
 			table = buildTable(context, pag.getRows(), pag.getColumns(), context.getReport().getRowColCellMap(), false, true);
 			tableList.add(table);
 		}
@@ -607,6 +592,4 @@ public class PageProducer {
 		}
 		return height;
 	}
-
-
 }

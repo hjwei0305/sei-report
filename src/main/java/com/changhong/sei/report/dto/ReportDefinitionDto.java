@@ -1,10 +1,10 @@
 package com.changhong.sei.report.dto;
 
-import com.bstek.ureport.definition.*;
-import com.bstek.ureport.definition.datasource.DatasourceDefinition;
-import com.bstek.ureport.definition.searchform.SearchForm;
-import com.bstek.ureport.expression.model.Condition;
-import com.bstek.ureport.expression.model.condition.*;
+import com.changhong.sei.report.definition.*;
+import com.changhong.sei.report.definition.datasource.DatasourceDefinition;
+import com.changhong.sei.report.definition.searchform.SearchForm;
+import com.changhong.sei.report.expression.model.Condition;
+import com.changhong.sei.report.expression.model.condition.*;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
@@ -21,7 +21,7 @@ public class ReportDefinitionDto {
 	private List<RowDefinition> rows;
 	private List<ColumnDefinition> columns;
 	private List<DatasourceDefinition> datasources;
-	private Map<String,CellDefinition> cellsMap=new HashMap<String,CellDefinition>();
+	private Map<String, CellDefinition> cellsMap=new HashMap<String,CellDefinition>();
 	public ReportDefinitionDto(ReportDefinition report) {
 		this.paper=report.getPaper();
 		this.header=report.getHeader();

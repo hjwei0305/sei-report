@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.DefaultIndexedColorMap;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -229,11 +230,11 @@ public class CellStyleContext {
 	}
 	
 	private BorderStyle getBorderStyle(Border border){
-		if(border.getStyle().equals(com.bstek.ureport.definition.BorderStyle.solid)){
+		if(border.getStyle().equals(com.changhong.sei.report.enums.BorderStyle.solid)){
 			return BorderStyle.THIN;
-		}else if(border.getStyle().equals(com.bstek.ureport.definition.BorderStyle.dashed)){
+		}else if(border.getStyle().equals(com.changhong.sei.report.enums.BorderStyle.dashed)){
 			return BorderStyle.DASHED;
-		}else if(border.getStyle().equals(com.bstek.ureport.definition.BorderStyle.doublesolid)){
+		}else if(border.getStyle().equals(com.changhong.sei.report.enums.BorderStyle.doublesolid)){
 			return BorderStyle.DOUBLE;
 		}
 		return null;
@@ -242,7 +243,7 @@ public class CellStyleContext {
 	private XSSFColor buildXSSFColor(String colorStr){
 		String[] color=colorStr.split(",");
 		Color c=new Color(Integer.valueOf(color[0]),Integer.valueOf(color[1]),Integer.valueOf(color[2]));
-		XSSFColor xssfColor=new XSSFColor(c);
+		XSSFColor xssfColor=new XSSFColor(c, new DefaultIndexedColorMap());
 		return xssfColor;
 	}
 	

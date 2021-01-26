@@ -2,8 +2,8 @@ package com.changhong.sei.report.dto;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bstek.ureport.chart.ChartData;
-import com.bstek.ureport.export.html.SearchFormData;
+import com.changhong.sei.report.chart.ChartData;
+import com.changhong.sei.report.export.html.SearchFormData;
 import com.changhong.sei.report.model.PageReport;
 import org.springframework.util.ObjectUtils;
 

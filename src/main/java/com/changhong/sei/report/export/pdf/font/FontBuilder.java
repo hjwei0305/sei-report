@@ -75,15 +75,11 @@ public class FontBuilder implements ApplicationContextAware {
 				return null;				
 			}
 		}
-		InputStream inputStream=null;
-		try {
-			inputStream=applicationContext.getResource(fontPath).getInputStream();
+		try (InputStream inputStream=applicationContext.getResource(fontPath).getInputStream()) {
 			java.awt.Font font=java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, inputStream);
 			return font.deriveFont(fontStyle,size);
 		} catch (Exception e) {
 			throw new ReportException(e);
-		}finally{
-			IOUtils.closeQuietly(inputStream);
 		}
 	}
 	

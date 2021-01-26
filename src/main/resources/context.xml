@@ -20,6 +20,60 @@
 
     <context:property-placeholder location="classpath:ureport.properties" ignore-unresolvable="true"/>
 
+    <bean id="ureport.datasourceServletAction" class="com.changhong.sei.report.servlet.designer.DatasourceServletAction"></bean>
+    <bean id="ureport.resourceLoaderServletAction" class="com.changhong.sei.report.servlet.ResourceLoaderServletAction"></bean>
+    <bean id="ureport.designerServletAction" class="com.changhong.sei.report.servlet.designer.DesignerServletAction">
+        <property name="reportRender" ref="ureport.reportRender"></property>
+        <property name="reportParser" ref="ureport.reportParser"></property>
+    </bean>
+
+    <bean id="ureport.searchFormDesignerAction" class="com.changhong.sei.report.servlet.designer.SearchFormDesignerAction"></bean>
+
+    <bean id="ureport.htmlPreviewServletAction" class="com.changhong.sei.report.servlet.html.HtmlPreviewServletAction">
+        <property name="exportManager" ref="ureport.exportManager"></property>
+        <property name="reportBuilder" ref="ureport.reportBuilder"></property>
+        <property name="reportRender" ref="ureport.reportRender"></property>
+    </bean>
+    <bean id="ureport.exportWordServletAction" class="com.changhong.sei.report.servlet.ExportWordServletAction">
+        <property name="exportManager" ref="ureport.exportManager"></property>
+        <property name="reportBuilder" ref="ureport.reportBuilder"></property>
+    </bean>
+
+    <bean id="ureport.exportPdfServletAction" class="com.changhong.sei.report.servlet.ExportPdfServletAction">
+        <property name="exportManager" ref="ureport.exportManager"></property>
+        <property name="reportBuilder" ref="ureport.reportBuilder"></property>
+        <property name="reportRender" ref="ureport.reportRender"></property>
+    </bean>
+
+    <bean id="ureport.exportExcelServletAction" class="com.changhong.sei.report.servlet.excel.ExportExcelServletAction">
+        <property name="exportManager" ref="ureport.exportManager"></property>
+        <property name="reportBuilder" ref="ureport.reportBuilder"></property>
+    </bean>
+
+    <bean id="ureport.exportExcel97ServletAction" class="com.changhong.sei.report.servlet.excel.ExportExcel97ServletAction">
+        <property name="exportManager" ref="ureport.exportManager"></property>
+        <property name="reportBuilder" ref="ureport.reportBuilder"></property>
+    </bean>
+
+    <bean id="ureport.imageServletAction" class="com.changhong.sei.report.servlet.ImageServletAction"></bean>
+    <bean id="ureport.importExcelServletAction" class="com.changhong.sei.report.servlet.importexcel.ImportExcelServletAction"></bean>
+
+    <bean id="ureport.chartServletAction" class="com.changhong.sei.report.servlet.ChartServletAction"></bean>
+
+    <bean id="ureport.httpSessionReportCache" class="com.changhong.sei.report.cache.HttpSessionReportCache">
+        <property name="disabled" value="${ureport.disableHttpSessionReportCache}"></property>
+    </bean>
+
+    <bean id="ureport.arialFontRegister" class="com.changhong.sei.report.font.arial.ArialFontRegister"></bean>
+    <bean id="ureport.comicSansMSFontRegister" class="com.changhong.sei.report.font.comicsansms.ComicSansMSFontRegister"></bean>
+    <bean id="ureport.courierNewFontRegister" class="com.changhong.sei.report.font.couriernew.CourierNewFontRegister"></bean>
+    <bean id="ureport.fangSongFontRegister" class="com.changhong.sei.report.font.fangsong.FangSongFontRegister"></bean>
+    <bean id="ureport.heiTiFontRegister" class="com.changhong.sei.report.font.heiti.HeiTiFontRegister"></bean>
+    <bean id="ureport.kaiTiFontRegister" class="com.changhong.sei.report.font.kaiti.KaiTiFontRegister"></bean>
+    <bean id="ureport.songTiFontRegister" class="com.changhong.sei.report.font.songti.SongTiFontRegister"></bean>
+    <bean id="ureport.timesNewRomanFontRegister" class="com.changhong.sei.report.font.timesnewroman.TimesNewRomanFontRegister"></bean>
+    <bean id="ureport.yaheiFontRegister" class="com.changhong.sei.report.font.yahei.YaheiFontRegister"></bean>
+
     <bean id="ureport.exportManager" class="com.changhong.sei.report.export.ExportManagerImpl">
         <property name="reportRender" ref="ureport.reportRender"></property>
     </bean>

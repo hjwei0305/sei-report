@@ -20,7 +20,7 @@ spring:
     name: ${sei.application.code}
   cloud:
     config: # 配置中心地址
-      uri: http://10.4.208.86:8100/config-center/
+      uri: http://dsei.changhong.com//config-center/
       profile: ${sei.application.env} #当前环境
       name: ${spring.application.name}
       enabled: true

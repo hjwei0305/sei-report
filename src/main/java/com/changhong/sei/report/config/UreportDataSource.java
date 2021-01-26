@@ -1,6 +1,6 @@
 package com.changhong.sei.report.config;
 
-import com.bstek.ureport.definition.datasource.BuildinDatasource;
+import com.changhong.sei.report.definition.datasource.BuildinDatasource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

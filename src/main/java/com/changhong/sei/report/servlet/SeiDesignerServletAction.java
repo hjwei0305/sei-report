@@ -1,20 +1,20 @@
 package com.changhong.sei.report.servlet;
 
-import com.bstek.ureport.cache.CacheUtils;
-import com.bstek.ureport.console.RenderPageServletAction;
-import com.bstek.ureport.console.cache.TempObjectCache;
-import com.bstek.ureport.console.designer.ReportUtils;
-import com.bstek.ureport.console.exception.ReportDesignException;
-import com.bstek.ureport.definition.ReportDefinition;
-import com.bstek.ureport.dsl.ReportParserLexer;
-import com.bstek.ureport.dsl.ReportParserParser;
-import com.bstek.ureport.export.ReportRender;
-import com.bstek.ureport.expression.ErrorInfo;
-import com.bstek.ureport.expression.ScriptErrorListener;
-import com.bstek.ureport.parser.ReportParser;
-import com.bstek.ureport.provider.report.ReportProvider;
+import com.changhong.sei.report.cache.CacheUtils;
+import com.changhong.sei.report.cache.TempObjectCache;
+import com.changhong.sei.report.definition.ReportDefinition;
+import com.changhong.sei.report.dsl.ReportParserLexer;
+import com.changhong.sei.report.dsl.ReportParserParser;
 import com.changhong.sei.report.dto.ReportDefinitionDto;
-import org.antlr.v4.runtime.ANTLRInputStream;
+import com.changhong.sei.report.exception.ReportDesignException;
+import com.changhong.sei.report.export.ReportRender;
+import com.changhong.sei.report.expression.ErrorInfo;
+import com.changhong.sei.report.expression.ScriptErrorListener;
+import com.changhong.sei.report.parser.ReportParser;
+import com.changhong.sei.report.provider.report.ReportProvider;
+import com.changhong.sei.report.utils.ReportUtils;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
@@ -55,7 +55,8 @@ public class SeiDesignerServletAction extends RenderPageServletAction {
     }
     public void scriptValidation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String content=req.getParameter("content");
-        ANTLRInputStream antlrInputStream=new ANTLRInputStream(content);
+        CharStream antlrInputStream = CharStreams.fromString(content);
+        /*ANTLRInputStream antlrInputStream=new ANTLRInputStream(content);*/
         ReportParserLexer lexer=new ReportParserLexer(antlrInputStream);
         CommonTokenStream tokenStream=new CommonTokenStream(lexer);
         ReportParserParser parser=new ReportParserParser(tokenStream);
@@ -69,7 +70,8 @@ public class SeiDesignerServletAction extends RenderPageServletAction {
 
     public void conditionScriptValidation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String content=req.getParameter("content");
-        ANTLRInputStream antlrInputStream=new ANTLRInputStream(content);
+        CharStream antlrInputStream = CharStreams.fromString(content);
+        /*ANTLRInputStream antlrInputStream=new ANTLRInputStream(content);*/
         ReportParserLexer lexer=new ReportParserLexer(antlrInputStream);
         CommonTokenStream tokenStream=new CommonTokenStream(lexer);
         ReportParserParser parser=new ReportParserParser(tokenStream);
@@ -84,7 +86,8 @@ public class SeiDesignerServletAction extends RenderPageServletAction {
 
     public void parseDatasetName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String expr=req.getParameter("expr");
-        ANTLRInputStream antlrInputStream=new ANTLRInputStream(expr);
+        CharStream antlrInputStream = CharStreams.fromString(expr);
+        /*ANTLRInputStream antlrInputStream=new ANTLRInputStream(expr);*/
         ReportParserLexer lexer=new ReportParserLexer(antlrInputStream);
         CommonTokenStream tokenStream=new CommonTokenStream(lexer);
         ReportParserParser parser=new ReportParserParser(tokenStream);
@@ -98,11 +101,13 @@ public class SeiDesignerServletAction extends RenderPageServletAction {
     public void savePreviewData(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String content=req.getParameter("content");
         content=decodeContent(content);
-        InputStream inputStream= IOUtils.toInputStream(content,"utf-8");
-        ReportDefinition reportDef=reportParser.parse(inputStream,"p");
-        reportRender.rebuildReportDefinition(reportDef);
-        IOUtils.closeQuietly(inputStream);
-        TempObjectCache.putObject(PREVIEW_KEY, reportDef);
+        try (InputStream inputStream= IOUtils.toInputStream(content,"utf-8")) {
+            ReportDefinition reportDef = reportParser.parse(inputStream, "p");
+            reportRender.rebuildReportDefinition(reportDef);
+            TempObjectCache.putObject(PREVIEW_KEY, reportDef);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void loadReport(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -157,11 +162,13 @@ public class SeiDesignerServletAction extends RenderPageServletAction {
             throw new ReportDesignException("File ["+file+"] not found available report provider.");
         }
         targetReportProvider.saveReport(file, content);
-        InputStream inputStream=IOUtils.toInputStream(content,"utf-8");
-        ReportDefinition reportDef=reportParser.parse(inputStream, file);
-        reportRender.rebuildReportDefinition(reportDef);
-        CacheUtils.cacheReportDefinition(file, reportDef);
-        IOUtils.closeQuietly(inputStream);
+        try (InputStream inputStream=IOUtils.toInputStream(content,"utf-8")) {
+            ReportDefinition reportDef = reportParser.parse(inputStream, file);
+            reportRender.rebuildReportDefinition(reportDef);
+            CacheUtils.cacheReportDefinition(file, reportDef);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void loadReportProviders(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

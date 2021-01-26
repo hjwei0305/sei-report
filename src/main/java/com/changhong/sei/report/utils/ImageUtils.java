@@ -43,8 +43,7 @@ public class ImageUtils {
 		if(targetProcessor==null){
 			throw new ReportComputeException("Unknow image type :"+type);
 		}
-		InputStream inputStream = targetProcessor.getImage(data);
-		try{
+		try(InputStream inputStream = targetProcessor.getImage(data)){
 			if(width>0 && height>0){
 				BufferedImage inputImage=ImageIO.read(inputStream);
 				BufferedImage outputImage = new BufferedImage(width,height,BufferedImage.TYPE_USHORT_565_RGB);
@@ -53,14 +52,15 @@ public class ImageUtils {
 		        g.dispose();
 		        ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
 		        ImageIO.write(outputImage, "png", outputStream);
-		        inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+				try(InputStream newInputStream = new ByteArrayInputStream(outputStream.toByteArray())){
+					return Base64Utils.encodeToString(IOUtils.toByteArray(newInputStream));
+				}
+			}else {
+				byte[] bytes = IOUtils.toByteArray(inputStream);
+				return Base64Utils.encodeToString(bytes);
 			}
-			byte[] bytes= IOUtils.toByteArray(inputStream);
-			return Base64Utils.encodeToString(bytes);
 		}catch(Exception ex){
 			throw new ReportComputeException(ex);
-		}finally{
-			IOUtils.closeQuietly(inputStream);
 		}
 	}
 }

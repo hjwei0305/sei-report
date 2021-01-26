@@ -1,28 +1,13 @@
-/*******************************************************************************
- * Copyright 2017 Bstek
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License.  You may obtain a copy
- * of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
- * License for the specific language governing permissions and limitations under
- * the License.
- ******************************************************************************/
 package com.changhong.sei.report.parser.impl.searchform;
 
-import com.bstek.ureport.definition.searchform.DateInputComponent;
-import com.bstek.ureport.definition.searchform.LabelPosition;
-import com.bstek.ureport.parser.impl.searchform.FormParser;
+import com.changhong.sei.report.definition.searchform.DateInputComponent;
+import com.changhong.sei.report.definition.searchform.LabelPosition;
 import org.dom4j.Element;
 
 /**
- * @author Jacky.gao
- * @since 2017年10月24日
+ * @desc：时间格式输入
+ * @author：zhaohz
+ * @date：2020/7/7 10:18
  */
 public class DatetimeInputParser implements FormParser<DateInputComponent> {
 	@Override

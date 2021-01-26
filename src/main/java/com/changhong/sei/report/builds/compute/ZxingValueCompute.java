@@ -118,12 +118,14 @@ public class ZxingValueCompute implements ValueCompute {
             		image.setRGB(x, y, matrix.get(x, y) ? BLACK : WHITE);
             	}
             }
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(image, "png", outputStream);
-            byte[] bytes=outputStream.toByteArray();
-            String base64Data= Base64Utils.encodeToString(bytes);
-            IOUtils.closeQuietly(outputStream);
-            return new Image(base64Data,w,h);
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+				ImageIO.write(image, "png", outputStream);
+				byte[] bytes = outputStream.toByteArray();
+				String base64Data = Base64Utils.encodeToString(bytes);
+				return new Image(base64Data, w, h);
+			}catch (Exception e){
+            	throw e;
+			}
         }catch(Exception ex){
         	throw new ReportComputeException(ex);
         }

@@ -20,6 +20,7 @@ import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.Units;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFShape;
 
@@ -138,14 +139,11 @@ public class Excel97Producer {
 			        		if(obj!=null){
 				        		if(obj instanceof String){
 				        			cell.setCellValue((String)obj);
-				        			cell.setCellType(CellType.STRING);
 				        		}else if(obj instanceof Number){
 				        			BigDecimal bigDecimal= Utils.toBigDecimal(obj);
 				        			cell.setCellValue(bigDecimal.floatValue());
-				        			cell.setCellType(CellType.NUMERIC);
 				        		}else if(obj instanceof Boolean){
 				        			cell.setCellValue((Boolean)obj);
-				        			cell.setCellType(CellType.BOOLEAN);
 				        		}else if(obj instanceof Image){
 				        			Image img=(Image)obj;
 				        			int width;
@@ -164,10 +162,10 @@ public class Excel97Producer {
 				        				anchor.setCol2(i+colSpan);
 				        				anchor.setRow1(rowNumber);
 				        				anchor.setRow2(rowNumber+rowSpan);
-				        				anchor.setDx1(0 * XSSFShape.EMU_PER_PIXEL);
-				        				anchor.setDx2(width * XSSFShape.EMU_PER_PIXEL);
-				        				anchor.setDy1(0 * XSSFShape.EMU_PER_PIXEL);
-				        				anchor.setDy2(height * XSSFShape.EMU_PER_PIXEL);
+				        				anchor.setDx1(0 * Units.EMU_PER_PIXEL);
+				        				anchor.setDx2(width * Units.EMU_PER_PIXEL);
+				        				anchor.setDy1(0 * Units.EMU_PER_PIXEL);
+				        				anchor.setDy2(height * Units.EMU_PER_PIXEL);
 				        				drawing.createPicture(anchor, pictureIndex);
 				        			}
 				        		}else if(obj instanceof ChartData){
@@ -175,13 +173,14 @@ public class Excel97Producer {
 				        			String base64Data=chartData.retriveBase64Data();
 				        			if(base64Data!=null){
 				        				Image img=new Image(base64Data,chartData.getWidth(),chartData.getHeight());
-				        				InputStream inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data());
-				        				BufferedImage bufferedImage=ImageIO.read(inputStream);
-				        				int width=bufferedImage.getWidth();
-				        				int height=bufferedImage.getHeight();
-				        				IOUtils.closeQuietly(inputStream);
-				        				inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data());
-				        				try{
+				        				int width;
+				        				int height;
+										try (InputStream inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data())) {
+											BufferedImage bufferedImage = ImageIO.read(inputStream);
+											width = bufferedImage.getWidth();
+											height = bufferedImage.getHeight();
+										}
+										try (InputStream inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data())) {
 				        					XSSFClientAnchor anchor=(XSSFClientAnchor)creationHelper.createClientAnchor();
 				        					byte[] bytes= IOUtils.toByteArray(inputStream);
 				        					int pictureFormat=buildImageFormat(img);
@@ -190,13 +189,11 @@ public class Excel97Producer {
 				        					anchor.setCol2(i+colSpan);
 				        					anchor.setRow1(rowNumber);
 				        					anchor.setRow2(rowNumber+rowSpan);
-				        					anchor.setDx1(0 * XSSFShape.EMU_PER_PIXEL);
-				        					anchor.setDx2(width * XSSFShape.EMU_PER_PIXEL);
-				        					anchor.setDy1(0 * XSSFShape.EMU_PER_PIXEL);
-				        					anchor.setDy2(height * XSSFShape.EMU_PER_PIXEL);
+				        					anchor.setDx1(0 * Units.EMU_PER_PIXEL);
+				        					anchor.setDx2(width * Units.EMU_PER_PIXEL);
+				        					anchor.setDy1(0 * Units.EMU_PER_PIXEL);
+				        					anchor.setDy2(height * Units.EMU_PER_PIXEL);
 				        					drawing.createPicture(anchor, pictureIndex);
-				        				}finally{
-				        					IOUtils.closeQuietly(inputStream);
 				        				}
 				        			}
 				        		}else if(obj instanceof Date){
@@ -289,14 +286,11 @@ public class Excel97Producer {
 		        		if(obj!=null){
 			        		if(obj instanceof String){
 			        			cell.setCellValue((String)obj);     
-			        			cell.setCellType(CellType.STRING);
 			        		}else if(obj instanceof Number){
 			        			BigDecimal bigDecimal= Utils.toBigDecimal(obj);
 			        			cell.setCellValue(bigDecimal.floatValue());
-			        			cell.setCellType(CellType.NUMERIC);
 			        		}else if(obj instanceof Boolean){
 			        			cell.setCellValue((Boolean)obj);
-			        			cell.setCellType(CellType.BOOLEAN);
 			        		}else if(obj instanceof Image){
 			        			Image img=(Image)obj;
 			        			int width;
@@ -315,24 +309,25 @@ public class Excel97Producer {
 			        				anchor.setCol2(i+colSpan);
 			        				anchor.setRow1(rowNumber);
 			        				anchor.setRow2(rowNumber+rowSpan);
-			        				anchor.setDx1(0 * XSSFShape.EMU_PER_PIXEL);
-			        				anchor.setDx2(width * XSSFShape.EMU_PER_PIXEL);
-			        				anchor.setDy1(0 * XSSFShape.EMU_PER_PIXEL);
-			        				anchor.setDy2(height * XSSFShape.EMU_PER_PIXEL);
+			        				anchor.setDx1(0 * Units.EMU_PER_PIXEL);
+			        				anchor.setDx2(width * Units.EMU_PER_PIXEL);
+			        				anchor.setDy1(0 * Units.EMU_PER_PIXEL);
+			        				anchor.setDy2(height * Units.EMU_PER_PIXEL);
 			        				drawing.createPicture(anchor, pictureIndex);
 			        			}
 			        		}else if(obj instanceof ChartData){
 			        			ChartData chartData=(ChartData)obj;
 			        			String base64Data=chartData.retriveBase64Data();
 			        			if(base64Data!=null){
+			        				int width;
+			        				int height;
 			        				Image img=new Image(base64Data,chartData.getWidth(),chartData.getHeight());
-			        				InputStream inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data());
-			        				BufferedImage bufferedImage=ImageIO.read(inputStream);
-			        				int width=bufferedImage.getWidth();
-			        				int height=bufferedImage.getHeight();
-			        				IOUtils.closeQuietly(inputStream);
-			        				inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data());
-			        				try{
+									try (InputStream inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data())) {
+										BufferedImage bufferedImage = ImageIO.read(inputStream);
+										width = bufferedImage.getWidth();
+										height = bufferedImage.getHeight();
+									}
+									try (InputStream inputStream= ImageUtils.base64DataToInputStream(img.getBase64Data())) {
 			        					XSSFClientAnchor anchor=(XSSFClientAnchor)creationHelper.createClientAnchor();
 			        					byte[] bytes= IOUtils.toByteArray(inputStream);
 			        					int pictureFormat=buildImageFormat(img);
@@ -341,13 +336,11 @@ public class Excel97Producer {
 			        					anchor.setCol2(i+colSpan);
 			        					anchor.setRow1(rowNumber);
 			        					anchor.setRow2(rowNumber+rowSpan);
-			        					anchor.setDx1(0 * XSSFShape.EMU_PER_PIXEL);
-			        					anchor.setDx2(width * XSSFShape.EMU_PER_PIXEL);
-			        					anchor.setDy1(0 * XSSFShape.EMU_PER_PIXEL);
-			        					anchor.setDy2(height * XSSFShape.EMU_PER_PIXEL);
+			        					anchor.setDx1(0 * Units.EMU_PER_PIXEL);
+			        					anchor.setDx2(width * Units.EMU_PER_PIXEL);
+			        					anchor.setDy1(0 * Units.EMU_PER_PIXEL);
+			        					anchor.setDy2(height * Units.EMU_PER_PIXEL);
 			        					drawing.createPicture(anchor, pictureIndex);
-			        				}finally{
-			        					IOUtils.closeQuietly(inputStream);
 			        				}
 			        			}
 			        		}else if(obj instanceof Date){

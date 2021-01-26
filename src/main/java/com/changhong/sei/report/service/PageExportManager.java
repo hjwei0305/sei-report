@@ -1,6 +1,6 @@
 package com.changhong.sei.report.service;
 
-import com.bstek.ureport.export.ExportConfigure;
+import com.changhong.sei.report.export.ExportConfigure;
 import com.changhong.sei.report.model.PageReport;
 
 import javax.servlet.ServletException;

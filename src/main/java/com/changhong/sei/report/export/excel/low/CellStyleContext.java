@@ -222,11 +222,11 @@ public class CellStyleContext {
 	}
 	
 	private BorderStyle getBorderStyle(Border border){
-		if(border.getStyle().equals(com.bstek.ureport.definition.BorderStyle.solid)){
+		if(border.getStyle().equals(com.changhong.sei.report.enums.BorderStyle.solid)){
 			return BorderStyle.THIN;
-		}else if(border.getStyle().equals(com.bstek.ureport.definition.BorderStyle.dashed)){
+		}else if(border.getStyle().equals(com.changhong.sei.report.enums.BorderStyle.dashed)){
 			return BorderStyle.DASHED;
-		}else if(border.getStyle().equals(com.bstek.ureport.definition.BorderStyle.doublesolid)){
+		}else if(border.getStyle().equals(com.changhong.sei.report.enums.BorderStyle.doublesolid)){
 			return BorderStyle.DOUBLE;
 		}
 		return null;

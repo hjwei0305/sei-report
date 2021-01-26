@@ -1,31 +1,29 @@
 package com.changhong.sei.report.servlet;
 
-import com.bstek.ureport.build.Context;
-import com.bstek.ureport.build.ReportBuilder;
-import com.bstek.ureport.build.paging.Page;
-import com.bstek.ureport.cache.CacheUtils;
-import com.bstek.ureport.chart.ChartData;
-import com.bstek.ureport.console.MobileUtils;
-import com.bstek.ureport.console.RenderPageServletAction;
-import com.bstek.ureport.console.cache.TempObjectCache;
-import com.bstek.ureport.console.exception.ReportDesignException;
-import com.bstek.ureport.console.html.Tools;
-import com.bstek.ureport.definition.Paper;
-import com.bstek.ureport.definition.ReportDefinition;
-import com.bstek.ureport.definition.searchform.FormPosition;
-import com.bstek.ureport.exception.ReportComputeException;
-import com.bstek.ureport.export.FullPageData;
-import com.bstek.ureport.export.PageBuilder;
-import com.bstek.ureport.export.ReportRender;
-import com.bstek.ureport.export.SinglePageData;
-import com.bstek.ureport.export.html.HtmlProducer;
-import com.bstek.ureport.export.html.SearchFormData;
-import com.bstek.ureport.model.Report;
+import com.changhong.sei.report.builds.Context;
+import com.changhong.sei.report.builds.ReportBuilder;
+import com.changhong.sei.report.builds.webpaging.Page;
+import com.changhong.sei.report.cache.CacheUtils;
+import com.changhong.sei.report.cache.TempObjectCache;
+import com.changhong.sei.report.chart.ChartData;
+import com.changhong.sei.report.definition.Paper;
+import com.changhong.sei.report.definition.ReportDefinition;
+import com.changhong.sei.report.definition.searchform.FormPosition;
 import com.changhong.sei.report.dto.TableDto;
+import com.changhong.sei.report.exception.ReportComputeException;
+import com.changhong.sei.report.exception.ReportDesignException;
+import com.changhong.sei.report.export.FullPageData;
+import com.changhong.sei.report.export.PageBuilder;
+import com.changhong.sei.report.export.ReportRender;
+import com.changhong.sei.report.export.SinglePageData;
+import com.changhong.sei.report.export.html.HtmlProducer;
+import com.changhong.sei.report.export.html.SearchFormData;
+import com.changhong.sei.report.expression.model.Report;
 import com.changhong.sei.report.model.PageProducer;
 import com.changhong.sei.report.model.PageReport;
 import com.changhong.sei.report.dto.PageReportDto;
 import com.changhong.sei.report.service.PageExportManager;
+import com.changhong.sei.report.servlet.html.Tools;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -183,7 +181,7 @@ public class HtmlPageServletAction extends RenderPageServletAction {
             }
         }
         if(file.equals(PREVIEW_KEY)){
-            ReportDefinition reportDefinition=(ReportDefinition)TempObjectCache.getObject(PREVIEW_KEY);
+            ReportDefinition reportDefinition=(ReportDefinition) TempObjectCache.getObject(PREVIEW_KEY);
             if(reportDefinition==null){
                 throw new ReportDesignException("Report data has expired,can not do preview.");
             }

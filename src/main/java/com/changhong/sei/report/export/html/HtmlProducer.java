@@ -17,8 +17,8 @@ import com.changhong.sei.report.model.Cell;
 import com.changhong.sei.report.model.Column;
 import com.changhong.sei.report.model.Image;
 import com.changhong.sei.report.model.Row;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.List;
 import java.util.Map;

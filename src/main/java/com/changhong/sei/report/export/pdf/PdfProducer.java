@@ -317,8 +317,7 @@ public class PdfProducer implements Producer {
 	}
 	private com.itextpdf.text.Image buildPdfImage(String base64Data, int width,int height) throws Exception{
 		com.itextpdf.text.Image pdfImg=null;
-		InputStream input= ImageUtils.base64DataToInputStream(base64Data);
-		try{
+		try (InputStream input= ImageUtils.base64DataToInputStream(base64Data)) {
 			byte[] bytes= IOUtils.toByteArray(input);
 			pdfImg=com.itextpdf.text.Image.getInstance(bytes);
 			float imgWidth=pdfImg.getWidth();
@@ -332,8 +331,6 @@ public class PdfProducer implements Producer {
 			width= UnitUtils.pixelToPoint(width-2);
 			height= UnitUtils.pixelToPoint(height-2);
 			pdfImg.scaleToFit(width,height);
-		}finally{
-			IOUtils.closeQuietly(input);
 		}
 		return pdfImg;
 	}

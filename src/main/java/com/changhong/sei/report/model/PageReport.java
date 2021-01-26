@@ -1,8 +1,8 @@
 package com.changhong.sei.report.model;
 
-import com.bstek.ureport.chart.ChartData;
-import com.bstek.ureport.export.html.SearchFormData;
+import com.changhong.sei.report.chart.ChartData;
 import com.changhong.sei.report.dto.TableDto;
+import com.changhong.sei.report.export.html.SearchFormData;
 
 import java.io.Serializable;
 import java.util.Collection;

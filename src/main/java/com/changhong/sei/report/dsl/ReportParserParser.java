@@ -1,4 +1,3 @@
-// Generated from ReportParser.g4 by ANTLR 4.5.3
 package com.changhong.sei.report.dsl;
 
 import org.antlr.v4.runtime.*;
@@ -110,7 +109,7 @@ public class ReportParserParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class EntryContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(com.bstek.ureport.dsl.ReportParserParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(ReportParserParser.EOF, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -264,7 +263,7 @@ public class ReportParserParser extends Parser {
 		public ExprCompositeContext exprComposite(int i) {
 			return getRuleContext(ExprCompositeContext.class,i);
 		}
-		public TerminalNode Operator() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Operator, 0); }
+		public TerminalNode Operator() { return getToken(ReportParserParser.Operator, 0); }
 		public ComplexExprCompositeContext(ExprCompositeContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -284,11 +283,11 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class ParenExprCompositeContext extends ExprCompositeContext {
-		public TerminalNode LeftParen() { return getToken(com.bstek.ureport.dsl.ReportParserParser.LeftParen, 0); }
+		public TerminalNode LeftParen() { return getToken(ReportParserParser.LeftParen, 0); }
 		public ExprCompositeContext exprComposite() {
 			return getRuleContext(ExprCompositeContext.class,0);
 		}
-		public TerminalNode RightParen() { return getToken(com.bstek.ureport.dsl.ReportParserParser.RightParen, 0); }
+		public TerminalNode RightParen() { return getToken(ReportParserParser.RightParen, 0); }
 		public ParenExprCompositeContext(ExprCompositeContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -1075,9 +1074,9 @@ public class ReportParserParser extends Parser {
 		public ItemContext item(int i) {
 			return getRuleContext(ItemContext.class,i);
 		}
-		public List<TerminalNode> Operator() { return getTokens(com.bstek.ureport.dsl.ReportParserParser.Operator); }
+		public List<TerminalNode> Operator() { return getTokens(ReportParserParser.Operator); }
 		public TerminalNode Operator(int i) {
-			return getToken(com.bstek.ureport.dsl.ReportParserParser.Operator, i);
+			return getToken(ReportParserParser.Operator, i);
 		}
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1137,7 +1136,7 @@ public class ReportParserParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode OP() { return getToken(com.bstek.ureport.dsl.ReportParserParser.OP, 0); }
+		public TerminalNode OP() { return getToken(ReportParserParser.OP, 0); }
 		public IfConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1249,11 +1248,11 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class SingleParenJoinContext extends ItemContext {
-		public TerminalNode LeftParen() { return getToken(com.bstek.ureport.dsl.ReportParserParser.LeftParen, 0); }
+		public TerminalNode LeftParen() { return getToken(ReportParserParser.LeftParen, 0); }
 		public ItemContext item() {
 			return getRuleContext(ItemContext.class,0);
 		}
-		public TerminalNode RightParen() { return getToken(com.bstek.ureport.dsl.ReportParserParser.RightParen, 0); }
+		public TerminalNode RightParen() { return getToken(ReportParserParser.RightParen, 0); }
 		public SingleParenJoinContext(ItemContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -1262,17 +1261,17 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class ParenJoinContext extends ItemContext {
-		public TerminalNode LeftParen() { return getToken(com.bstek.ureport.dsl.ReportParserParser.LeftParen, 0); }
+		public TerminalNode LeftParen() { return getToken(ReportParserParser.LeftParen, 0); }
 		public List<ItemContext> item() {
 			return getRuleContexts(ItemContext.class);
 		}
 		public ItemContext item(int i) {
 			return getRuleContext(ItemContext.class,i);
 		}
-		public TerminalNode RightParen() { return getToken(com.bstek.ureport.dsl.ReportParserParser.RightParen, 0); }
-		public List<TerminalNode> Operator() { return getTokens(com.bstek.ureport.dsl.ReportParserParser.Operator); }
+		public TerminalNode RightParen() { return getToken(ReportParserParser.RightParen, 0); }
+		public List<TerminalNode> Operator() { return getTokens(ReportParserParser.Operator); }
 		public TerminalNode Operator(int i) {
-			return getToken(com.bstek.ureport.dsl.ReportParserParser.Operator, i);
+			return getToken(ReportParserParser.Operator, i);
 		}
 		public ParenJoinContext(ItemContext ctx) { copyFrom(ctx); }
 		@Override
@@ -1288,9 +1287,9 @@ public class ReportParserParser extends Parser {
 		public UnitContext unit(int i) {
 			return getRuleContext(UnitContext.class,i);
 		}
-		public List<TerminalNode> Operator() { return getTokens(com.bstek.ureport.dsl.ReportParserParser.Operator); }
+		public List<TerminalNode> Operator() { return getTokens(ReportParserParser.Operator); }
 		public TerminalNode Operator(int i) {
-			return getToken(com.bstek.ureport.dsl.ReportParserParser.Operator, i);
+			return getToken(ReportParserParser.Operator, i);
 		}
 		public SimpleJoinContext(ItemContext ctx) { copyFrom(ctx); }
 		@Override
@@ -1416,11 +1415,11 @@ public class ReportParserParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public TerminalNode INTEGER() { return getToken(com.bstek.ureport.dsl.ReportParserParser.INTEGER, 0); }
-		public TerminalNode BOOLEAN() { return getToken(com.bstek.ureport.dsl.ReportParserParser.BOOLEAN, 0); }
-		public TerminalNode STRING() { return getToken(com.bstek.ureport.dsl.ReportParserParser.STRING, 0); }
-		public TerminalNode NUMBER() { return getToken(com.bstek.ureport.dsl.ReportParserParser.NUMBER, 0); }
-		public TerminalNode NULL() { return getToken(com.bstek.ureport.dsl.ReportParserParser.NULL, 0); }
+		public TerminalNode INTEGER() { return getToken(ReportParserParser.INTEGER, 0); }
+		public TerminalNode BOOLEAN() { return getToken(ReportParserParser.BOOLEAN, 0); }
+		public TerminalNode STRING() { return getToken(ReportParserParser.STRING, 0); }
+		public TerminalNode NUMBER() { return getToken(ReportParserParser.NUMBER, 0); }
+		public TerminalNode NULL() { return getToken(ReportParserParser.NULL, 0); }
 		public UnitContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1551,7 +1550,7 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class VariableContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(ReportParserParser.Identifier, 0); }
 		public VariableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1585,7 +1584,7 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class CellPositionContext extends ParserRuleContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public CellPositionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1621,7 +1620,7 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class RelativeCellContext extends ParserRuleContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public RelativeCellContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1778,7 +1777,7 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class DatasetContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(ReportParserParser.Identifier, 0); }
 		public AggregateContext aggregate() {
 			return getRuleContext(AggregateContext.class,0);
 		}
@@ -1788,7 +1787,7 @@ public class ReportParserParser extends Parser {
 		public ConditionsContext conditions() {
 			return getRuleContext(ConditionsContext.class,0);
 		}
-		public TerminalNode ORDER() { return getToken(com.bstek.ureport.dsl.ReportParserParser.ORDER, 0); }
+		public TerminalNode ORDER() { return getToken(ReportParserParser.ORDER, 0); }
 		public DatasetContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1863,7 +1862,7 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class FunctionContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(ReportParserParser.Identifier, 0); }
 		public FunctionParameterContext functionParameter() {
 			return getRuleContext(FunctionParameterContext.class,0);
 		}
@@ -1988,9 +1987,9 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class CellPairContext extends SetContext {
-		public List<TerminalNode> Cell() { return getTokens(com.bstek.ureport.dsl.ReportParserParser.Cell); }
+		public List<TerminalNode> Cell() { return getTokens(ReportParserParser.Cell); }
 		public TerminalNode Cell(int i) {
-			return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, i);
+			return getToken(ReportParserParser.Cell, i);
 		}
 		public CellPairContext(SetContext ctx) { copyFrom(ctx); }
 		@Override
@@ -2000,7 +1999,7 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class WholeCellContext extends SetContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public ConditionsContext conditions() {
 			return getRuleContext(ConditionsContext.class,0);
 		}
@@ -2012,7 +2011,7 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class CellCoordinateConditionContext extends SetContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public CellCoordinateContext cellCoordinate() {
 			return getRuleContext(CellCoordinateContext.class,0);
 		}
@@ -2027,7 +2026,7 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class SingleCellConditionContext extends SetContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public ConditionsContext conditions() {
 			return getRuleContext(ConditionsContext.class,0);
 		}
@@ -2039,7 +2038,7 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class SingleCellContext extends SetContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public SingleCellContext(SetContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -2073,7 +2072,7 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class SingleCellCoordinateContext extends SetContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public CellCoordinateContext cellCoordinate() {
 			return getRuleContext(CellCoordinateContext.class,0);
 		}
@@ -2371,9 +2370,9 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class AbsoluteContext extends CellIndicatorContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
-		public TerminalNode INTEGER() { return getToken(com.bstek.ureport.dsl.ReportParserParser.INTEGER, 0); }
-		public TerminalNode EXCLAMATION() { return getToken(com.bstek.ureport.dsl.ReportParserParser.EXCLAMATION, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
+		public TerminalNode INTEGER() { return getToken(ReportParserParser.INTEGER, 0); }
+		public TerminalNode EXCLAMATION() { return getToken(ReportParserParser.EXCLAMATION, 0); }
 		public AbsoluteContext(CellIndicatorContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -2382,7 +2381,7 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class RelativeContext extends CellIndicatorContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
 		public RelativeContext(CellIndicatorContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -2521,7 +2520,7 @@ public class ReportParserParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode OP() { return getToken(com.bstek.ureport.dsl.ReportParserParser.OP, 0); }
+		public TerminalNode OP() { return getToken(ReportParserParser.OP, 0); }
 		public ExprConditionContext(ConditionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -2533,7 +2532,7 @@ public class ReportParserParser extends Parser {
 		public CurrentValueContext currentValue() {
 			return getRuleContext(CurrentValueContext.class,0);
 		}
-		public TerminalNode OP() { return getToken(com.bstek.ureport.dsl.ReportParserParser.OP, 0); }
+		public TerminalNode OP() { return getToken(ReportParserParser.OP, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -2548,7 +2547,7 @@ public class ReportParserParser extends Parser {
 		public PropertyContext property() {
 			return getRuleContext(PropertyContext.class,0);
 		}
-		public TerminalNode OP() { return getToken(com.bstek.ureport.dsl.ReportParserParser.OP, 0); }
+		public TerminalNode OP() { return getToken(ReportParserParser.OP, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -2560,8 +2559,8 @@ public class ReportParserParser extends Parser {
 		}
 	}
 	public static class CellNameExprConditionContext extends ConditionContext {
-		public TerminalNode Cell() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Cell, 0); }
-		public TerminalNode OP() { return getToken(com.bstek.ureport.dsl.ReportParserParser.OP, 0); }
+		public TerminalNode Cell() { return getToken(ReportParserParser.Cell, 0); }
+		public TerminalNode OP() { return getToken(ReportParserParser.OP, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -2642,7 +2641,7 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class PropertyContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(ReportParserParser.Identifier, 0); }
 		public List<PropertyContext> property() {
 			return getRuleContexts(PropertyContext.class);
 		}
@@ -2751,11 +2750,11 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class SimpleValueContext extends ParserRuleContext {
-		public TerminalNode INTEGER() { return getToken(com.bstek.ureport.dsl.ReportParserParser.INTEGER, 0); }
-		public TerminalNode NUMBER() { return getToken(com.bstek.ureport.dsl.ReportParserParser.NUMBER, 0); }
-		public TerminalNode STRING() { return getToken(com.bstek.ureport.dsl.ReportParserParser.STRING, 0); }
-		public TerminalNode BOOLEAN() { return getToken(com.bstek.ureport.dsl.ReportParserParser.BOOLEAN, 0); }
-		public TerminalNode NULL() { return getToken(com.bstek.ureport.dsl.ReportParserParser.NULL, 0); }
+		public TerminalNode INTEGER() { return getToken(ReportParserParser.INTEGER, 0); }
+		public TerminalNode NUMBER() { return getToken(ReportParserParser.NUMBER, 0); }
+		public TerminalNode STRING() { return getToken(ReportParserParser.STRING, 0); }
+		public TerminalNode BOOLEAN() { return getToken(ReportParserParser.BOOLEAN, 0); }
+		public TerminalNode NULL() { return getToken(ReportParserParser.NULL, 0); }
 		public SimpleValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2795,8 +2794,8 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class JoinContext extends ParserRuleContext {
-		public TerminalNode AND() { return getToken(com.bstek.ureport.dsl.ReportParserParser.AND, 0); }
-		public TerminalNode OR() { return getToken(com.bstek.ureport.dsl.ReportParserParser.OR, 0); }
+		public TerminalNode AND() { return getToken(ReportParserParser.AND, 0); }
+		public TerminalNode OR() { return getToken(ReportParserParser.OR, 0); }
 		public JoinContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2836,7 +2835,7 @@ public class ReportParserParser extends Parser {
 	}
 
 	public static class AggregateContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(com.bstek.ureport.dsl.ReportParserParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(ReportParserParser.Identifier, 0); }
 		public AggregateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
