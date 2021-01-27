@@ -23,7 +23,7 @@ public class SearchFormDesignerAction extends RenderPageServletAction {
 		context.put("contextPath", req.getContextPath());
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("utf-8");
-		Template template=ve.getTemplate("ureport-html/searchform.html","utf-8");
+		Template template=ve.getTemplate("static/searchform.html","utf-8");
 		PrintWriter writer=resp.getWriter();
 		template.merge(context, writer);
 		writer.close();
