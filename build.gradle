@@ -44,9 +44,7 @@ bootJar  {
 }
 jar {
     enabled = true
-//    exclude('bootstrap.yaml')
     exclude('application.yaml')
-//    exclude('com/changhong/sei/report/ReportApplication.*')
     manifest {
         attributes("Manifest-Version": "6.0")
         attributes("Created-By": "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString())
@@ -60,14 +58,11 @@ jar {
 dependencies {
     compile group: 'org.apache.commons', name: 'commons-text', version: '1.8'
     compile("com.changhong.sei:sei-service-starter:$sei_version")
-    /*compile group: 'com.bstek.ureport', name: 'ureport2-console', version: '2.2.9'*/
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
     compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
     compile group: 'org.antlr', name: 'antlr4-runtime', version: '4.7.2'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
     compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.4'
-    /*compile group: 'org.apache.poi', name: 'poi-scratchpad', version: '4.1.2'
-    compile group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '4.1.2'*/
     compile group: 'com.google.zxing', name: 'core', version: '3.4.0'
     compile files('lib/ojdbc14.jar')
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
@@ -75,12 +70,4 @@ dependencies {
     implementation("com.alibaba:fastjson:1.2.62")
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    //implementation "org.springframework.boot:spring-boot-starter:$springBootVersion"
-    //implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
-    //implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
-    //compile("org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion")
-    //compile("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
-    //compile "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    //implementation("org.springframework.cloud:spring-cloud-starter-bus-kafka:2.2.0.RELEASE")
-    //implementation("org.springframework.cloud:spring-cloud-context:2.2.0.RELEASE")
 }
