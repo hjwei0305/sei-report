@@ -116,9 +116,9 @@
                 e.empty(),e.append(t.content),_buildChartDatas(t.chartDatas);
                 const r=t.total;
                 if(window._totalPage=r,pageSelect.length>0){
-                    pageSelect.empty();
+                    /*pageSelect.empty();
                     for(let t=1;t<=r;t++)
-                        pageSelect.append(`<option>${t}</option>`);
+                        pageSelect.append(`<option>${t}</option>`);*/
                     const pageNum=t.page||1;
                     const rows = t.rows||30;
                     pageSelect.val(pageNum),$("#totalPageLabel").html(r);//,buildPaging(pageNum,r)
