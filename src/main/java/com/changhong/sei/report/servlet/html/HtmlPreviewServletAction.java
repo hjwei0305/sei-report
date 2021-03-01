@@ -275,7 +275,7 @@ public class HtmlPreviewServletAction extends RenderPageServletAction {
 			}else{
 				html=htmlProducer.produce(report);				
 			}
-			if(report.getPaper().isColumnEnabled()){
+			if(report.getPaper().getColumnEnabled()){
 				htmlReport.setColumn(report.getPaper().getColumnCount());				
 			}
 			htmlReport.setChartDatas(report.getContext().getChartDataMap().values());			

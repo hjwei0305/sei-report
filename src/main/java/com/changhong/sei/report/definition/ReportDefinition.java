@@ -27,20 +27,60 @@ import java.util.Map;
  */
 public class ReportDefinition implements Serializable{
 	private static final long serialVersionUID = 5934291400824773809L;
+	/**
+	 * 报表全名，包含前后缀
+	 */
 	private String reportFullName;
+	/**
+	 * 纸张
+	 */
 	private Paper paper;
+	/**
+	 * 根元素模板
+	 */
 	private CellDefinition rootCell;
+	/**
+	 * 表头模板
+	 */
 	private HeaderFooterDefinition header;
+	/**
+	 * 表脚模板
+	 */
 	private HeaderFooterDefinition footer;
+	/**
+	 * 查询面板
+	 */
 	private SearchForm searchForm;
+	/**
+	 * 元素模板集合
+	 */
 	private List<CellDefinition> cells;
+	/**
+	 * 行模板集合
+	 */
 	private List<RowDefinition> rows;
+	/**
+	 * 列模板集合
+	 */
 	private List<ColumnDefinition> columns;
+	/**
+	 * 数据源模板集合
+	 */
 	private List<DatasourceDefinition> datasources;
+	/**
+	 * 查询面板Xml串
+	 */
 	private String searchFormXml;
+	/**
+	 * 样式css串
+	 */
 	@JsonIgnore
 	private String style;
 
+	/**
+	 * 根据报表模板生成报表
+	 * @return 报表
+	 */
 	public Report newReport() {
 		Report report = new Report();
 		report.setReportFullName(reportFullName);

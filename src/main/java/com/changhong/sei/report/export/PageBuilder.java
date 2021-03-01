@@ -19,7 +19,7 @@ public class PageBuilder {
 		int totalPages=pageSize;
 		Paper paper=report.getPaper();
 		List<List<Page>> list=new ArrayList<List<Page>>();
-		if(paper.isColumnEnabled()){
+		if(paper.getColumnEnabled()){
 			int columnCount=paper.getColumnCount();
 			totalPages=totalPages/columnCount;
 			int mode=totalPages%columnCount;
@@ -44,7 +44,7 @@ public class PageBuilder {
 		int totalPages=pageSize;
 		Paper paper=report.getPaper();
 		List<Page> columnPages=new ArrayList<Page>();
-		if(paper.isColumnEnabled()){
+		if(paper.getColumnEnabled()){
 			int columnCount=paper.getColumnCount();
 			totalPages=pageSize/columnCount;
 			int mode=pageSize%columnCount;

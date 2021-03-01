@@ -20,35 +20,64 @@ import java.util.Map;
  */
 public class CellDefinition implements Serializable {
 
-    private int rowNumber;
-    private int columnNumber;
-    private int rowSpan;
-    private int colSpan;
+    /**
+     * 行数
+     */
+    private Integer rowNumber = 1;
+    /**
+     * 列数
+     */
+    private Integer columnNumber = 1;
+    /**
+     * 行单元格所跨行数
+     */
+    private Integer rowSpan = 1;
+    /**
+     * 列单元格所跨列数
+     */
+    private Integer colSpan = 1;
+    /**
+     * 元素名（一般指单元格名或序号）
+     */
     private String name;
+    /**
+     * 元素的值，有数据集、图形、表达式、图片、常量、斜线分割框和条码等类型
+     */
     private Value value;
+    /**
+     * 元素样式
+     */
     private CellStyle cellStyle=new CellStyle();
-
+    /**
+     * 超链接Url
+     */
     private String linkUrl;
+    /**
+     * 超链接目标窗口，包含父窗口、当前窗口、新窗口和顶层窗口4种 todo 可做枚举
+     */
     private String linkTargetWindow;
+    /**
+     * 超链接参数集合
+     */
     private List<LinkParameter> linkParameters;
 
     @JsonIgnore
     private Expression linkUrlExpression;
-
-    private boolean fillBlankRows;
     /**
      * 允许填充空白行时fillBlankRows=true，要求当前数据行数必须是multiple定义的行数的倍数，否则就补充空白行
      */
-    private int multiple;
+    private Boolean fillBlankRows = Boolean.FALSE;
 
-    private Expand expand=Expand.None;
+    private Integer multiple;
+
+    private Expand expand= Expand.None;
 
     @JsonIgnore
     private Range duplicateRange;
     @JsonIgnore
     private List<String> increaseSpanCellNames=new ArrayList<String>();
     @JsonIgnore
-    private Map<String, BlankCellInfo> newBlankCellsMap=new HashMap<String,BlankCellInfo>();
+    private Map<String, BlankCellInfo> newBlankCellsMap=new HashMap<String, BlankCellInfo>();
     @JsonIgnore
     private List<String> newCellNames=new ArrayList<String>();
 
@@ -100,7 +129,9 @@ public class CellDefinition implements Serializable {
         cell.setLinkUrl(linkUrl);
         cell.setConditionPropertyItems(conditionPropertyItems);
         cell.setFillBlankRows(fillBlankRows);
-        cell.setMultiple(multiple);
+        if (fillBlankRows) {
+            cell.setMultiple(multiple);
+        }
         cell.setLinkUrlExpression(linkUrlExpression);
         return cell;
     }
@@ -113,20 +144,52 @@ public class CellDefinition implements Serializable {
         this.name = name;
     }
 
-    public int getRowNumber() {
+    public Integer getRowNumber() {
         return rowNumber;
     }
 
-    public void setRowNumber(int rowNumber) {
+    public void setRowNumber(Integer rowNumber) {
         this.rowNumber = rowNumber;
     }
 
-    public int getColumnNumber() {
+    public Integer getColumnNumber() {
         return columnNumber;
     }
 
-    public void setColumnNumber(int columnNumber) {
+    public void setColumnNumber(Integer columnNumber) {
         this.columnNumber = columnNumber;
+    }
+
+    public Integer getRowSpan() {
+        return rowSpan;
+    }
+
+    public void setRowSpan(Integer rowSpan) {
+        this.rowSpan = rowSpan;
+    }
+
+    public Integer getColSpan() {
+        return colSpan;
+    }
+
+    public void setColSpan(Integer colSpan) {
+        this.colSpan = colSpan;
+    }
+
+    public Boolean getFillBlankRows() {
+        return fillBlankRows;
+    }
+
+    public void setFillBlankRows(Boolean fillBlankRows) {
+        this.fillBlankRows = fillBlankRows;
+    }
+
+    public Integer getMultiple() {
+        return multiple;
+    }
+
+    public void setMultiple(Integer multiple) {
+        this.multiple = multiple;
     }
 
     public Value getValue() {
@@ -135,22 +198,6 @@ public class CellDefinition implements Serializable {
 
     public void setValue(Value value) {
         this.value = value;
-    }
-
-    public int getRowSpan() {
-        return rowSpan;
-    }
-
-    public void setRowSpan(int rowSpan) {
-        this.rowSpan = rowSpan;
-    }
-
-    public int getColSpan() {
-        return colSpan;
-    }
-
-    public void setColSpan(int colSpan) {
-        this.colSpan = colSpan;
     }
 
     public Expand getExpand() {
@@ -195,22 +242,6 @@ public class CellDefinition implements Serializable {
 
     public CellStyle getCellStyle() {
         return cellStyle;
-    }
-
-    public boolean isFillBlankRows() {
-        return fillBlankRows;
-    }
-
-    public void setFillBlankRows(boolean fillBlankRows) {
-        this.fillBlankRows = fillBlankRows;
-    }
-
-    public int getMultiple() {
-        return multiple;
-    }
-
-    public void setMultiple(int multiple) {
-        this.multiple = multiple;
     }
 
     public Range getDuplicateRange() {

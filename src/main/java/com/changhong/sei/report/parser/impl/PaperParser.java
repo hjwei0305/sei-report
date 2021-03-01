@@ -54,7 +54,7 @@ public class PaperParser implements Parser<Paper> {
 		if(StringUtils.isNotBlank(columnEnabled)){
 			paper.setColumnEnabled(Boolean.valueOf(columnEnabled));
 		}
-		if(paper.isColumnEnabled()){
+		if(paper.getColumnEnabled()){
 			paper.setColumnCount(Integer.valueOf(element.attributeValue("column-count")));
 			paper.setColumnMargin(Integer.valueOf(element.attributeValue("column-margin")));
 		}

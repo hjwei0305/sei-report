@@ -43,7 +43,7 @@ public class PageExportManagerImpl implements PageExportManager {
         TableDto jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
         pageReport.setContent(content);
         pageReport.setJsonContent(jsonContent);
-        if(reportDefinition.getPaper().isColumnEnabled()){
+        if(reportDefinition.getPaper().getColumnEnabled()){
             pageReport.setColumn(reportDefinition.getPaper().getColumnCount());
         }
         pageReport.setStyle(reportDefinition.getStyle());
@@ -81,7 +81,7 @@ public class PageExportManagerImpl implements PageExportManager {
         PageReport pageReport=new PageReport();
         pageReport.setContent(content);
         pageReport.setJsonContent(jsonContent);
-        if(reportDefinition.getPaper().isColumnEnabled()){
+        if(reportDefinition.getPaper().getColumnEnabled()){
             pageReport.setColumn(reportDefinition.getPaper().getColumnCount());
         }
         pageReport.setStyle(reportDefinition.getStyle());
@@ -108,7 +108,7 @@ public class PageExportManagerImpl implements PageExportManager {
         TableDto jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
         pageReport.setContent(content);
         pageReport.setJsonContent(jsonContent);
-        if(reportDefinition.getPaper().isColumnEnabled()){
+        if(reportDefinition.getPaper().getColumnEnabled()){
             pageReport.setColumn(reportDefinition.getPaper().getColumnCount());
         }
         pageReport.setType("3");

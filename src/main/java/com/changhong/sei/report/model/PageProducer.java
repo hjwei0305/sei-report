@@ -223,8 +223,10 @@ public class PageProducer {
 		cell.setLinkTargetWindow(cellDef.getLinkTargetWindow());
 		cell.setLinkUrl(cellDef.getLinkUrl());
 		cell.setConditionPropertyItems(cellDef.getConditionPropertyItems());
-		cell.setFillBlankRows(cellDef.isFillBlankRows());
-		cell.setMultiple(cellDef.getMultiple());
+		cell.setFillBlankRows(cellDef.getFillBlankRows());
+		if (cellDef.getFillBlankRows()) {
+			cell.setMultiple(cellDef.getMultiple());
+		}
 		cell.setLinkUrlExpression(cellDef.getLinkUrlExpression());
 		return cell;
 	}

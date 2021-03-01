@@ -221,7 +221,7 @@ public class HtmlPageServletAction extends RenderPageServletAction {
                 html = htmlProducer.produce(report);
                 jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
             }
-            if(report.getPaper().isColumnEnabled()){
+            if(report.getPaper().getColumnEnabled()){
                 pageReport.setColumn(report.getPaper().getColumnCount());
             }
             pageReport.setType(type==null?"1":type);

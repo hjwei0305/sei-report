@@ -38,7 +38,7 @@ public class ExportManagerImpl implements ExportManager {
 		HtmlReport htmlReport=new HtmlReport();
 		String content=htmlProducer.produce(report);
 		htmlReport.setContent(content);
-		if(reportDefinition.getPaper().isColumnEnabled()){
+		if(reportDefinition.getPaper().getColumnEnabled()){
 			htmlReport.setColumn(reportDefinition.getPaper().getColumnCount());
 		}
 		htmlReport.setStyle(reportDefinition.getStyle());
@@ -67,7 +67,7 @@ public class ExportManagerImpl implements ExportManager {
 		}
 		HtmlReport htmlReport=new HtmlReport();
 		htmlReport.setContent(content);
-		if(reportDefinition.getPaper().isColumnEnabled()){
+		if(reportDefinition.getPaper().getColumnEnabled()){
 			htmlReport.setColumn(reportDefinition.getPaper().getColumnCount());
 		}
 		htmlReport.setStyle(reportDefinition.getStyle());

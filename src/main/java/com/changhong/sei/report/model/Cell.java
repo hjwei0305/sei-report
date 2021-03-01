@@ -170,7 +170,9 @@ public class Cell implements ReportCell {
 		cell.setPageRowSpan(pageRowSpan);
 		cell.setConditionPropertyItems(conditionPropertyItems);
 		cell.setFillBlankRows(fillBlankRows);
-		cell.setMultiple(multiple);
+		if (fillBlankRows) {
+			cell.setMultiple(multiple);
+		}
 		cell.setLinkUrlExpression(linkUrlExpression);
 		return cell;
 	}

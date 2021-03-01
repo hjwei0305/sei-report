@@ -63,7 +63,7 @@ public class WordProducer implements Producer {
 				pageSize.setH(BigInteger.valueOf(DxaUtils.points2dxa(paper.getHeight())));
 			}
 			int columnCount=paper.getColumnCount();
-			if(paper.isColumnEnabled() && columnCount>0){
+			if(paper.getColumnEnabled() && columnCount>0){
 				CTColumns cols= CTColumns.Factory.newInstance();
 				cols.setNum(new BigInteger(String.valueOf(columnCount)));
 				int columnMargin=paper.getColumnMargin();

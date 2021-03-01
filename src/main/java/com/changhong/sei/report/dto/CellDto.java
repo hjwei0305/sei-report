@@ -2,6 +2,11 @@ package com.changhong.sei.report.dto;
 
 import java.io.Serializable;
 
+/**
+ * @desc：元素Dto
+ * @author：zhaohz
+ * @date：2021/3/1 11:22
+ */
 public class CellDto implements Serializable{
     /**
      * rowSpan

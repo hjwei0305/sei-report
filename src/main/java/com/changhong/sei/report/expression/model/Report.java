@@ -130,7 +130,7 @@ public class Report {
 	
 	public void rePaging(Paper paper){
 		paper.setColumnCount(this.paper.getColumnCount());
-		paper.setColumnEnabled(this.paper.isColumnEnabled());
+		paper.setColumnEnabled(this.paper.getColumnEnabled());
 		paper.setFixRows(this.paper.getFixRows());
 		paper.setPagingMode(this.paper.getPagingMode());
 		setPaper(paper);

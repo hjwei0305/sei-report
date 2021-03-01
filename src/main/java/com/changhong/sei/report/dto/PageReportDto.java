@@ -1,6 +1,5 @@
 package com.changhong.sei.report.dto;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.changhong.sei.report.chart.ChartData;
 import com.changhong.sei.report.export.html.SearchFormData;
@@ -10,6 +9,11 @@ import org.springframework.util.ObjectUtils;
 import java.io.Serializable;
 import java.util.Collection;
 
+/**
+ * @desc：物理分页报表Dto
+ * @author：zhaohz
+ * @date：2021/3/1 11:22
+ */
 public class PageReportDto implements Serializable {
     /**
      * 当前页码

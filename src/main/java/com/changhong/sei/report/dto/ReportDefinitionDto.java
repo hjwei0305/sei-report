@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @desc：报表模板Dto
+ * @author：zhaohz
+ * @date：2021/3/1 11:23
+ */
 public class ReportDefinitionDto {
 	private Paper paper;
 	private HeaderFooterDefinition header;
