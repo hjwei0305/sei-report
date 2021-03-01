@@ -15,10 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @desc：报表模板Vo
@@ -194,8 +191,8 @@ public class ReportDefinition implements Serializable{
 			if(valign!=null){
 				sb.append("vertical-align:"+valign.name()+";");
 			}
-			float lineHeight=cellStyle.getLineHeight();
-			if(lineHeight>0){
+			Float lineHeight=cellStyle.getLineHeight();
+			if(Objects.nonNull(lineHeight)){
 				sb.append("line-height:"+lineHeight+";");
 			}
 			String bgcolor=cellStyle.getBgcolor();

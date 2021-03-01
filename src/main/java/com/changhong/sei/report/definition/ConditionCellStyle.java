@@ -9,7 +9,7 @@ import com.changhong.sei.report.enums.Scope;
  */
 public class ConditionCellStyle extends CellStyle {
 	private static final long serialVersionUID = -3295823703567508310L;
-	private int fontSize;
+	private Integer fontSize;
 	private String fontFamily;
 	private Scope bgcolorScope= Scope.cell;
 	private Scope forecolorScope= Scope.cell;
@@ -92,11 +92,11 @@ public class ConditionCellStyle extends CellStyle {
 		this.underlineScope = underlineScope;
 	}
 
-	public int getFontSize() {
+	public Integer getFontSize() {
 		return fontSize;
 	}
 
-	public void setFontSize(int fontSize) {
+	public void setFontSize(Integer fontSize) {
 		this.fontSize = fontSize;
 	}
 

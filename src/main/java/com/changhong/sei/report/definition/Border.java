@@ -11,13 +11,22 @@ import java.io.Serializable;
  */
 public class Border implements Serializable{
 	private static final long serialVersionUID = 5320929211828633858L;
-	private int width;
+	/**
+	 * 宽度
+	 */
+	private Integer width = 0;
+	/**
+	 * 颜色
+	 */
 	private String color;
+	/**
+	 * 样式
+	 */
 	private BorderStyle style;
-	public int getWidth() {
+	public Integer getWidth() {
 		return width;
 	}
-	public void setWidth(int width) {
+	public void setWidth(Integer width) {
 		this.width = width;
 	}
 	public String getColor() {

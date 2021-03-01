@@ -1,5 +1,7 @@
 package com.changhong.sei.report.enums;
 
+import com.changhong.sei.annotation.Remark;
+
 import java.io.Serializable;
 
 /**
@@ -8,5 +10,8 @@ import java.io.Serializable;
  * @date：2020/6/30 10:08
  */
 public enum Orientation implements Serializable{
-	portrait,landscape;
+	@Remark("纵向打印")
+	portrait,
+	@Remark("横向打印")
+	landscape;
 }

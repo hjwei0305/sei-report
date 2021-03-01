@@ -22,6 +22,7 @@ import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @desc：html生产者
@@ -298,8 +299,8 @@ public class HtmlProducer{
 			sb.append("font-family:"+fontFamily+";");
 		}
 		int fontSize=0;
-		if(style!=null){
-			fontSize=style.getFontSize();
+		if(Objects.nonNull(style) && Objects.nonNull(style.getFontSize())){
+			fontSize =  style.getFontSize();
 		}
 		if(rowStyle!=null){
 			fontSize=rowStyle.getFontSize();

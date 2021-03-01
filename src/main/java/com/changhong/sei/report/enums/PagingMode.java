@@ -1,5 +1,7 @@
 package com.changhong.sei.report.enums;
 
+import com.changhong.sei.annotation.Remark;
+
 import java.io.Serializable;
 
 /**
@@ -8,5 +10,8 @@ import java.io.Serializable;
  * @date：2020/6/30 10:06
  */
 public enum PagingMode implements Serializable{
-	fitpage,fixrows
+	@Remark("自动")
+	fitpage,
+	@Remark("固定行数")
+	fixrows;
 }

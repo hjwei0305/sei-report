@@ -15,23 +15,74 @@ import java.io.Serializable;
  */
 public class CellStyle implements Serializable{
 
+	/**
+	 * 背景色
+	 */
 	private String bgcolor;
+	/**
+	 * 前景色，文本或字体颜色
+	 */
 	private String forecolor;
-	private int fontSize;
+	/**
+	 * 字体尺寸
+	 */
+	private Integer fontSize;
+	/**
+	 * 字体描述
+	 */
 	private String fontFamily;
+	/**
+	 * 展示格式
+	 */
 	private String format;
-	private float lineHeight;
+	/**
+	 * 行高
+	 */
+	private Float lineHeight;
+	/**
+	 * 左右对齐方式
+	 */
 	private Alignment align;
+	/**
+	 * 上下对齐方式
+	 */
 	private Alignment valign;
+	/**
+	 * 加粗
+	 */
 	private Boolean bold;
+	/**
+	 * 斜体
+	 */
 	private Boolean italic;
+	/**
+	 * 下划线
+	 */
 	private Boolean underline;
+	/**
+	 * todo
+	 */
 	private Boolean wrapCompute;
+	/**
+	 * 左边框
+	 */
 	private Border leftBorder;
+	/**
+	 * 右边框
+	 */
 	private Border rightBorder;
+	/**
+	 * 上边框
+	 */
 	private Border topBorder;
+	/**
+	 * 下边框
+	 */
 	private Border bottomBorder;
 
+	/**
+	 * 字体
+	 */
 	@JsonIgnore
 	private Font font;
 
@@ -83,11 +134,11 @@ public class CellStyle implements Serializable{
 		this.forecolor = forecolor;
 	}
 
-	public int getFontSize() {
+	public Integer getFontSize() {
 		return fontSize;
 	}
 
-	public void setFontSize(int fontSize) {
+	public void setFontSize(Integer fontSize) {
 		this.fontSize = fontSize;
 	}
 
@@ -159,11 +210,11 @@ public class CellStyle implements Serializable{
 		this.font = font;
 	}
 
-	public float getLineHeight() {
+	public Float getLineHeight() {
 		return lineHeight;
 	}
 
-	public void setLineHeight(float lineHeight) {
+	public void setLineHeight(Float lineHeight) {
 		this.lineHeight = lineHeight;
 	}
 

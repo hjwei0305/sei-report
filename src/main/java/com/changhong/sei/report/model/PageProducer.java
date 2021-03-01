@@ -39,10 +39,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -448,7 +445,7 @@ public class PageProducer {
 			sb.append("font-family:"+fontFamily+";");
 		}
 		int fontSize=0;
-		if(style!=null){
+		if(Objects.nonNull(style) && Objects.nonNull(style.getFontSize())){
 			fontSize=style.getFontSize();
 		}
 		if(rowStyle!=null){

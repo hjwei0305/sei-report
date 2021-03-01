@@ -31,11 +31,11 @@ public class CellDefinition implements Serializable {
     /**
      * 行单元格所跨行数
      */
-    private Integer rowSpan = 1;
+    private Integer rowSpan = 0;
     /**
      * 列单元格所跨列数
      */
-    private Integer colSpan = 1;
+    private Integer colSpan = 0;
     /**
      * 元素名（一般指单元格名或序号）
      */
