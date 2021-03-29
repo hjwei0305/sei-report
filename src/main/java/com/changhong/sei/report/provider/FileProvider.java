@@ -4,6 +4,7 @@ import com.changhong.sei.report.exception.ReportException;
 import com.changhong.sei.report.provider.report.ReportFile;
 import com.changhong.sei.report.provider.report.ReportProvider;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -28,6 +29,8 @@ public class FileProvider implements ReportProvider,ApplicationContextAware{
 	private String fileStoreDir;
 	@Value("${ureport.file.provider.disabled}")
 	private boolean disabled;
+
+	private ApplicationContext applicationContext;
 	/*@Bean
 	public ReportProvider fileReportProvider() {
 
@@ -117,6 +120,11 @@ public class FileProvider implements ReportProvider,ApplicationContextAware{
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		String property = System.getProperty("user.dir");
+		String path = property + "/src/main/resources/template";
+		if (StringUtils.isBlank(fileStoreDir)){
+			fileStoreDir = path;
+		}
 		File file = new File(fileStoreDir);
 		if (file.exists()) {
 			return;
@@ -128,7 +136,7 @@ public class FileProvider implements ReportProvider,ApplicationContextAware{
 			fileStoreDir = basePath + fileStoreDir;
 			file = new File(fileStoreDir);
 			if (!file.exists()) {
-				file.mkdirs();
+				fileStoreDir = path;
 			}
 		}
 	}
