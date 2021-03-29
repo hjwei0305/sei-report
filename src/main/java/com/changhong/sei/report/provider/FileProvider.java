@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
-//import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
@@ -30,7 +28,15 @@ public class FileProvider implements ReportProvider,ApplicationContextAware{
 	@Value("${ureport.file.provider.disabled}")
 	private boolean disabled;
 
-	private ApplicationContext applicationContext;
+	static String defaultPath;
+	static {
+		/*try {
+			defaultPath = ResourceUtils.getFile("classpath:template").getPath();
+		} catch (FileNotFoundException e) {*/
+		defaultPath = System.getProperty("user.dir") + "/src/main/resources/template";
+		//}
+	}
+
 	/*@Bean
 	public ReportProvider fileReportProvider() {
 
@@ -120,10 +126,8 @@ public class FileProvider implements ReportProvider,ApplicationContextAware{
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		String property = System.getProperty("user.dir");
-		String path = property + "/src/main/resources/template";
 		if (StringUtils.isBlank(fileStoreDir)){
-			fileStoreDir = path;
+			fileStoreDir = defaultPath;
 		}
 		File file = new File(fileStoreDir);
 		if (file.exists()) {
@@ -136,7 +140,7 @@ public class FileProvider implements ReportProvider,ApplicationContextAware{
 			fileStoreDir = basePath + fileStoreDir;
 			file = new File(fileStoreDir);
 			if (!file.exists()) {
-				fileStoreDir = path;
+				fileStoreDir = defaultPath;
 			}
 		}
 	}
