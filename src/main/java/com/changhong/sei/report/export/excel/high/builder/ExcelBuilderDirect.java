@@ -116,11 +116,11 @@ public class ExcelBuilderDirect extends ExcelBuilder {
 	        				cc.setCellStyle(style);
 	        			}
 	        		}
-	        		if(colSpan>0 || rowSpan>0){
-	        			if(rowSpan>0){
+	        		if(colSpan>1 || rowSpan>1){
+	        			if(rowSpan>1){
 	        				rowSpan--;
 	        			}
-	        			if(colSpan>0){
+	        			if(colSpan>1){
 	        				colSpan--;
 	        			}
 	        			CellRangeAddress cellRegion=new CellRangeAddress(rowNumber,(rowNumber+rowSpan),i-skipCol,(i-skipCol+colSpan));
