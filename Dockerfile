@@ -10,11 +10,10 @@ LABEL maintainer="brianhsiung@outlook.com"
 ENV JAVA_OPTS="" APP_NAME="sei-report"
 
 # Application
-ADD --chown=sei /build/libs/$APP_NAME.jar $APP_NAME.jar
+ADD /build/libs/$APP_NAME.jar $APP_NAME.jar
 
 # Port
 EXPOSE 8080
 
 # Launch the application
-USER sei
 ENTRYPOINT ["sh","-c","java -server  -XX:InitialRAMPercentage=75.0 -XX:MaxRAMPercentage=75.0 -XX:+UseG1GC $JAVA_OPTS -jar $APP_NAME.jar --server.servlet.context-path=/$APP_NAME --server.port=8080"]
