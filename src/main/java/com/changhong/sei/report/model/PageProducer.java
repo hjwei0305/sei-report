@@ -49,8 +49,7 @@ public class PageProducer {
 		Page page = new Page(pageIndex, rows);
 		page.setRecords(0);
 		Cell cell = rootDataCell(reportDefinition);
-		//获取查总行数的参数
-		Map<String, Object> params = noPageParam(parameters);
+
 		if(!ObjectUtils.isEmpty(cell)){
 			List<DatasourceDefinition> datasourceList = reportDefinition.getDatasources();
 			String datasetName = ((DatasetValue)cell.getValue()).getDatasetName();
@@ -58,6 +57,8 @@ public class PageProducer {
 				for(DatasetDefinition datasetDefinition:datasource.getDatasets()){
 					if(datasetName.equals(datasetDefinition.getName())){
 						Map<String, Object> parameterMap = buildParameters(((SqlDatasetDefinition) datasetDefinition).getParameters(), parameters);
+						//获取查总行数的参数
+						Map<String, Object> params = noPageParam(parameterMap);
 						if (parameterMap.containsKey("startRow")&&parameterMap.containsKey("rows")) {
 							Connection conn = buildConnect(datasource);
 							String sql = "select count(1) as records from (" + sqlForUse((SqlDatasetDefinition) datasetDefinition, params) + ")";
