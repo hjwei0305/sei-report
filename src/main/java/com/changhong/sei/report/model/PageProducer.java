@@ -61,7 +61,8 @@ public class PageProducer {
 						Map<String, Object> params = noPageParam(parameterMap);
 						if (parameterMap.containsKey("startRow")&&parameterMap.containsKey("rows")) {
 							Connection conn = buildConnect(datasource);
-							String sql = "select count(1) as records from (" + sqlForUse((SqlDatasetDefinition) datasetDefinition, params) + ")";
+							String s = sqlForUse((SqlDatasetDefinition) datasetDefinition, params);
+							String sql = "select count(1) as records from (" + s.replaceAll("limit :startRow,:rows","") + ")";
 							String databaseProductName = conn.getMetaData().getDatabaseProductName().trim();
 							if (!"Oracle".equals(databaseProductName)) {
 								sql +=  " as sei_count";
