@@ -16,11 +16,11 @@ public class XAxes extends BaseAxes {
 		StringBuilder sb=new StringBuilder();
 		sb.append("{");
 		sb.append("\"ticks\":{");
-		sb.append("\"minRotation\":"+getRotation()+"");
+		sb.append("\"minRotation\":").append(getRotation());
 		sb.append("}");
 		ScaleLabel scaleLabel=getScaleLabel();
 		if(scaleLabel!=null){
-			sb.append(",\"scaleLabel\":"+scaleLabel.toJson());	
+			sb.append(",\"scaleLabel\":").append(scaleLabel.toJson());
 		}
 		sb.append("}");
 		return sb.toString();

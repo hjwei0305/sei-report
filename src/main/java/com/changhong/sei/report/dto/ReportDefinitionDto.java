@@ -46,7 +46,7 @@ public class ReportDefinitionDto {
 					initConditions(conditions);
 				}
 			}
-			cellsMap.put(cell.getRowNumber()+","+cell.getColumnNumber(), cell);
+			cellsMap.put(new StringBuilder().append(cell.getRowNumber()).append(",").append(cell.getColumnNumber()).toString(), cell);
 		}
 	}
 	public List<ColumnDefinition> getColumns() {

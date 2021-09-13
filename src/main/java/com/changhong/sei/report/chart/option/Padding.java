@@ -13,10 +13,10 @@ public class Padding {
 	public String toJson(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("{");
-		sb.append("left:"+left+",");
-		sb.append("right:"+right+",");
-		sb.append("top:"+top+",");
-		sb.append("bottom:"+bottom);
+		sb.append("left:").append(left).append(",");
+		sb.append("right:").append(right).append(",");
+		sb.append("top:").append(top).append(",");
+		sb.append("bottom:").append(bottom);
 		sb.append("}");
 		return sb.toString();
 	}

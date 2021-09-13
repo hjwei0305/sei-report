@@ -21,13 +21,13 @@ public class TooltipOption implements Option {
 	public String buildOptionJson() {
 		StringBuilder sb=new StringBuilder();
 		sb.append("\"tooltips\":{");
-		sb.append("\"enabled\":"+enabled+",");
-		sb.append("\"titleFontSize\":"+titleFontSize+",");
-		sb.append("\"titleFontStyle\":\""+titleFontStyle+"\",");
-		sb.append("\"titleFontColor\":\""+titleFontColor+"\",");
-		sb.append("\"bodyFontSize\":"+bodyFontSize+",");
-		sb.append("\"bodyFontStyle\":\""+bodyFontStyle+"\",");
-		sb.append("\"bodyFontColor\":\""+bodyFontColor+"\",");
+		sb.append("\"enabled\":").append(enabled).append(",");
+		sb.append("\"titleFontSize\":").append(titleFontSize).append(",");
+		sb.append("\"titleFontStyle\":\"").append(titleFontStyle).append("\",");
+		sb.append("\"titleFontColor\":\"").append(titleFontColor).append("\",");
+		sb.append("\"bodyFontSize\":").append(bodyFontSize).append(",");
+		sb.append("\"bodyFontStyle\":\"").append(bodyFontStyle).append("\",");
+		sb.append("\"bodyFontColor\":\"").append(bodyFontColor).append("\",");
 		sb.append("}");
 		return sb.toString();
 	}

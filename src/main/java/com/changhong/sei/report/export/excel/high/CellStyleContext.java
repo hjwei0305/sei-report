@@ -260,23 +260,23 @@ public class CellStyleContext {
 			bgcolor=colStyle.getBgcolor();
 		}
 		if(StringUtils.isNotEmpty(bgcolor)){
-			sb.append("bgcolor:"+bgcolor);
+			sb.append("bgcolor:").append(bgcolor);
 		}
 		Border topBorder=customStyle!=null ? customStyle.getTopBorder() : null;
 		if(topBorder!=null){
-			sb.append("topborder:"+buildBorderStyleId(topBorder));
+			sb.append("topborder:").append(buildBorderStyleId(topBorder));
 		}
 		Border bottomBorder=customStyle!=null ? customStyle.getBottomBorder() : null;
 		if(bottomBorder!=null){
-			sb.append("bottomborder:"+buildBorderStyleId(bottomBorder));
+			sb.append("bottomborder:").append(buildBorderStyleId(bottomBorder));
 		}
 		Border leftBorder=customStyle!=null ? customStyle.getLeftBorder() : null;
 		if(leftBorder!=null){
-			sb.append("leftborder:"+buildBorderStyleId(leftBorder));  				
+			sb.append("leftborder:").append(buildBorderStyleId(leftBorder));
 		}
 		Border rightBorder=customStyle!=null ? customStyle.getRightBorder() : null;
 		if(rightBorder!=null){
-			sb.append("rightborder:"+buildBorderStyleId(rightBorder));
+			sb.append("rightborder:").append(buildBorderStyleId(rightBorder));
 		}
 		Alignment align=customStyle!=null ? customStyle.getAlign() : null;
 		if(rowStyle!=null && rowStyle.getAlign()!=null){
@@ -287,11 +287,11 @@ public class CellStyleContext {
 		}
 		if(align!=null){
 			if(align.equals(Alignment.left)){
-				sb.append("align:"+ HorizontalAlignment.LEFT.name());
+				sb.append("align:").append(HorizontalAlignment.LEFT.name());
 			}else if(align.equals(Alignment.center)){
-				sb.append("align:"+ HorizontalAlignment.CENTER.name());
+				sb.append("align:").append(HorizontalAlignment.CENTER.name());
 			}else if(align.equals(Alignment.right)){
-				sb.append("align:"+ HorizontalAlignment.RIGHT.name());
+				sb.append("align:").append(HorizontalAlignment.RIGHT.name());
 			}
 		}
 		Alignment valign=customStyle!=null ? customStyle.getValign() : null;
@@ -303,11 +303,11 @@ public class CellStyleContext {
 		}
 		if(valign!=null){
 			if(valign.equals(Alignment.top)){
-				sb.append("valign:"+ VerticalAlignment.TOP.name());
+				sb.append("valign:").append(VerticalAlignment.TOP.name());
 			}else if(valign.equals(Alignment.middle)){
-				sb.append("valign:"+ VerticalAlignment.CENTER.name());
+				sb.append("valign:").append(VerticalAlignment.CENTER.name());
 			}else if(valign.equals(Alignment.bottom)){
-				sb.append("valign:"+ VerticalAlignment.BOTTOM.name());
+				sb.append("valign:").append(VerticalAlignment.BOTTOM.name());
 			}
 		}
 		Boolean underline=customStyle!=null ? customStyle.getUnderline() : null;
@@ -317,7 +317,7 @@ public class CellStyleContext {
 		if(colStyle!=null && colStyle.getUnderline()!=null){
 			underline=colStyle.getUnderline();
 		}
-		sb.append("underline:"+underline);
+		sb.append("underline:").append(underline);
 		Boolean bold=customStyle!=null ? customStyle.getBold() : null;
 		if(rowStyle!=null && rowStyle.getBold()!=null){
 			bold=rowStyle.getBold();
@@ -325,7 +325,7 @@ public class CellStyleContext {
 		if(colStyle!=null && colStyle.getBold()!=null){
 			bold=colStyle.getBold();
 		}
-		sb.append("bold:"+bold);
+		sb.append("bold:").append(bold);
 		Boolean italic=customStyle!=null ? customStyle.getItalic() : null;
 		if(rowStyle!=null && rowStyle.getItalic()!=null){
 			italic=rowStyle.getItalic();
@@ -333,7 +333,7 @@ public class CellStyleContext {
 		if(colStyle!=null && colStyle.getItalic()!=null){
 			italic=colStyle.getItalic();
 		}
-		sb.append("italic:"+italic);	
+		sb.append("italic:").append(italic);
 		String forecolor=customStyle!=null ? customStyle.getForecolor() : null;
 		if(rowStyle!=null && rowStyle.getForecolor()!=null){
 			forecolor=rowStyle.getForecolor();
@@ -341,7 +341,7 @@ public class CellStyleContext {
 		if(colStyle!=null && colStyle.getForecolor()!=null){
 			forecolor=colStyle.getForecolor();
 		}
-		sb.append("forecolor:"+forecolor);
+		sb.append("forecolor:").append(forecolor);
 		String font=customStyle!=null ? customStyle.getFontFamily() : null;
 		if(rowStyle!=null && rowStyle.getFontFamily()!=null){
 			font=rowStyle.getFontFamily();
@@ -349,7 +349,7 @@ public class CellStyleContext {
 		if(colStyle!=null && colStyle.getFontFamily()!=null){
 			font=colStyle.getFontFamily();
 		}
-		sb.append("font:"+font);
+		sb.append("font:").append(font);
 		int fontSize=customStyle!=null ? customStyle.getFontSize() : 0;
 		if(rowStyle!=null && rowStyle.getFontSize()>0){
 			fontSize=rowStyle.getFontSize();
@@ -357,17 +357,17 @@ public class CellStyleContext {
 		if(colStyle!=null && colStyle.getFontSize()>0){
 			fontSize=colStyle.getFontSize();
 		}
-		sb.append("font-size:"+fontSize);
+		sb.append("font-size:").append(fontSize);
 		return sb.toString();
 	}
 	
 	private String buildBorderStyleId(Border border){
 		StringBuilder sb=new StringBuilder();
 		if(border.getStyle()!=null){
-			sb.append("border-style:"+border.getStyle().name());
+			sb.append("border-style:").append(border.getStyle().name());
 		}
-		sb.append("border-color:"+border.getColor());
-		sb.append("border-width:"+border.getWidth());
+		sb.append("border-color:").append(border.getColor());
+		sb.append("border-width:").append(border.getWidth());
 		return sb.toString();
 	}
 }

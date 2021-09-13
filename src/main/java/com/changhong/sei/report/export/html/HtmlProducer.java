@@ -49,18 +49,18 @@ public class HtmlProducer{
 		}
 		StringBuilder sb=new StringBuilder();
 		if(breakPage){
-			sb.append("<table border='0' class='page-break' style='margin:auto;border-collapse:collapse;width:"+tableWidth+"pt"+bgStyle+"'>");
+			sb.append("<table border='0' class='page-break' style='margin:auto;border-collapse:collapse;width:").append(tableWidth).append("pt").append(bgStyle).append("'>");
 		}else{
-			sb.append("<table border='0' class='page-break' style='margin:auto;border-collapse:collapse;width:"+tableWidth+"pt"+bgStyle+"'>");
+			sb.append("<table border='0' class='page-break' style='margin:auto;border-collapse:collapse;width:").append(tableWidth).append("pt").append(bgStyle).append("'>");
 		}
 		sb.append("<tr>");
 		for(int i=0;i<pageSize;i++){
 			if(i>0){
-				sb.append("<td style='width:"+columnMargin+"pt'></td>");
+				sb.append("<td style='width:").append(columnMargin).append("pt'></td>");
 			}
 			Page page=pages.get(i);
 			String table=produce(context,page,false);
-			sb.append("<td style='width:"+singleTableWidth+"pt;vertical-align:top'>");
+			sb.append("<td style='width:").append(singleTableWidth).append("pt;vertical-align:top'>");
 			sb.append(table);
 			sb.append("</td>");
 		}
@@ -86,9 +86,9 @@ public class HtmlProducer{
 			bgStyle=";background:url("+bgImage+") no-repeat";
 		}
 		if(breakPage){
-			sb.append("<table class='page-break' border='0' style='margin:auto;border-collapse:collapse;width:"+tableWidth+"pt"+bgStyle+"'>");						
+			sb.append("<table class='page-break' border='0' style='margin:auto;border-collapse:collapse;width:").append(tableWidth).append("pt").append(bgStyle).append("'>");
 		}else{
-			sb.append("<table border='0' style='margin:auto;border-collapse:collapse;width:"+tableWidth+"pt"+bgStyle+"'>");						
+			sb.append("<table border='0' style='margin:auto;border-collapse:collapse;width:").append(tableWidth).append("pt").append(bgStyle).append("'>");
 		}
 		int colSize=columns.size();
 		int rowSize=rows.size();
@@ -101,7 +101,7 @@ public class HtmlProducer{
 			if(height<1){
 				continue;
 			}
-			sb.append("<tr style=\"height:"+height+"pt\">");
+			sb.append("<tr style=\"height:").append(height).append("pt\">");
 			for(int j=0;j<colSize;j++){
 				Column col=columns.get(j);
 				Cell cell=null;
@@ -121,24 +121,24 @@ public class HtmlProducer{
 				}
 				if(rowSpan>0){
 					if(colSpan>0){
-						sb.append("<td rowspan=\""+rowSpan+"\" colspan=\""+colSpan+"\"");						
+						sb.append("<td rowspan=\"").append(rowSpan).append("\" colspan=\"").append(colSpan).append("\"");
 					}else{
-						sb.append("<td rowspan=\""+rowSpan+"\"");						
+						sb.append("<td rowspan=\"").append(rowSpan).append("\"");
 					}
 				}else{
 					if(colSpan>0){
-						sb.append("<td colspan=\""+colSpan+"\"");						
+						sb.append("<td colspan=\"").append(colSpan).append("\"");
 					}else{
 						sb.append("<td");
 					}
 				}
-				sb.append(" class='_"+cell.getName()+"' ");
+				sb.append(" class='_").append(cell.getName()).append("' ");
 				String style=buildCustomStyle(cell);
-				sb.append(" "+style+"");
+				sb.append(" ").append(style);
 				sb.append(">");
 				boolean hasLink=false;
-				String linkURL=cell.getLinkUrl();
-				if(StringUtils.isNotBlank(linkURL)){
+				if(StringUtils.isNotBlank(cell.getLinkUrl())){
+					StringBuilder linkURL=new StringBuilder().append(cell.getLinkUrl());
 					Expression urlExpression=cell.getLinkUrlExpression();
 					if(urlExpression!=null){
 						ExpressionData<?> exprData=urlExpression.execute(cell, cell, context);
@@ -148,14 +148,14 @@ public class HtmlProducer{
 							if(bindDataList!=null && bindDataList.size()>0){
 								Object data=bindDataList.get(0).getValue();
 								if(data!=null){
-									linkURL=data.toString();
+									linkURL=new StringBuilder().append(data.toString());
 								}
 							}
 						}else if(exprData instanceof ObjectExpressionData){
 							ObjectExpressionData objExprData=(ObjectExpressionData)exprData;
 							Object data=objExprData.getData();
 							if(data!=null){
-								linkURL=data.toString();
+								linkURL=new StringBuilder().append(data.toString());
 							}
 						}else if(exprData instanceof ObjectListExpressionData){
 							ObjectListExpressionData objListExprData=(ObjectListExpressionData)exprData;
@@ -163,7 +163,7 @@ public class HtmlProducer{
 							if(list!=null && list.size()>0){
 								Object data=list.get(0);
 								if(data!=null){
-									linkURL=data.toString();
+									linkURL=new StringBuilder().append(data.toString());
 								}
 							}
 						}
@@ -172,14 +172,14 @@ public class HtmlProducer{
 					String urlParameter=cell.buildLinkParameters(context);
 					if(StringUtils.isNotBlank(urlParameter)) {
 						if(linkURL.indexOf("?")==-1){
-							linkURL+="?"+urlParameter;
+							linkURL.append("?").append(urlParameter);
 						}else{
-							linkURL+="&"+urlParameter;
+							linkURL.append("&").append(urlParameter);
 						}						
 					}
 					String target=cell.getLinkTargetWindow();
 					if(StringUtils.isBlank(target))target="_self";
-					sb.append("<a href=\""+linkURL+"\" target=\""+target+"\">");
+					sb.append("<a href=\"").append(linkURL).append("\" target=\"").append(target).append("\">");
 				}
 				Object obj=(cell.getFormatData()== null) ? "" : cell.getFormatData();
 				if(obj instanceof Image){
@@ -194,7 +194,7 @@ public class HtmlProducer{
 							imageType="image/gif";
 						}
 					}
-					sb.append("<img src=\"data:"+imageType+";base64,"+img.getBase64Data()+"\"");
+					sb.append("<img src=\"data:").append(imageType).append(";base64,").append(img.getBase64Data()).append("\"");
 					sb.append(">");
 				}else if(obj instanceof ChartData){
 					ChartData chartData=(ChartData)obj;
@@ -208,8 +208,8 @@ public class HtmlProducer{
 					}else{
 						height-=2;
 					}
-					sb.append("<div style=\"position: relative;width:"+width+"pt;height:"+height+"pt\">");
-					sb.append("<canvas id=\""+canvasId+"\" style=\"width:"+width+"px !important;height:"+height+"px !important\"></canvas>");
+					sb.append("<div style=\"position: relative;width:").append(width).append("pt;height:").append(height).append("pt\">");
+					sb.append("<canvas id=\"").append(canvasId).append("\" style=\"width:").append(width).append("px !important;height:").append(height).append("px !important\"></canvas>");
 					sb.append("</div>");
 				}else{
 					String text=obj.toString();
@@ -270,7 +270,7 @@ public class HtmlProducer{
 			forecolor=colStyle.getForecolor();
 		}
 		if(StringUtils.isNotBlank(forecolor)){
-			sb.append("color:rgb("+forecolor+");");
+			sb.append("color:rgb(").append(forecolor).append(");");
 		}
 		String bgcolor=null;
 		if(style!=null){
@@ -283,7 +283,7 @@ public class HtmlProducer{
 			bgcolor=colStyle.getBgcolor();
 		}
 		if(StringUtils.isNotBlank(bgcolor)){
-			sb.append("background-color:rgb("+bgcolor+");");
+			sb.append("background-color:rgb(").append(bgcolor).append(");");
 		}
 		String fontFamily=null;
 		if(style!=null){
@@ -296,7 +296,7 @@ public class HtmlProducer{
 			fontFamily=colStyle.getFontFamily();
 		}
 		if(StringUtils.isNotBlank(fontFamily)){
-			sb.append("font-family:"+fontFamily+";");
+			sb.append("font-family:").append(fontFamily).append(";");
 		}
 		int fontSize=0;
 		if(Objects.nonNull(style) && Objects.nonNull(style.getFontSize())){
@@ -309,7 +309,7 @@ public class HtmlProducer{
 			fontSize=colStyle.getFontSize();
 		}
 		if(fontSize>0){
-			sb.append("font-size:"+fontSize+"pt;");
+			sb.append("font-size:").append(fontSize).append("pt;");
 		}
 		Boolean bold=null;
 		if(style!=null){
@@ -374,7 +374,7 @@ public class HtmlProducer{
 			align=colStyle.getAlign();
 		}
 		if(align!=null){
-			sb.append("text-align:"+align.name()+";");
+			sb.append("text-align:").append(align.name()).append(";");
 		}
 		Alignment valign=null;
 		if(style!=null){
@@ -387,39 +387,39 @@ public class HtmlProducer{
 			valign=colStyle.getValign();
 		}
 		if(valign!=null){
-			sb.append("vertical-align:"+valign.name()+";");
+			sb.append("vertical-align:").append(valign.name()).append(";");
 		}
 		Border border=null;
 		if(style!=null){
 			border=style.getLeftBorder();
 		}
 		if(border!=null){
-			sb.append("border-left:"+border.getStyle().name()+" "+border.getWidth()+"px rgb("+border.getColor()+");");
+			sb.append("border-left:").append(border.getStyle().name()).append(" ").append(border.getWidth()).append("px rgb(").append(border.getColor()).append(");");
 		}
 		Border rightBorder=null;
 		if(style!=null){
 			rightBorder=style.getRightBorder();
 		}
 		if(rightBorder!=null){
-			sb.append("border-right:"+rightBorder.getStyle().name()+" "+rightBorder.getWidth()+"px rgb("+rightBorder.getColor()+");");
+			sb.append("border-right:").append(rightBorder.getStyle().name()).append(" ").append(rightBorder.getWidth()).append("px rgb(").append(rightBorder.getColor()).append(");");
 		}
 		Border topBorder=null;
 		if(style!=null){
 			topBorder=style.getTopBorder();
 		}
 		if(topBorder!=null){
-			sb.append("border-top:"+topBorder.getStyle().name()+" "+topBorder.getWidth()+"px rgb("+topBorder.getColor()+");");
+			sb.append("border-top:").append(topBorder.getStyle().name()).append(" ").append(topBorder.getWidth()).append("px rgb(").append(topBorder.getColor()).append(");");
 		}
 		Border bottomBorder=null;
 		if(style!=null){
 			bottomBorder=style.getBottomBorder();
 		}
 		if(bottomBorder!=null){
-			sb.append("border-bottom:"+bottomBorder.getStyle().name()+" "+bottomBorder.getWidth()+"px rgb("+bottomBorder.getColor()+");");
+			sb.append("border-bottom:").append(bottomBorder.getStyle().name()).append(" ").append(bottomBorder.getWidth()).append("px rgb(").append(bottomBorder.getColor()).append(");");
 		}
 		if(sb.length()>0){
 			int colWidth=cell.getColumn().getWidth();
-			sb.append("width:"+colWidth+"pt");
+			sb.append("width:").append(colWidth).append("pt");
 			sb.insert(0, "style=\"");
 			sb.append("\"");
 		}

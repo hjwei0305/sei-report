@@ -63,9 +63,9 @@ public class BubbleDataset extends BaseDataset {
 				sb.append(",");
 			}
 			sb.append("{");
-			sb.append("\"borderColor\":\"rgb("+getRgbColor(index)+")\",");
-			sb.append("\"backgroundColor\":\"rgba("+getRgbColor(index)+",0.5)\",");
-			sb.append("\"label\":\""+obj+"\",");
+			sb.append("\"borderColor\":\"rgb(").append(getRgbColor(index)).append(")\",");
+			sb.append("\"backgroundColor\":\"rgba(").append(getRgbColor(index)).append(",0.5)\",");
+			sb.append("\"label\":\"").append(obj).append("\",");
 			sb.append("\"data\":[");
 			List<BubbleData> list=map.get(obj);
 			int i=0;
@@ -75,9 +75,9 @@ public class BubbleDataset extends BaseDataset {
 				}
 				i++;
 				sb.append("{");				
-				sb.append("\"x\":"+data.getX()+",");				
-				sb.append("\"y\":"+data.getY()+",");				
-				sb.append("\"r\":"+data.getR());				
+				sb.append("\"x\":").append(data.getX()).append(",");
+				sb.append("\"y\":").append(data.getY()).append(",");
+				sb.append("\"r\":").append(data.getR());
 				sb.append("}");				
 			}
 			sb.append("]");

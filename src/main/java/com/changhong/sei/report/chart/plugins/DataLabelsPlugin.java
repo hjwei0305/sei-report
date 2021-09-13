@@ -14,7 +14,7 @@ public class DataLabelsPlugin implements Plugin {
 	@Override
 	public String toJson(String type) {
 		StringBuilder sb=new StringBuilder();
-		sb.append("\"datalabels\":{\"display\":"+display+",");
+		sb.append("\"datalabels\":{\"display\":").append(display).append(",");
 		sb.append("\"font\":{");
 		sb.append("\"size\":14,");
 		sb.append("\"weight\":\"bold\"");

@@ -21,13 +21,13 @@ public class TitleOption implements Option {
 	public String buildOptionJson() {
 		StringBuilder sb=new StringBuilder();
 		sb.append("\"title\":{");
-		sb.append("\"display\":"+display+",");
-		sb.append("\"text\":\""+text+"\",");
-		sb.append("\"position\":\""+position+"\",");
-		sb.append("\"fontSize\":"+fontSize+",");
-		sb.append("\"fontColor\":\""+fontColor+"\",");
-		sb.append("\"fontStyle\":\""+fontStyle+"\",");
-		sb.append("\"padding\":\""+padding+"\"");
+		sb.append("\"display\":").append(display).append(",");
+		sb.append("\"text\":\"").append(text).append("\",");
+		sb.append("\"position\":\"").append(position).append("\",");
+		sb.append("\"fontSize\":").append(fontSize).append(",");
+		sb.append("\"fontColor\":\"").append(fontColor).append("\",");
+		sb.append("\"fontStyle\":\"").append(fontStyle).append("\",");
+		sb.append("\"padding\":\"").append(padding).append("\"");
 		sb.append("}");
 		return sb.toString();
 	}

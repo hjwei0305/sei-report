@@ -198,9 +198,10 @@ public class XSSFExcelParser extends ExcelParser {
 	}
 
 	private  String hex2Rgb(String colorStr) {
-		return Integer.valueOf(colorStr.substring( 2, 4 ),16 )+","+
-				Integer.valueOf( colorStr.substring( 4, 6 ), 16 )+","+
-	            Integer.valueOf( colorStr.substring( 6, 8 ), 16 );
+		return new StringBuilder()
+				.append(Integer.valueOf(colorStr.substring( 2, 4 ),16 )).append(",")
+				.append(Integer.valueOf( colorStr.substring( 4, 6 ), 16 )).append(",")
+				.append(Integer.valueOf( colorStr.substring( 6, 8 ), 16 )).toString();
 	}
 	
 	private Span getSpan(XSSFSheet sheet, int row , int column){

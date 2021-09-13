@@ -24,9 +24,9 @@ public class RadioInputComponent extends InputComponent {
 			String label=option.getLabel();
 			String checked=list.contains(value) ? "checked" : "";
 			if(this.optionsInline){
-				sb.append("<span class='checkbox-inline' style='padding-top:0px;padding-left:2px;padding-top:0px'><input value='"+value+"' "+checked+" type='radio' name='"+name+"'> "+label+"</span>");
+				sb.append("<span class='checkbox-inline' style='padding-top:0px;padding-left:2px;padding-top:0px'><input value='").append(value).append("' ").append(checked).append(" type='radio' name='").append(name).append("'> ").append(label).append("</span>");
 			}else{
-				sb.append("<span class='checkbox'><input value='"+value+"' type='radio' "+checked+" name='"+name+"' style='margin-left: auto'> <span style=\"margin-left:15px\">"+label+"</span></span>");
+				sb.append("<span class='checkbox'><input value='").append(value).append("' type='radio' ").append(checked).append(" name='").append(name).append("' style='margin-left: auto'> <span style=\"margin-left:15px\">").append(label).append("</span></span>");
 			}
 		}
 		sb.append("</div>");
@@ -38,13 +38,13 @@ public class RadioInputComponent extends InputComponent {
 		StringBuilder sb=new StringBuilder();
 		sb.append("formElements.push(");
 		sb.append("function(){");
-		sb.append("if(''==='"+name+"'){");
+		sb.append("if(''==='").append(name).append("'){");
 		sb.append("alert('单选框未绑定查询参数名，不能进行查询操作!');");
 		sb.append("throw '单选框未绑定查询参数名，不能进行查询操作!'");
 		sb.append("}");
 		sb.append("return {");
-		sb.append("\""+name+"\":");
-		sb.append("$(\"input[name='"+getBindParameter()+"']:checked\").val()");
+		sb.append("\"").append(name).append("\":");
+		sb.append("$(\"input[name='").append(getBindParameter()).append("']:checked\").val()");
 		sb.append("}");
 		sb.append("}");
 		sb.append(");");

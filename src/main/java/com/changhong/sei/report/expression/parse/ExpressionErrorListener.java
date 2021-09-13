@@ -18,7 +18,7 @@ public class ExpressionErrorListener extends BaseErrorListener {
 		if(sb==null){
 			sb=new StringBuffer();
 		}
-		sb.append("["+offendingSymbol+"] is invalid:"+msg);
+		sb.append("[").append(offendingSymbol).append("] is invalid:").append(msg);
 		sb.append("\r\n");
 	}
 	public String getErrorMessage(){

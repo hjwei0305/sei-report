@@ -64,27 +64,25 @@ public class JoinExpression extends BaseExpression {
 			}
 			list.add(obj);
 		}
-		String str=null;
+		StringBuilder str = new StringBuilder();
 		for(int i=0;i<list.size();i++){
 			Object data=list.get(i);
-			if(str==null){
+			if(str.toString().length()==0){
 				if(data instanceof String){
-					str="\""+data+"\"";
-					//str=""+data+"";
+					str.append("\"").append(data).append("\"");
 				}else{
-					str=""+data+"";					
+					str.append(data);
 				}
 			}else{
 				Operator op=operators.get(i-1);
 				if(data instanceof String){
-					str+=""+op+"\""+data+"\"";
-					//str+=""+op+""+data+"";
+					str.append(op).append("\"").append(data).append("\"");
 				}else{
-					str+=""+op+""+data+"";					
+					str.append(op).append(data);
 				}
 			}
 		}
-		Object obj=context.evalExpr(str);
+		Object obj=context.evalExpr(str.toString());
 		return new ObjectExpressionData(obj);
 	}
 	public List<BaseExpression> getExpressions() {

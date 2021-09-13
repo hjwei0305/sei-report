@@ -14,7 +14,7 @@ public class LayoutOption implements Option {
 	public String buildOptionJson() {
 		StringBuilder sb=new StringBuilder();
 		sb.append("\"layout\":{");
-		sb.append("\"padding\":"+padding.toJson());
+		sb.append("\"padding\":").append(padding.toJson());
 		sb.append("}");
 		return sb.toString();
 	}

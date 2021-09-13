@@ -17,11 +17,11 @@ public class ScaleLabel {
 	public String toJson(){
 		StringBuilder sb=new StringBuilder();
 		sb.append("{");
-		sb.append("\"display\":"+display+",");
-		sb.append("\"labelString\":\""+labelString+"\",");
-		sb.append("\"fontColor\":\""+fontColor+"\",");
-		sb.append("\"fontSize\":"+fontSize+",");
-		sb.append("\"fontStyle\":\""+fontStyle+"\"");
+		sb.append("\"display\":").append(display).append(",");
+		sb.append("\"labelString\":\"").append(labelString).append("\",");
+		sb.append("\"fontColor\":\"").append(fontColor).append("\",");
+		sb.append("\"fontSize\":").append(fontSize).append(",");
+		sb.append("\"fontStyle\":\"").append(fontStyle).append("\"");
 		sb.append("}");
 		return sb.toString();
 	}

@@ -60,11 +60,11 @@ public class ScatterDataset extends BaseDataset {
 				sb.append(",");
 			}
 			sb.append("{");
-			sb.append("\"label\":\""+obj+"\",");
-			sb.append("\"fill\":"+fill+",");
-			sb.append("\"lineTension\":"+lineTension+",");
-			sb.append("\"borderColor\":\"rgb("+getRgbColor(index)+")\",");
-			sb.append("\"backgroundColor\":\"rgba("+getRgbColor(index)+",0.5)\",");
+			sb.append("\"label\":\"").append(obj).append("\",");
+			sb.append("\"fill\":").append(fill).append(",");
+			sb.append("\"lineTension\":").append(lineTension).append(",");
+			sb.append("\"borderColor\":\"rgb(").append(getRgbColor(index)).append(")\",");
+			sb.append("\"backgroundColor\":\"rgba(").append(getRgbColor(index)).append(",0.5)\",");
 			sb.append("\"data\":[");
 			List<ScatterData> list=map.get(obj);
 			int i=0;
@@ -74,8 +74,8 @@ public class ScatterDataset extends BaseDataset {
 				}
 				i++;
 				sb.append("{");				
-				sb.append("\"x\":"+data.getX()+",");				
-				sb.append("\"y\":"+data.getY()+"");				
+				sb.append("\"x\":").append(data.getX()).append(",");
+				sb.append("\"y\":").append(data.getY()).append("");
 				sb.append("}");				
 			}
 			sb.append("]");

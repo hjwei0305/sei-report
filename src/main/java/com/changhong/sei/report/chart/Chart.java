@@ -29,8 +29,8 @@ public class Chart {
 	public ChartData doCompute(Cell cell, Context context){
 		StringBuilder sb=new StringBuilder();
 		sb.append("{");
-		sb.append("\"type\":\""+dataset.getType()+"\",");
-		sb.append("\"data\":"+dataset.buildDataJson(context, cell)+",");
+		sb.append("\"type\":\"").append(dataset.getType()).append("\",");
+		sb.append("\"data\":").append(dataset.buildDataJson(context, cell)).append(",");
 		sb.append("\"options\":{");
 		boolean withoption=false;
 		if(options!=null && options.size()>0){

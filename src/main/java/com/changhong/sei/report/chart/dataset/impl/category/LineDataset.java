@@ -17,8 +17,8 @@ public class LineDataset extends CategoryDataset {
 		StringBuilder sb=new StringBuilder();
 		sb.append("{");
 		String labels=getLabels();
-		sb.append("\"labels\":"+labels+",");
-		sb.append("\"datasets\":["+datasetJson+"]");
+		sb.append("\"labels\":").append(labels).append(",");
+		sb.append("\"datasets\":[").append(datasetJson).append("]");
 		sb.append("}");
 		return sb.toString();
 	}

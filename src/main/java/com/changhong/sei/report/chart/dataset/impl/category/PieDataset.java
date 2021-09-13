@@ -18,8 +18,8 @@ public class PieDataset extends CategoryDataset {
 		StringBuilder sb=new StringBuilder();
 		sb.append("{");
 		String labels=getLabels();
-		sb.append("\"labels\":"+labels+",");
-		sb.append("\"datasets\":["+datasetJson+"]");
+		sb.append("\"labels\":").append(labels).append(",");
+		sb.append("\"datasets\":[").append(datasetJson).append("]");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -32,12 +32,12 @@ public class PieDataset extends CategoryDataset {
 				sb.append(",");
 			}
 			sb.append("{");
-			sb.append("\"label\":\""+series+"\",");
+			sb.append("\"label\":\"").append(series).append("\",");
 			Map<Object,List<Object>> categoryMap=map.get(series);
-			sb.append("\"backgroundColor\":"+buildBackgroundColor(i, categoryMap.size())+",");
-			sb.append("\"data\":"+buildData(categoryMap));
+			sb.append("\"backgroundColor\":").append(buildBackgroundColor(i, categoryMap.size())).append(",");
+			sb.append("\"data\":").append(buildData(categoryMap));
 			if(props!=null){
-				sb.append(","+props);
+				sb.append(",").append(props);
 			}
 			sb.append("}");
 			i++;
@@ -53,7 +53,7 @@ public class PieDataset extends CategoryDataset {
 			if(sb.length()>1){
 				sb.append(",");
 			}
-			sb.append("\"rgb("+color+")\"");
+			sb.append("\"rgb(").append(color).append(")\"");
 		}
 		sb.append("]");
 		return sb.toString();

@@ -76,16 +76,17 @@ public class HeaderFooterDefinition implements Serializable{
 			if(listData!=null){
 				List<?> list=listData.getData();
 				if(list!=null && list.size()>0){
-					obj="";
+					StringBuilder object = new StringBuilder();
 					for(Object o:list){
 						if(o==null){
 							continue;
 						}
 						if(!obj.equals("")){
-							obj+=",";
+							object.append(",");
 						}
-						obj+=o.toString();
+						object.append(o.toString());
 					}
+					obj = object.toString();
 				}
 			}
 		}

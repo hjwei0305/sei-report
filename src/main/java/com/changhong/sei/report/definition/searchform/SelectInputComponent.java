@@ -23,7 +23,7 @@ public class SelectInputComponent extends InputComponent {
 		String name=getBindParameter();
 		Object pvalue=context.getParameter(name)==null ? "" : context.getParameter(name);
 		StringBuilder sb=new StringBuilder();
-		sb.append("<select style=\"padding:3px;height:28px\" id='"+context.buildComponentId(this)+"' name='"+name+"' class='form-control'>");
+		sb.append("<select style=\"padding:3px;height:28px\" id='").append(context.buildComponentId(this)).append("' name='").append(name).append("' class='form-control'>");
 		if(useDataset && StringUtils.isNotBlank(dataset)){
 			Dataset ds=context.getDataset(dataset);
 			if(ds==null){
@@ -33,7 +33,7 @@ public class SelectInputComponent extends InputComponent {
 				Object label= Utils.getProperty(obj, labelField);
 				Object value= Utils.getProperty(obj, valueField);
 				String selected=value.equals(pvalue) ? "selected" : "";
-				sb.append("<option value='"+value+"' "+selected+">"+label+"</option>");
+				sb.append("<option value='").append(value).append("' ").append(selected).append(">").append(label).append("</option>");
 			}
 			if(pvalue.equals("")){
 				sb.append("<option value='' selected></option>");
@@ -42,7 +42,7 @@ public class SelectInputComponent extends InputComponent {
 			for(Option option:options){
 				String value=option.getValue();
 				String selected=value.equals(pvalue) ? "selected" : "";
-				sb.append("<option value='"+value+"' "+selected+">"+option.getLabel()+"</option>");
+				sb.append("<option value='").append(value).append("' ").append(selected).append(">").append(option.getLabel()).append("</option>");
 			}
 			if(pvalue.equals("")){
 				sb.append("<option value='' selected></option>");
@@ -57,13 +57,13 @@ public class SelectInputComponent extends InputComponent {
 		StringBuilder sb=new StringBuilder();
 		sb.append("formElements.push(");
 		sb.append("function(){");
-		sb.append("if(''==='"+name+"'){");
+		sb.append("if(''==='").append(name).append("'){");
 		sb.append("alert('列表框未绑定查询参数名，不能进行查询操作!');");
 		sb.append("throw '列表框未绑定查询参数名，不能进行查询操作!'");
 		sb.append("}");
 		sb.append("return {");
-		sb.append("\""+name+"\":");
-		sb.append("$('#"+context.buildComponentId(this)+"').val()");
+		sb.append("\"").append(name).append("\":");
+		sb.append("$('#").append(context.buildComponentId(this)).append("').val()");
 		sb.append("}");
 		sb.append("}");
 		sb.append(");");

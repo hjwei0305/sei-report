@@ -150,7 +150,7 @@ public class HSSFExcelParser extends ExcelParser {
 		HSSFColor color=font.getHSSFColor(book);
 		if(color!=null){
 			short[] rgb=color.getTriplet();
-			style.setForecolor(rgb[0]+","+rgb[1]+","+rgb[2]);
+			style.setForecolor(new StringBuilder().append(rgb[0]).append(",").append(rgb[1]).append(",").append(rgb[2]).toString());
 		}else{
 			style.setForecolor("0,0,0");			
 		}
@@ -159,7 +159,7 @@ public class HSSFExcelParser extends ExcelParser {
 			HSSFColor bgcolor=cellStyle.getFillForegroundColorColor();
 			if(bgcolor!=null){
 				short[] rgb=bgcolor.getTriplet();
-				style.setBgcolor(rgb[0]+","+rgb[1]+","+rgb[2]);
+				style.setBgcolor(new StringBuilder().append(rgb[0]).append(",").append(rgb[1]).append(",").append(rgb[2]).toString());
 			}		
 		}
 		int fontSize=font.getFontHeight()/20;

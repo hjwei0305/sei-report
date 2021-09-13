@@ -9,7 +9,7 @@ public class SubmitButtonComponent extends ButtonComponent {
 	@Override
 	public String initJs(RenderContext context) {
 		StringBuilder sb=new StringBuilder();
-		sb.append("$('#"+context.buildComponentId(this)+"').click(function(){");
+		sb.append("$('#").append(context.buildComponentId(this)).append("').click(function(){");
 		sb.append("doSearch();");
 		sb.append("});");
 		return sb.toString();

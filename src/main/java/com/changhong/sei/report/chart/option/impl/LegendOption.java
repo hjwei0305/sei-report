@@ -17,10 +17,10 @@ public class LegendOption implements Option {
 	public String buildOptionJson() {
 		StringBuilder sb=new StringBuilder();
 		sb.append("\"legend\":{");
-		sb.append("\"display\":"+display+",");
-		sb.append("\"position\":\""+position+"\"");
+		sb.append("\"display\":").append(display).append(",");
+		sb.append("\"position\":\"").append(position).append("\"");
 		if(labels!=null){
-			sb.append("\"labels\":"+labels.toJson());			
+			sb.append("\"labels\":").append(labels.toJson());
 		}
 		sb.append("}");
 		return sb.toString();

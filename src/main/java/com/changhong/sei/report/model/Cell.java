@@ -892,7 +892,7 @@ public class Cell implements ReportCell {
 				if(i>0){
 					sb.append("&");
 				}
-				sb.append(name+"="+value);
+				sb.append(name).append("=").append(value);
 			}
 		}
 		return sb.toString();

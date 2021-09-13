@@ -15,8 +15,8 @@ public class AnimationsOption implements Option {
 	public String buildOptionJson() {
 		StringBuilder sb=new StringBuilder();
 		sb.append("\"animation\":{");
-		sb.append("\"duration\":"+duration+",");
-		sb.append("\"easing\":\""+easing+"\"");
+		sb.append("\"duration\":").append(duration).append(",");
+		sb.append("\"easing\":\"").append(easing).append("\"");
 		sb.append("}");
 		return sb.toString();
 	}

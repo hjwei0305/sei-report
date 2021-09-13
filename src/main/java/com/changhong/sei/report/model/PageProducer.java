@@ -28,11 +28,11 @@ import com.changhong.sei.report.expression.model.data.ObjectListExpressionData;
 import com.changhong.sei.report.utils.ExpressionUtils;
 import com.changhong.sei.report.utils.ProcedureUtils;
 import com.changhong.sei.report.utils.Utils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
@@ -282,8 +282,8 @@ public class PageProducer {
 				cel.setName(cell.getName());
 				String style=buildCustomStyle(cell);
 				cel.setStyle(style);
-				String linkURL=cell.getLinkUrl();
-				if(!StringUtils.isEmpty(linkURL)){
+				if(StringUtils.isNotBlank(cell.getLinkUrl())){
+					StringBuilder linkURL=new StringBuilder().append(cell.getLinkUrl());
 					Expression urlExpression=cell.getLinkUrlExpression();
 					if(urlExpression!=null){
 						ExpressionData<?> exprData=urlExpression.execute(cell, cell, context);
@@ -293,14 +293,14 @@ public class PageProducer {
 							if(bindDataList!=null && bindDataList.size()>0){
 								Object data=bindDataList.get(0).getValue();
 								if(data!=null){
-									linkURL=data.toString();
+									linkURL=new StringBuilder().append(data.toString());
 								}
 							}
 						}else if(exprData instanceof ObjectExpressionData){
 							ObjectExpressionData objExprData=(ObjectExpressionData)exprData;
 							Object data=objExprData.getData();
 							if(data!=null){
-								linkURL=data.toString();
+								linkURL=new StringBuilder().append(data.toString());
 							}
 						}else if(exprData instanceof ObjectListExpressionData){
 							ObjectListExpressionData objListExprData=(ObjectListExpressionData)exprData;
@@ -308,7 +308,7 @@ public class PageProducer {
 							if(list!=null && list.size()>0){
 								Object data=list.get(0);
 								if(data!=null){
-									linkURL=data.toString();
+									linkURL=new StringBuilder().append(data.toString());
 								}
 							}
 						}
@@ -316,14 +316,14 @@ public class PageProducer {
 					String urlParameter=cell.buildLinkParameters(context);
 					if(!StringUtils.isEmpty(urlParameter)) {
 						if(linkURL.indexOf("?")==-1){
-							linkURL+="?"+urlParameter;
+							linkURL.append("?").append(urlParameter);
 						}else{
-							linkURL+="&"+urlParameter;
+							linkURL.append("&").append(urlParameter);
 						}
 					}
 					String target=cell.getLinkTargetWindow();
 					if(StringUtils.isEmpty(target))target="_self";
-					cel.setLinkUrl(linkURL);
+					cel.setLinkUrl(linkURL.toString());
 					cel.setLinkTarget(target);
 				}
 				Object obj=(cell.getFormatData()== null) ? "" : cell.getFormatData();
@@ -352,8 +352,8 @@ public class PageProducer {
 					}else{
 						height-=2;
 					}
-					StringBuffer chart = new StringBuffer("<div style=\"position: relative;width:"+width+"pt;height:"+height+"pt\">");
-					chart.append("<canvas id=\""+canvasId+"\" style=\"width:"+width+"px !important;height:"+height+"px !important\"></canvas>");
+					StringBuffer chart = new StringBuffer("<div style=\"position: relative;width:").append(width).append("pt;height:").append(height).append("pt\">");
+					chart.append("<canvas id=\"").append(canvasId).append("\" style=\"width:").append(width).append("px !important;height:").append(height).append("px !important\"></canvas>");
 					chart.append("</div>");
 					cel.setContent(chart.toString());
 				}else{
@@ -418,7 +418,7 @@ public class PageProducer {
 			forecolor=colStyle.getForecolor();
 		}
 		if(!StringUtils.isEmpty(forecolor)){
-			sb.append("color:rgb("+forecolor+");");
+			sb.append("color:rgb(").append(forecolor).append(");");
 		}
 		String bgcolor=null;
 		if(style!=null){
@@ -431,7 +431,7 @@ public class PageProducer {
 			bgcolor=colStyle.getBgcolor();
 		}
 		if(!StringUtils.isEmpty(bgcolor)){
-			sb.append("background-color:rgb("+bgcolor+");");
+			sb.append("background-color:rgb(").append(bgcolor).append(");");
 		}
 		String fontFamily=null;
 		if(style!=null){
@@ -444,7 +444,7 @@ public class PageProducer {
 			fontFamily=colStyle.getFontFamily();
 		}
 		if(!StringUtils.isEmpty(fontFamily)){
-			sb.append("font-family:"+fontFamily+";");
+			sb.append("font-family:").append(fontFamily).append(";");
 		}
 		int fontSize=0;
 		if(Objects.nonNull(style) && Objects.nonNull(style.getFontSize())){
@@ -457,7 +457,7 @@ public class PageProducer {
 			fontSize=colStyle.getFontSize();
 		}
 		if(fontSize>0){
-			sb.append("font-size:"+fontSize+"pt;");
+			sb.append("font-size:").append(fontSize).append("pt;");
 		}
 		Boolean bold=null;
 		if(style!=null){
@@ -522,7 +522,7 @@ public class PageProducer {
 			align=colStyle.getAlign();
 		}
 		if(align!=null){
-			sb.append("text-align:"+align.name()+";");
+			sb.append("text-align:").append(align.name()).append(";");
 		}
 		Alignment valign=null;
 		if(style!=null){
@@ -535,39 +535,39 @@ public class PageProducer {
 			valign=colStyle.getValign();
 		}
 		if(valign!=null){
-			sb.append("vertical-align:"+valign.name()+";");
+			sb.append("vertical-align:").append(valign.name()).append(";");
 		}
 		Border border=null;
 		if(style!=null){
 			border=style.getLeftBorder();
 		}
 		if(border!=null){
-			sb.append("border-left:"+border.getStyle().name()+" "+border.getWidth()+"px rgb("+border.getColor()+");");
+			sb.append("border-left:").append(border.getStyle().name()).append(" ").append(border.getWidth()).append("px rgb(").append(border.getColor()).append(");");
 		}
 		Border rightBorder=null;
 		if(style!=null){
 			rightBorder=style.getRightBorder();
 		}
 		if(rightBorder!=null){
-			sb.append("border-right:"+rightBorder.getStyle().name()+" "+rightBorder.getWidth()+"px rgb("+rightBorder.getColor()+");");
+			sb.append("border-right:").append(rightBorder.getStyle().name()).append(" ").append(rightBorder.getWidth()).append("px rgb(").append(rightBorder.getColor()).append(");");
 		}
 		Border topBorder=null;
 		if(style!=null){
 			topBorder=style.getTopBorder();
 		}
 		if(topBorder!=null){
-			sb.append("border-top:"+topBorder.getStyle().name()+" "+topBorder.getWidth()+"px rgb("+topBorder.getColor()+");");
+			sb.append("border-top:").append(topBorder.getStyle().name()).append(" ").append(topBorder.getWidth()).append("px rgb(").append(topBorder.getColor()).append(");");
 		}
 		Border bottomBorder=null;
 		if(style!=null){
 			bottomBorder=style.getBottomBorder();
 		}
 		if(bottomBorder!=null){
-			sb.append("border-bottom:"+bottomBorder.getStyle().name()+" "+bottomBorder.getWidth()+"px rgb("+bottomBorder.getColor()+");");
+			sb.append("border-bottom:").append(bottomBorder.getStyle().name()).append(" ").append(bottomBorder.getWidth()).append("px rgb(").append(bottomBorder.getColor()).append(");");
 		}
 		if(sb.length()>0){
 			int colWidth=cell.getColumn().getWidth();
-			sb.append("width:"+colWidth+"pt");
+			sb.append("width:").append(colWidth).append("pt");
 			sb.insert(0, "style=\"");
 			sb.append("\"");
 		}

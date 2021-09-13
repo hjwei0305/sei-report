@@ -10,13 +10,13 @@ public class ColComponent extends ContainerComponent {
 	@Override
 	public String toHtml(RenderContext context) {
 		StringBuffer sb=new StringBuffer();
-		sb.append("<div class='col-md-"+size+"' style='padding-left:2px;padding-right:2px'");
+		sb.append("<div class='col-md-").append(size).append("' style='padding-left:2px;padding-right:2px'");
 		Object gridComponent=context.getMetadata(GridComponent.KEY);
 		if(gridComponent!=null){
 			GridComponent gc=(GridComponent)gridComponent;
 			if(gc.isShowBorder()){
 				String border="border:solid "+gc.getBorderWidth()+"px "+gc.getBorderColor()+"";
-				sb.append(" style='"+border+";padding:10px'");
+				sb.append(" style='").append(border).append(";padding:10px'");
 			}
 		}
 		sb.append(">");

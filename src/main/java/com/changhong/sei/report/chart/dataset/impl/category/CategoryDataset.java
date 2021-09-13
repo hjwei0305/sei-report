@@ -91,17 +91,15 @@ public abstract class CategoryDataset extends BaseDataset {
 				sb.append(",");
 			}
 			sb.append("{");
-			sb.append("\"label\":\""+series+"\",");
-			String color=null;
+			sb.append("\"label\":\"").append(series).append("\",");
 			if(this instanceof LineDataset){
-				color="rgb("+getRgbColor(i)+")";
+				sb.append("\"backgroundColor\":\"").append("rgb(").append(getRgbColor(i)).append(")").append("\",");
 			}else{
-				color="rgba("+getRgbColor(i)+",0.3)";				
+				sb.append("\"backgroundColor\":\"").append("rgba(").append(getRgbColor(i)).append(",0.3)").append("\",");
 			}
-			sb.append("\"backgroundColor\":\""+color+"\",");
-			sb.append("\"borderColor\":\"rgb("+getRgbColor(i)+")\",");
+			sb.append("\"borderColor\":\"rgb(").append(getRgbColor(i)).append(")\",");
 			sb.append("\"borderWidth\": 1,");
-			sb.append("\"data\":"+buildData(map.get(series)));
+			sb.append("\"data\":").append(buildData(map.get(series)));
 			if(this instanceof LineDataset){
 				sb.append(",");
 				if(this instanceof AreaDataset){
@@ -111,12 +109,11 @@ public abstract class CategoryDataset extends BaseDataset {
 				}
 			}
 			if(props!=null){
-				sb.append(","+props);
+				sb.append(",").append(props);
 			}
 			sb.append("}");
 			i++;
 		}
-		sb.append("");
 		return sb.toString();
 	}
 	
@@ -210,7 +207,7 @@ public abstract class CategoryDataset extends BaseDataset {
 					}
 				}
 			}
-			sb.append("\""+obj+"\"");
+			sb.append("\"").append(obj).append("\"");
 		}
 		if(sb.length()==0){
 			sb.append("[");

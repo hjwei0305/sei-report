@@ -46,7 +46,7 @@ public class MixDataset implements Dataset {
 		}else{
 			throw new ReportComputeException("Mix chart need one dataset at least.");
 		}
-		sb.append("labels:"+labels);
+		sb.append("labels:").append(labels);
 		sb.append("}");
 		return sb.toString();
 	}

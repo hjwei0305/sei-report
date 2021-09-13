@@ -12,7 +12,17 @@ public abstract class ButtonComponent implements Component {
 	private String type;
 	@Override
 	public String toHtml(RenderContext context) {
-		return "<div style='text-align:"+this.align+"'><button type=\"button\" id=\""+context.buildComponentId(this)+"\" class=\"btn "+style+" btn-sm\">"+label+"</button></div>";
+		return new StringBuilder()
+				.append("<div style='text-align:")
+				.append(this.align)
+				.append("'><button type=\"button\" id=\"")
+				.append(context.buildComponentId(this))
+				.append("\" class=\"btn ")
+				.append(style)
+				.append(" btn-sm\">")
+				.append(label)
+				.append("</button></div>")
+				.toString();
 	}
 	public String getLabel() {
 		return label;

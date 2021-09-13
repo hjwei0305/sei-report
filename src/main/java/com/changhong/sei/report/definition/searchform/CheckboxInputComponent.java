@@ -23,9 +23,9 @@ public class CheckboxInputComponent extends InputComponent {
 			String label=option.getLabel();
 			String checked=list.contains(value) ? "checked" : "";
 			if(this.optionsInline){
-				sb.append("<span class='checkbox-inline' style='padding-top:0px'><input value='"+value+"' type='checkbox' "+checked+" name='"+name+"'>"+label+"</span>");
+				sb.append("<span class='checkbox-inline' style='padding-top:0px'><input value='").append(value).append("' type='checkbox' ").append(checked).append(" name='").append(name).append("'>").append(label).append("</span>");
 			}else{
-				sb.append("<span class='checkbox'><input type='checkbox' value='"+value+"' name='"+name+"' "+checked+" style='margin-left: auto'><span style=\"margin-left:15px\">"+label+"</span></span>");
+				sb.append("<span class='checkbox'><input type='checkbox' value='").append(value).append("' name='").append(name).append("' ").append(checked).append(" style='margin-left: auto'><span style=\"margin-left:15px\">").append(label).append("</span></span>");
 			}
 		}
 		return sb.toString();
@@ -36,16 +36,16 @@ public class CheckboxInputComponent extends InputComponent {
 		StringBuilder sb=new StringBuilder();
 		sb.append("formElements.push(");
 		sb.append("function(){");
-		sb.append("if(''==='"+name+"'){");
+		sb.append("if(''==='").append(name).append("'){");
 		sb.append("alert('复选框未绑定查询参数名，不能进行查询操作!');");
 		sb.append("throw '复选框未绑定查询参数名，不能进行查询操作!'");
 		sb.append("}");
 		sb.append("var names='';");
-		sb.append("$(\"input[name='"+getBindParameter()+"']:checked\").each(function(index,item){");
+		sb.append("$(\"input[name='").append(getBindParameter()).append("']:checked\").each(function(index,item){");
 		sb.append("if(names===''){names+=$(item).val();}else{names+=','+$(item).val();}");
 		sb.append("});");
 		sb.append("return {");
-		sb.append("\""+name+"\":names");
+		sb.append("\"").append(name).append("\":names");
 		sb.append("}");
 		sb.append("}");
 		sb.append(");");
