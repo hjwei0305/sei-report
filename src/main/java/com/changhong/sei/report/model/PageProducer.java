@@ -67,11 +67,11 @@ public class PageProducer {
 							if (!"Oracle".equals(databaseProductName)) {
 								sql +=  " as sei_count";
 							}
-							System.out.println("sql:" + sql);
+							LogUtil.bizLog("sql:" + sql);
 							List<Map<String, Object>> result = getResult(sql, params, conn);
 							int records = Integer.valueOf(result.get(0).get("records").toString());
 							page.setRecords(records);
-							System.out.println("total:" + page.getTotal());
+							LogUtil.bizLog("total:" + page.getTotal());
 							break flag;
 						}else{
 							throw new ServletException("请配置数据集'"+datasetName+"'的分页参数'startRow'和'rows'!");
