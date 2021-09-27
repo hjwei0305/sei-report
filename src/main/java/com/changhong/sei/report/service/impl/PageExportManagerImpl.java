@@ -96,7 +96,7 @@ public class PageExportManagerImpl implements PageExportManager {
     }
 
     @Override
-    public PageReport exportHtml(String file, String contextPath, Map<String, Object> parameters, int pageIndex, int rows) throws ServletException, SQLException {
+    public PageReport exportHtml(String file, String contextPath, Map<String, Object> parameters, Page page) throws ServletException, SQLException {
         ReportDefinition reportDefinition=reportRender.getReportDefinition(file);
         Report report=reportRender.render(reportDefinition, parameters);
         Map<String, ChartData> chartMap=report.getContext().getChartDataMap();
@@ -112,7 +112,7 @@ public class PageExportManagerImpl implements PageExportManager {
             pageReport.setColumn(reportDefinition.getPaper().getColumnCount());
         }
         pageReport.setType("3");
-        pageReport.setPage(pageProducer.produce(reportDefinition, parameters, pageIndex, rows));
+        pageReport.setPage(pageProducer.produce(reportDefinition, parameters, page));
         pageReport.setStyle(reportDefinition.getStyle());
         pageReport.setSearchFormData(reportDefinition.buildSearchFormData(report.getContext().getDatasetMap(),parameters));
         pageReport.setReportAlign(report.getPaper().getHtmlReportAlign().name());

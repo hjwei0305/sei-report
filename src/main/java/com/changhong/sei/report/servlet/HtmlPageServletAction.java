@@ -154,6 +154,7 @@ public class HtmlPageServletAction extends RenderPageServletAction {
         }
         String type = request.getParameter("_type");
         String pageIndex = request.getParameter("_i");
+        com.changhong.sei.report.model.Page pageModel = null;
         if (!"3".equals(type)) {
             if (parameters.containsKey("page")) {
                 parameters.remove("page");
@@ -161,23 +162,31 @@ public class HtmlPageServletAction extends RenderPageServletAction {
             if (parameters.containsKey("rows")) {
                 parameters.remove("rows");
             }
-        }
-        int page = 0;
-        int rows = 0;
-        if (parameters.containsKey("page") && parameters.containsKey("rows")) {
-            String pageNum = parameters.get("page").toString();
-            String size = parameters.get("rows").toString();
-            if (!pageNum.equals("0") && !size.equals("0")) {
-                page = 1;
-                rows = 30;
-                try {
-                    page = Integer.valueOf(pageNum);
-                    rows = Integer.valueOf(size);
-                } catch (Exception e) {
-                    throw new ServletException("page和rows必须是整数");
+        }else{
+            if (!parameters.containsKey("page")) {
+                throw new ReportComputeException("请传入参数page！");
+            }
+            if (!parameters.containsKey("rows")) {
+                throw new ReportComputeException("请传入参数rows！");
+            }
+            int page = 0;
+            int rows = 0;
+            if (parameters.containsKey("page") && parameters.containsKey("rows")) {
+                String pageNum = parameters.get("page").toString();
+                String size = parameters.get("rows").toString();
+                if (!pageNum.equals("0") && !size.equals("0")) {
+                    page = 1;
+                    rows = 30;
+                    try {
+                        page = Integer.valueOf(pageNum);
+                        rows = Integer.valueOf(size);
+                        pageModel = new com.changhong.sei.report.model.Page(page, rows);
+                    } catch (Exception e) {
+                        throw new ServletException("page和rows必须是整数");
+                    }
+                    //重构parameters，把page参数替换成startRow参数
+                    rebuildParam(parameters, (page-1)*rows);
                 }
-                //重构parameters，把page参数替换成startRow参数
-                rebuildParam(parameters, (page-1)*rows);
             }
         }
         if(file.equals(PREVIEW_KEY)){
@@ -215,8 +224,8 @@ public class HtmlPageServletAction extends RenderPageServletAction {
                     jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
                 }
             }else{
-                if(page!=0&&rows!=0){
-                    pageReport.setPage(pageProducer.produce(reportDefinition, parameters, page, rows));
+                if(Objects.nonNull(pageModel)){
+                    pageReport.setPage(pageProducer.produce(reportDefinition, parameters, pageModel));
                 }
                 html = htmlProducer.produce(report);
                 jsonContent = pageProducer.buildTable(report.getContext(), report.getRows(), report.getColumns(), report.getRowColCellMap(), false, false);
@@ -244,8 +253,8 @@ public class HtmlPageServletAction extends RenderPageServletAction {
                     pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters, index);
                 }
             }else if("3".equals(type)){
-                if (page!=0&&rows!=0) {
-                    pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters, page, rows);
+                if (Objects.nonNull(pageModel)) {
+                    pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters, pageModel);
                 }
             }
             if(pageReport==null) pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters);

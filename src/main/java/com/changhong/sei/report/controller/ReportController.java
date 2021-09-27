@@ -2,6 +2,7 @@ package com.changhong.sei.report.controller;
 
 import com.changhong.sei.report.entity.ReportEntity;
 import com.changhong.sei.report.exception.ReportComputeException;
+import com.changhong.sei.report.model.Page;
 import com.changhong.sei.report.model.PageReport;
 import com.changhong.sei.report.dto.PageReportDto;
 import com.changhong.sei.report.service.PageExportManager;
@@ -40,6 +41,7 @@ public class ReportController {
     public String genReport(HttpServletRequest request) throws ServletException, SQLException {
         Map<String, Object> parameters = buildParameters(request);
         PageReport pageReport = null;
+        Page pageModel = null;
         String file=request.getParameter("_u");
         file=decode(file);
         if(StringUtils.isEmpty(file)){
@@ -66,6 +68,7 @@ public class ReportController {
                 try {
                     page = Integer.valueOf(pageNum);
                     rows = Integer.valueOf(size);
+                    pageModel = new Page(page, rows);
                 } catch (Exception e) {
                     throw new ServletException("page和rows必须是整数");
                 }
@@ -85,7 +88,7 @@ public class ReportController {
             }
         }else if("3".equals(type)){
             if (page!=0&&rows!=0) {
-                pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters, page, rows);
+                pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters, pageModel);
             }
         }
         if(pageReport==null) pageReport = pageExportManager.exportHtml(file, request.getContextPath(), parameters);

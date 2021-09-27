@@ -2,6 +2,7 @@ package com.changhong.sei.report.service;
 
 import com.changhong.sei.report.export.ExportConfigure;
 import com.changhong.sei.report.model.PageReport;
+import com.changhong.sei.report.model.Page;
 
 import javax.servlet.ServletException;
 import java.sql.SQLException;
@@ -31,11 +32,10 @@ public interface PageExportManager {
      * @param file 报表模版文件名
      * @param contextPath 当前项目的context path
      * @param parameters 参数
-     * @param page 当前页码
-     * @param rows 每页行数
+     * @param page  物理分页实体
      * @return 返回一个HtmlReport对象，里面有报表产生的HTML及相关CSS
      */
-    PageReport exportHtml(String file, String contextPath, Map<String, Object> parameters, int page, int rows) throws ServletException, SQLException;
+    PageReport exportHtml(String file, String contextPath, Map<String, Object> parameters, Page page) throws ServletException, SQLException;
     /**
      * 导出PDF报表
      * @param config 包含报表模版文件名、参数等信息的配置对象

@@ -1,5 +1,6 @@
 package com.changhong.sei.report.model;
 
+import com.changhong.sei.core.log.LogUtil;
 import com.changhong.sei.report.builds.BindData;
 import com.changhong.sei.report.builds.Context;
 import com.changhong.sei.report.chart.ChartData;
@@ -45,37 +46,40 @@ import java.util.regex.Pattern;
 
 public class PageProducer {
 
-	public Page produce(ReportDefinition reportDefinition, Map<String, Object> parameters, int pageIndex, int rows) throws SQLException, ServletException {
-		Page page = new Page(pageIndex, rows);
+	public Page produce(ReportDefinition reportDefinition, Map<String, Object> parameters, Page page) throws SQLException, ServletException {
 		page.setRecords(0);
 		Cell cell = rootDataCell(reportDefinition);
-
+		//获取查总行数的参数
+		//Map<String, Object> params = noPageParam(parameters);
 		if(!ObjectUtils.isEmpty(cell)){
 			List<DatasourceDefinition> datasourceList = reportDefinition.getDatasources();
 			String datasetName = ((DatasetValue)cell.getValue()).getDatasetName();
 			flag: for(DatasourceDefinition datasource:datasourceList){
 				for(DatasetDefinition datasetDefinition:datasource.getDatasets()){
-					if(datasetName.equals(datasetDefinition.getName())){
-						Map<String, Object> parameterMap = buildParameters(((SqlDatasetDefinition) datasetDefinition).getParameters(), parameters);
-						//获取查总行数的参数
-						Map<String, Object> params = noPageParam(parameterMap);
-						if (parameterMap.containsKey("startRow")&&parameterMap.containsKey("rows")) {
-							Connection conn = buildConnect(datasource);
-							String s = sqlForUse((SqlDatasetDefinition) datasetDefinition, params);
-							String sql = "select count(1) as records from (" + s.replaceAll("limit :startRow,:rows","") + ")";
+					Map<String, Object> parameterMap = buildParameters(((SqlDatasetDefinition) datasetDefinition).getParameters(), parameters);
+					Map<String, Object> params = noPageParam(parameterMap);
+					if (parameterMap.containsKey("startRow")&&parameterMap.containsKey("rows")) {
+						Connection conn = buildConnect(datasource);
+						String s = sqlForUse((SqlDatasetDefinition) datasetDefinition, params);
+						String sql;
+						if (s.startsWith("call ")){
+							sql = s.replace("call ", "call count_");
+						}else {
+							sql = "select count(1) as records from (" + s.replaceAll("limit :startRow,:rows","") + ")";
+							//sql = "select count(1) as records from (" + s + ")";
 							String databaseProductName = conn.getMetaData().getDatabaseProductName().trim();
 							if (!"Oracle".equals(databaseProductName)) {
 								sql +=  " as sei_count";
 							}
-							LogUtil.bizLog("sql:" + sql);
-							List<Map<String, Object>> result = getResult(sql, params, conn);
-							int records = Integer.valueOf(result.get(0).get("records").toString());
-							page.setRecords(records);
-							LogUtil.bizLog("total:" + page.getTotal());
-							break flag;
-						}else{
-							throw new ServletException("请配置数据集'"+datasetName+"'的分页参数'startRow'和'rows'!");
 						}
+						LogUtil.bizLog("sql:" + sql);
+						List<Map<String, Object>> result = getResult(sql, params, conn);
+						int records = Integer.valueOf(result.get(0).get("records").toString());
+						page.setRecords(records);
+						LogUtil.bizLog("total:" + page.getTotal());
+						break flag;
+					}else{
+						throw new ServletException("请配置数据集'"+datasetName+"'的分页参数'startRow'和'rows'!");
 					}
 				}
 			}
