@@ -4,10 +4,8 @@ import com.changhong.sei.report.builds.webpaging.Page;
 import com.changhong.sei.report.chart.ChartData;
 import com.changhong.sei.report.definition.Border;
 import com.changhong.sei.report.definition.CellStyle;
-import com.changhong.sei.report.definition.Paper;
 import com.changhong.sei.report.enums.Alignment;
 import com.changhong.sei.report.enums.BorderStyle;
-import com.changhong.sei.report.enums.Orientation;
 import com.changhong.sei.report.exception.ReportComputeException;
 import com.changhong.sei.report.export.Producer;
 import com.changhong.sei.report.export.word.DxaUtils;
@@ -18,7 +16,6 @@ import com.changhong.sei.report.model.Image;
 import com.changhong.sei.report.model.Row;
 import com.changhong.sei.report.utils.ImageUtils;
 import com.changhong.sei.report.utils.UnitUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
@@ -46,7 +43,7 @@ public class WordProducer implements Producer {
 	public void produce(Report report, OutputStream outputStream) {
 		XWPFDocument document = new XWPFDocument();
 		try{
-			CTSectPr sectpr = document.getDocument().getBody().addNewSectPr();
+			/*CTSectPr sectpr = document.getDocument().getBody().addNewSectPr();
 			if(!sectpr.isSetPgSz()) {
 				sectpr.addNewPgSz();
 			}
@@ -74,7 +71,7 @@ public class WordProducer implements Producer {
 			pageMar.setLeft(BigInteger.valueOf(DxaUtils.points2dxa(paper.getLeftMargin())));
 			pageMar.setRight(BigInteger.valueOf(DxaUtils.points2dxa(paper.getRightMargin())));
 			pageMar.setTop(BigInteger.valueOf(DxaUtils.points2dxa(paper.getTopMargin())));
-			pageMar.setBottom(BigInteger.valueOf(DxaUtils.points2dxa(paper.getBottomMargin())));
+			pageMar.setBottom(BigInteger.valueOf(DxaUtils.points2dxa(paper.getBottomMargin())));*/
 			List<Column> columns=report.getColumns();
 			int intArr[]=buildColumnSizeAndTotalWidth(columns);
 			int totalColumn=intArr[0],tableWidth=intArr[1];
