@@ -5,12 +5,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
 import javax.servlet.Servlet;
 
 @ImportResource("classpath:context.xml")
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.changhong.sei.**"})
 public class ReportApplication {
 
 	public static void main(String[] args) {
