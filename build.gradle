@@ -94,7 +94,7 @@ dependencies {
     compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
     compile group: 'org.antlr', name: 'antlr4-runtime', version: '4.7.2'
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
-    compile group: 'org.apache.poi', name: 'poi', version: '4.1.2'
+    compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.4'
     compile group: 'com.google.zxing', name: 'core', version: '3.4.0'
     compile files('lib/ojdbc14.jar')
     implementation 'org.codehaus.jackson:jackson-core-asl:1.9.13'
